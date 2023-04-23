@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <h1>{{ article.title }}</h1>
+
+  <div class="alert alert-info">
+    <p>Запрос:<b> {{ article.id }}</b>. Статус: <b>{{article.status}}</b>. Дата создания: {{ article.CreateDate }}.</p>
+    Ответственный: {{ article.responsible }}<br>
+    Направление счета: {{ article.direction }}<br>
+    Компания плательщик: {{ article.payer }}<br>
+    Вид оплаты: {{ article.paymenttype }}<br>
+    <p>Номер заказа на закупку: {{ article.porderno }}<br>
+    номер счета: {{ article.invoice }}<br>
+    Дата счета {{ article.invdate }}<br>
+    Сумма счета с НДС: {{ article.amount }} {{ article.currency }}<br>
+    Отдел (центр затрат): {{ article.dept }}<br>
+    Номер зарегистрированного контракта:  {{ article.contract }}<br>
+    Поставщик: {{ article.inn }} {{ article.vendorname }}</br>
+    <div>
+    <fieldset class="card">
+        <legend>Приложеные файлы</legend>
+   <span class="files">
+		{% for e in files %}
+		<a href="/download/{{article.id}}/{{ e.filename }}">{{ e.filename }}</a><br>
+		{% endfor %}
+	</span>
+    </fieldset>
+      </div>
+      <div>
+    <span>
+        {% set prstatus=namespace(value='0') %}
+    <fieldset class="card">
+        <legend>Запрошеные одобрения</legend>
+		{% for e in tasks %}
+        {% if e.taskstatus != 'Created' %}
+            {% set prstatus.value ='1' %}
+        {% endif %}{{ e.id }}
+		{{e.CreateDate}} | {{ e.tasktype }} | {{ e.taskstatus }} | {{ e.assigneemail }} | {{ e.scomment }} | {{ e.acomment }}<br>
+		{% endfor %}
+    </fieldset>
+	</span>
+      </div>
+    <div>
+        {% if prstatus.value == '0' %}
+    <a href="/posts/{{ article.id }}/del" class="btn btn-danger">Удалить</a>
+    <a href="/posts/{{ article.id }}/update" class="btn btn-success">Редактировать</a>
+    <a href="/attachments/{{ article.id }}" class="btn btn-success">Управлять вложениями</a>
+        {% endif %}
+        {% if article.status == "Ожидание утверждения" or article.status == "Черновик" %}
+    <a href="/process/{{ article.id }}" class="btn btn-success">Отправить на согласование</a>
+        {% endif %}
+    <br>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{
+    "webserver": "http://127.0.0.1:5000",
+    "connectionstring": "mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0",
+    "smtpserver": "mail.stokov.ru",
+    "smtplogin": "payment.request@stokov.ru",
+    "smtppassword": "f!6?@eXwu",
+    "accountingmail": "mikhail.iofis@stokov.ru",
+    "supportmail": "mikhail.iofis@stokov.ru"
+}

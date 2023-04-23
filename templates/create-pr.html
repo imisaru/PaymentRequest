@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавление
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="container mt-5">
+<form action="" method="post" class="form-contact">
+      {{ form.hidden_tag() }}
+{% for field in form if field.name not in ['csrf_token', 'submit'] -%}
+	<p>{{ field.label() }}
+	{% if field.errors %}
+		{{ field(class="invalid") }}
+	<span class="invalid-feedback">
+		{% for e in field.errors %}
+		{{ e }}
+		{% endfor %}
+	</span>
+	{% else %}
+		{{ field() }}
+	{% endif %}
+{% endfor %}
+<!--
+	<div class="file-load">
+			<p><input type="file" name="files" multiple>
+		</div>
+--!>
+        <p>{{ form.submit() }}
+    </form>
+	<div class="flash success">Файлы необходимо приложить позже нажав "Детальнее" на созданной заявке.</div>
+</div>
+{% endblock %}

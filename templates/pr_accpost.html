@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <h1>{{ article.title }}</h1>
+
+  <div class="alert alert-info">
+    <p>Запрос:<b> {{ article.id }}</b>. Статус: <b>{{article.status}}</b>. Дата создания: {{ article.CreateDate }}.</p>
+    Ответственный: {{ article.responsible }}<br>
+    Направление счета: {{ article.direction }}<br>
+    Компания плательщик: {{ article.payer }}<br>
+    Вид оплаты: {{ article.paymenttype }}<br>
+    <p>Номер заказа на закупку: {{ article.porderno }}<br>
+    номер счета: {{ article.invoice }}<br>
+    Дата счета {{ article.invdate }}<br>
+    Сумма счета с НДС: {{ article.amount }} {{ article.currency }}<br>
+    Отдел (центр затрат): {{ article.dept }}<br>
+    Номер зарегистрированного контракта:  {{ article.contract }}<br>
+    Поставщик: {{ article.inn }} {{ article.vendorname }}</br>
+    <div>
+    <fieldset class="card">
+        <legend>Приложеные файлы</legend>
+   <span class="files">
+		{% for e in files %}
+		<a href="/download/{{article.id}}/{{ e.filename }}">{{ e.filename }}</a><br>
+		{% endfor %}
+	</span>
+    </fieldset>
+    </div>
+    <div>
+        <span>
+          {% set prstatus=namespace(value='0') %}
+          <fieldset class="card">
+            <legend>Запрошеные одобрения</legend>
+            {% for e in tasks %}
+            {% if e.taskstatus != 'Created' %}
+                {% set prstatus.value ='1' %}
+            {% endif %}{{ e.id }}
+            {{e.CreateDate}} | {{ e.tasktype }} | {{ e.taskstatus }} | {{ e.assigneemail }} | {{ e.scomment }} | {{ e.acomment }}<br>
+            {% endfor %}
+          </fieldset>
+	    </span>
+    </div>
+    <form class="form-inline" action="" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="trno">Номер проводки(документа)</label>
+        <input type="text" class="form-control" id="trno" name="trno" value="{{ article.trno }}"required>
+        <label for="trdate">Дата проводки(документа)</label><br>
+        <input type="date"  id="trdate" name="trdate" value="{{ article.trdate }}" required><br>
+      </div>
+
+      <div>
+             <input type="submit" class="btn btn-success" name="action" value="Сохранить и передать в оплату">
+      </div>
+            </form>
+        <br>
+    <form class="form-inline" action="" method="post" enctype="multipart/form-data">
+        <div>
+        <label for="trno">Комментарий для заявителя</label>
+        <input type="text" class="form-control" id="acomment" name="acomment"  value="{{ article.acomment }}"    required>
+             <input type="submit" class="btn btn-warning" name="action" value="Отправить на доработку">
+            </div>
+            </form>
+  </div>
+</div>
+
+{% endblock %}

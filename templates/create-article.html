@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавление
+{% endblock %}
+
+{% block body %}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="container mt-5">
+    <h1>Создание заявки на оплату</h1>
+    <form method="post">
+        <label class="form-label" for="direction">Направление счета (Калуга/Химки):</label>
+        <select id="direction" name="direction" class="form-control" >
+          <option value="Калуга">Калуга</option>
+          <option value="Химки">Химки</option>
+        </select><br>
+        <label class="form-label" for="payer">Компания плательщик:</label>
+        <select id="payer" name="payer" class="form-control" >
+          <option value="Стоков Машинное Оборудование АО">Стоков Машинное Оборудование АО</option>
+          <option value="Стоков Компоненты ООО">Стоков Компоненты ООО</option>
+          <option value="Стоков Конструкция ООО">Стоков Конструкция ООО</option>
+        </select><br>
+        <label class="form-label" for="reponsible">Ответственный </label>
+        <input type="text" name="responsible" class="form-control" placeholder="введите email"><br>
+        <label class="form-label" for="payer">Способ оплаты:</label>
+        <select id="paymenttype" name="paymenttype" class="form-control" >
+          <option class="dropdown-item" value="постоплата">постоплата</option>
+          <option class="dropdown-item" value="предоплата">предоплата</option>
+        </select><br>
+      <div class="form-group">
+        <label for="porderno">Номер заказа на закупку</label>
+        <input type="text" class="form-control" id="porderno" name="porderno" placeholder="Введите номер заказа на закупку">
+      </div><br>
+      <div class="form-group">
+        <label for="invoice">Номер счета</label>
+        <input type="text" class="form-control" id="invoice" name="invoice" placeholder="Введите номер счета">
+      </div><br>
+      <div class="form-group">
+        <label for="invdate">Дата счета</label>
+        <input type="date" class="form-control" id="invdate" name="invdate" required pattern="\d{4}-\d{2}-\d{2}" placeholder="Введите дату счета">
+      </div><br>
+      <div class="form-group">
+        <label for="amount">Сумма счета с НДС</label>
+        <input type="number" class="form-control" id="amount" name="amount" placeholder="Введите сумму с ндс">
+      </div>
+        <select id="currency" name="currency" class="form-control" >
+          <option class="dropdown-item" value="РУБ">РУБ</option>
+          <option class="dropdown-item" value="USD">USD</option>
+          <option class="dropdown-item" value="EUR">EURтф
+        </select><br>
+        <label for="dept">Отдел (центр затрат)</label>
+        <select id="dept" name="dept" class="form-control" >
+          <option class="dropdown-item" value="GTO Logistic">GTO Logistic</option>
+          <option class="dropdown-item" value="GTO Prod & Maintn">GTO Prod & Maintn</option>
+          <option class="dropdown-item" value="GTO HR/Labor safety">GTO HR/Labor safety</option>
+          <option class="dropdown-item" value="GTO Quality">GTO Quality</option>
+          <option class="dropdown-item" value="GTO VLS">GTO VLS</option>
+          <option class="dropdown-item" value="HR">HR</option>
+          <option class="dropdown-item" value="IT">IT</option>
+          <option class="dropdown-item" value="Legal">Legal</option>
+          <option class="dropdown-item" value="RE">RE</option>
+          <option class="dropdown-item" value="SEC">SEC</option>
+          <option class="dropdown-item" value="TC">TC</option>
+          <option class="dropdown-item" value="VFS">VFS</option>
+        </select><br>
+      <div class="form-group">
+        <label for="contract">Номер контракта</label>
+        <input type="text" class="form-control" id="contract" name="contract" placeholder="Введите номер зарегистрированного контракта">
+      </div><br>
+      <div class="form-group">
+        <label for="inn">ИНН поставщика</label>
+        <input type="text" class="form-control" id="inn" name="inn" placeholder="Введите ИНН поставщика">
+      </div><br>
+ <!--<div class="input-group mb-3">
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile02">
+    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+  </div>
+  <div class="input-group-append">
+    <span class="input-group-text" id="">Upload</span>
+  </div>
+</div> --!>
+        <!-- <input type="text" name="title" class="form-control" placeholder="Введите название"><br>
+        #<textarea name="intro" id="intro" class="form-control" placeholder="Введите анонс"></textarea><br>
+        #<textarea name="text" id="text" class="form-control" placeholder="Введите основной текст"></textarea><br>--!>
+        <input type="submit" class="btn btn-success" value="Создать">
+
+    </form>
+</div>
+{% endblock %}

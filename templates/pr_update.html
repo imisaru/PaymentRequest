@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Редактирование PR
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<form action="" method="post" class="form-contact" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+{% for field in form if field.name not in ['csrf_token', 'submit', 'fi les'] -%}
+	<p>{{ field.label() }}
+	{% if field.errors %}
+		{{ field(class="invalid") }}
+	<span class="invalid-feedback">
+		{% for e in field.errors %}
+		{{ e }}
+		{% endfor %}
+	</span>
+	{% else %}
+		{{ field() }}
+	{% endif %}
+{% endfor %}
+
+        <br>
+    <span class="files">
+		{% for e in files %}
+		<a href="/download/{{ e.filename }}">{{ e.filename }}</a>
+		<a href="/delattach/{{ e.filename }}">удалить</a>
+		<br>
+		{% endfor %}
+	</span><br>
+
+        <p>{{ form.submit() }}
+    </form>
+{% endblock %}

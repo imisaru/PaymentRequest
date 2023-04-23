@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Список
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <h1>Заявки на оплату</h1>
+  {% for el in articles %}
+  <div class="alert alert-info">
+    <p>{{ el.payer }} | {{ el.direction }} | {{ el.inn }} | {{ el.vendorname }}</p>
+    <p>{{ el.amount }} {{ el.currency }} | Дата счета: {{ el.invdate }}</p>
+    <a href="/posts/{{ el.id }}" class="btn btn-warning">Детальнее</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

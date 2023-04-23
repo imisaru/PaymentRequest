@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block body %}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="container mt-5">
+    <h1>Регистрация</h1>
+    <form action="/register" method="post">
+        <p><label>Имя: </label>     <input type="text" name="name" value="" requied />
+        <p><label>Логин: </label>     <input type="text" name="login" value="" requied />
+        <p><label>Email: </label>   <input type="text" name="email" value="" requied />
+        <p><label>Пароль: </label> <input type="password" name="psw" value="" requied />
+        <p><label>Повтор пароля: </label> <input type="password" name="psw2" value="" requied />
+        <p><input type="submit" value="Регистрация" />
+    </form>
+</p></div>
+{% endblock %}

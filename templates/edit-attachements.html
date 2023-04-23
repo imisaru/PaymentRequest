@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <h1>{{ article.title }}</h1>
+
+  <div class="alert alert-info">
+    <p><b>Заявка на оплату: {{ article.id }}</b></p>
+    <p><b>Дата создания: {{ article.CreateDate }}</b></p>
+    <p>Поставщик: {{ article.inn }} {{ article.vendorname }}</p>
+    <p>Направление счета: {{ article.direction }}</p>
+    <p>Компания плательщик: {{ article.payer }}</p>
+    <p>Вид оплаты: {{ article.paymenttype }}</p>
+    <p>Номер заказа на закупку: {{ article.porderno }}</p>
+    <p>номер счета: {{ article.invoice }}</p>
+    <p>Дата счета {{ article.invdate }}</p>
+    <p>Сумма счета с НДС: {{ article.amount }} {{ article.currency }}
+    <p>Отдел (центр затрат): {{ article.dept }}</p>
+    <p>Номер зарегистрированного контракта:  {{ article.contract }}</p>
+    <p>Статус: {{ article.status }}</p>
+
+    <span class="files">
+		{% for e in files %}
+	    <a href="/delattach/{{ e.id }}/{{ e.prid }}" class="btn btn-warning">удалить</a>
+        <a href="/download/{{ e.prid }}/{{ e.filename }}">{{ e.filename }}</a>
+        <br>
+      {% endfor %}
+	</span>
+      <br>
+  <div class="input-group mb-3">
+      <form action="" method="post" enctype="multipart/form-data">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="files" name="files" multiple required>
+      <!--label class="custom-file-label" for="inputGroupFile02">выбрать файл</label> --!>
+        </div>
+        <div class="input-group-append">
+            <input type="submit" class="btn btn-success" value="Загрузить">
+        <!--span class="input-group-text" id="">Загрузить</span --!>
+        </div>
+     </form>
+  </div>
+    <!-- a href="/posts/{{ article.id }}/del" class="btn btn-danger">Удалить</a>
+    <a href="/posts/{{ article.id }}/update" class="btn btn-success">Редактировать</a><br --!>
+  </div>
+  <br><a href="/posts/{{ article.id }}" class="btn btn-warning">Перейти к заявке</a>
+
+</div>
+{% endblock %}

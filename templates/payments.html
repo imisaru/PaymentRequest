@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block body %}
+        {% if current_user.is_authenticated %}
+            <div class="container mt-5">
+              <h2>Платежи ({{articles|length}})</h2>
+              <table class="table table-bordered"><!-- class="table table-hover"table table-sm--!>
+              <thead class="thead-dark">
+              <tr>
+                <th>№</th><th>Номер, дата проводки</th><th>Юрлицо</th><th>Клиент</th><th>Сумма</th><th></th>
+                </tr></thead>
+              {% for el in articles %}
+              <div class="alert alert-info">
+              <tr>
+                <td>{{ el.id }}</td>
+                <td>{{ el.trno }} {{ el.trdate }}</td>
+                <td>{{ el.payer }}</td><td>{{ el.vendorname }}</td>
+                <td>{{ el.amount }} {{ el.currency }}</td>
+                <td><a href="/posts/{{ el.id }}" class="btn btn-secondary btn-sm">Ввести платеж</a></td>
+              </tr>
+              </div>
+              {% endfor %}
+                </table>
+            </div>
+          {% else %}
+            <div class="container mt-5">
+            <h1>Для работы нужно
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/login">авторизоваться</a>
+                </h1>
+            </div>
+          {% endif %}
+
+{% endblock %}
