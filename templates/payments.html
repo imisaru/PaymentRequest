@@ -1,31 +1,50 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Главная страница
+PR План платежей
 {% endblock %}
 
 {% block body %}
         {% if current_user.is_authenticated %}
+      <div class="container mt-5">
+            <form method="post">
+        <label for="prno">Номер заказа на закупку</label>
+        <input type="text" class="fo rm-control" id="prno" name="prno" placeholder="Номер PR или пусто">
+      <!--/div><br>
+      <div class="container mt-5"--!>
+        <label for="invdate">Дата платежа с </label>
+        <input type="date" id="date1" name="date1" value={{ date1 }} required pattern="\d{4}-\d{2}-\d{2}" placeholder="с">
+        <label for="invdate"> по </label>
+        <input type="date" id="date2" name="date2" value={{date2}} required pattern="\d{4}-\d{2}-\d{2}" placeholder="по">
+       <input type="submit" class="btn btn-secondary btn-sm" value="Фильтровать">
+        <!--a href="/payments?date1={{ date1 }}" class="btn btn-secondary btn-sm">Фильтровать</a--!>
+            </form>
+      </div>
             <div class="container mt-5">
-              <h2>Платежи ({{articles|length}})</h2>
-              <table class="table table-bordered"><!-- class="table table-hover"table table-sm--!>
-              <thead class="thead-dark">
-              <tr>
-                <th>№</th><th>Номер, дата проводки</th><th>Юрлицо</th><th>Клиент</th><th>Сумма</th><th></th>
-                </tr></thead>
-              {% for el in articles %}
+              <h3>Платежи ({{articles|length}})</h3>
+            </div>
               <div class="alert alert-info">
+              <table class="table table-bordered"><!-- class="table table-hover"table table-sm--!>
+              <!--thead class="thead-dark" --!>
+              <tr>
+                <th>№</th><th>Номер</th><th>Cрок оплаты</th><th>Юрлицо</th><th>Клиент</th><th>Сумма</th><th>Комментарий бухгалтера</th><th>Вложения</th>
+                </th></tr></thead>
+              {% for el in articles %}
               <tr>
                 <td>{{ el.id }}</td>
-                <td>{{ el.trno }} {{ el.trdate }}</td>
+                <td>{{ el.trno }}</td><td>{{ el.trdate }}</td>
                 <td>{{ el.payer }}</td><td>{{ el.vendorname }}</td>
-                <td>{{ el.amount }} {{ el.currency }}</td>
-                <td><a href="/posts/{{ el.id }}" class="btn btn-secondary btn-sm">Ввести платеж</a></td>
+                <td align="right">{{ el.amount }} {{ el.currency }}</td>
+                <td>{% if el.acomment != None %} {{ el.acomment }} {% endif %}</td>
+                <td>({{ el.nfiles }}) {% if el.nfiles>0 %}<a href="/download/{{ el.id }}/{{ el.file1 }}" target="_blank">{{ el.file1 }}</a> {% if el.file1 != el.file2 %} <br>
+                  <a href="/download/{{ el.id }}/{{ el.file2 }}" target="_blank">{{ el.file2 }}</a> {% endif %}{% endif %}</td>
+
+                <td><a href="/paymentpost/{{ el.id }}" class="btn btn-secondary btn-sm">Ввести платеж</a></td>
               </tr>
-              </div>
               {% endfor %}
                 </table>
-            </div>
+              </div>
+
           {% else %}
             <div class="container mt-5">
             <h1>Для работы нужно

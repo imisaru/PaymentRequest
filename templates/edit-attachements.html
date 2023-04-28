@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ article.title }}
+PR {{ article.id }} Вложения
 {% endblock %}
 
 {% block body %}
@@ -26,7 +26,7 @@
     <span class="files">
 		{% for e in files %}
 	    <a href="/delattach/{{ e.id }}/{{ e.prid }}" class="btn btn-warning">удалить</a>
-        <a href="/download/{{ e.prid }}/{{ e.filename }}">{{ e.filename }}</a>
+        <a href="/download/{{ article.id }}/{{ e.filename }}" target="_blank">{{ e.filename }}</a>
         <br>
       {% endfor %}
 	</span>

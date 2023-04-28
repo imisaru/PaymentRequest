@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Редактирование PR
+PR Редактирование
 {% endblock %}
 
 {% block body %}
@@ -9,6 +9,7 @@
 {% for cat, msg in get_flashed_messages(True) %}
 <div class="flash {{cat}}">{{msg}}</div>
 {% endfor %}
+<div class="container mt-5">
 <form action="" method="post" class="form-contact" enctype="multipart/form-data">
       {{ form.hidden_tag() }}
 {% for field in form if field.name not in ['csrf_token', 'submit', 'fi les'] -%}
@@ -28,12 +29,14 @@
         <br>
     <span class="files">
 		{% for e in files %}
-		<a href="/download/{{ e.filename }}">{{ e.filename }}</a>
-		<a href="/delattach/{{ e.filename }}">удалить</a>
+        <a href="/download/{{ e.prid }}/{{ e.filename }}">{{ e.filename }}</a>
+		<a href="/delattach/{{ e.id }}/{{ e.prid }}" class="btn btn-warning">удалить</a>
+
 		<br>
 		{% endfor %}
 	</span><br>
 
         <p>{{ form.submit() }}
     </form>
-{% endblock %}
+</div>
+	{% endblock %}

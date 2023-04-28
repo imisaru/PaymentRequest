@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ article.title }}
+PR {{ article.id }}
 {% endblock %}
 
 {% block body %}
@@ -26,19 +26,19 @@
         <legend>Приложеные файлы</legend>
    <span class="files">
 		{% for e in files %}
-		<a href="/download/{{article.id}}/{{ e.filename }}">{{ e.filename }}</a><br>
+		<a href="/download/{{article.id}}/{{ e.filename }}" target="_blank">{{ e.filename }}</a><br>
 		{% endfor %}
 	</span>
     </fieldset>
       </div>
       <div>
     <span>
-        {% set prstatus=namespace(value='0') %}
+        {% set prstatus=namespace(value='1') %}
     <fieldset class="card">
         <legend>Запрошеные одобрения</legend>
 		{% for e in tasks %}
-        {% if e.taskstatus != 'Created' %}
-            {% set prstatus.value ='1' %}
+        {% if not(e.taskstatus in ('Created', 'Refused')) %}
+            {% set prstatus.value ='0' %}
         {% endif %}{{ e.id }}
 		{{e.CreateDate}} | {{ e.tasktype }} | {{ e.taskstatus }} | {{ e.assigneemail }} | {{ e.scomment }} | {{ e.acomment }}<br>
 		{% endfor %}
@@ -46,13 +46,16 @@
 	</span>
       </div>
     <div>
-        {% if prstatus.value == '0' %}
+        {% if prstatus.value == '1' %}
     <a href="/posts/{{ article.id }}/del" class="btn btn-danger">Удалить</a>
     <a href="/posts/{{ article.id }}/update" class="btn btn-success">Редактировать</a>
     <a href="/attachments/{{ article.id }}" class="btn btn-success">Управлять вложениями</a>
         {% endif %}
-        {% if article.status == "Ожидание утверждения" or article.status == "Черновик" %}
+        {% if article.status in("Ожидание утверждения", "Черновик", "Отказано в утверждении","Доработка") %}
     <a href="/process/{{ article.id }}" class="btn btn-success">Отправить на согласование</a>
+        {% endif %}
+        {% if article.status in("Доработка") %}
+    <a href="/toaccounting/{{ article.id }}" class="btn btn-success">Отправить в бухгалтерию</a>
         {% endif %}
     <br>
     </div>

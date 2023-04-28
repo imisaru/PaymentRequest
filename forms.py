@@ -16,7 +16,7 @@ class PRForm(FlaskForm):
     dept = SelectField("Отдел (центр затрат): ", coerce=str, choices=['GTO Logistic', 'GTO Prod & Maintn', 'GTO HR/Labor safety', 'GTO Quality', 'GTO VLS', 'HR', 'IT', 'Legal', 'RE', 'SEC', 'TC', 'VFS'])
     contract = StringField("Номер зарегистрированного контракта: ")
     inn = StringField("ИНН поставщика: ", validators=[DataRequired(), Length(min=10, max=12, message="Неверная длинна Инн")])
-    vendorname = StringField("Наименование поставщика (не побязательно))")
+#    vendorname = StringField("Наименование поставщика (не побязательно))")
 #    files = MultipleFileField("Вложения")
     submit = SubmitField("Сохранить")
 

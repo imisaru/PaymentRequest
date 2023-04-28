@@ -1,6 +1,8 @@
 import mail
 import json
 import os
+import shutil
+import datetime
 from flask import Flask, render_template, url_for, request, redirect, make_response
 from flask import g, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -11,7 +13,7 @@ from FDataBase import FDataBase
 
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import timedelta
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from UserLogin import UserLogin
 from flask_login import UserMixin
@@ -21,14 +23,12 @@ from flask import send_from_directory
 app = Flask(__name__)
 app.secret_key = 'fdgfh78@#5?>gfhf89dx,v06k'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
-paramfile=open("params.json")
-parameters=json.load(paramfile)
+paramfile = open("params.json")
+parameters = json.load(paramfile)
 mailparams = {}
-print(parameters)
-mailparams.setdefault('smtpserver',parameters.get("smtpserver"))
+mailparams.setdefault('smtpserver', parameters.get("smtpserver"))
 mailparams.setdefault("smtplogin", parameters.get("smtplogin"))
 mailparams.setdefault("smtppassword", parameters.get("smtppassword"))
-print(mailparams)
 app.config['SQLALCHEMY_DATABASE_URI'] =parameters.get('connectionstring')# 'mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 SECRET_KEY = 'fdgfh78@#5?>gfhf89dx,v06k'
@@ -37,6 +37,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message = "Авторизуйтесь для доступа к закрытым страницам"
 login_manager.login_message_category = "success"
+dbase = None
 
 db = SQLAlchemy(app)
 
@@ -46,7 +47,7 @@ class attachment(db.Model):
     prid = db.Column(db.Integer)
     filename = db.Column(db.String(256))
     path = db.Column(db.String(256))
-    CreateDate = db.Column(db.DateTime, default=datetime.now)
+    CreateDate = db.Column(db.DateTime, default=datetime.datetime.today())
     login = db.Column(db.String(10))
 
 class PaymentRequest(db.Model):
@@ -62,6 +63,7 @@ class PaymentRequest(db.Model):
     trno = db.Column(db.String(50))
     trdate = db.Column(db.Date)
     paymentdate = db.Column(db.Date)
+    plandate = db.Column(db.Date)
     amount = db.Column(db.Numeric(20, 2))
     currency = db.Column(db.String(3))
     dept = db.Column(db.String(50))
@@ -71,8 +73,9 @@ class PaymentRequest(db.Model):
     status = db.Column(db.String(20))
     requested = db.Column(db.String(10), default='00000')
     requeststatus = db.Column(db.String(10), default='00000')
-    acomment = db.Column(db.String(500))
-    CreateDate = db.Column(db.DateTime, default=datetime.now)
+    acomment = db.Column(db.String(500), default='')
+    pcomment = db.Column(db.String(500), default='')
+    CreateDate = db.Column(db.DateTime, default=datetime.datetime.today())
 
 class department(db.Model):
     __tablename__ = 'department'
@@ -93,7 +96,7 @@ class task(db.Model):
     scomment = db.Column(db.String(250), default='')
     acomment = db.Column(db.String(250), default='')
     approvedate =db.Column(db.DateTime)
-    CreateDate = db.Column(db.DateTime, default=datetime.now)
+    CreateDate = db.Column(db.DateTime, default=datetime.datetime.today())
 
 class Vendor(db.Model):
     __tablename__ = 'Vendors'
@@ -119,13 +122,7 @@ class User(db.Model):
     userrole = db.Column(db.String(50))
     avatar = db.Column(db.LargeBinary)
 
-#def connect_db():
-#    conn = sqlite3.connect(app.config['DATABASE'])
-#    conn.row_factory = sqlite3.Row
-#    return conn
 
-
-dbase = None
 @app.before_request
 def before_request():
     """Установление соединения с БД перед выполнением запроса"""
@@ -158,7 +155,7 @@ def index():
     if current_user.is_authenticated:
         if not(parameters.get('userrole')):
             parameters['userrole'] = getUserByLogin(current_user.get_login()).userrole
-        print(parameters['userrole'])
+            print('home role', parameters['userrole'], current_user.get_login())
         if parameters['userrole'] == 'accounting':
             articles = PaymentRequest.query.filter(or_(PaymentRequest.status == "Закрыто", PaymentRequest.status == "Одобрено", PaymentRequest.status == "Передано в оплату")).order_by(
                 PaymentRequest.CreateDate.desc()).limit(100).all()
@@ -179,23 +176,44 @@ def index():
     return render_template("index.html", articles=articles, tasks=tasks, userrole=parameters.get('userrole'))
 
 
-@app.route('/payments')
+@app.route('/payments', methods=["POST", "GET"])
 @login_required
 def payments():
-    sql = text(f"""select a.id, direction, payer, responsible, b.name as respname, paymenttype, amount, currency, dept, 
-    vendorname, trno, trdate from PaymentRequest a left join users b on a.responsible=b.login where status='Передано в оплату'
-    order by trdate desc""")
+    if request.method == "POST":
+        if request.form['prno']>'':
+            return redirect(url_for('payments') + '?prno=' + request.form['prno'])
+        return redirect(url_for('payments') + '?date1='+request.form['date1']+'&date2='+request.form['date2'])
+
+    prno = request.args.get('prno')
+    print(prno)
+    if prno!= None:
+        sql = text(f"""select a.id, direction, payer, responsible, b.name as respname, paymenttype, amount, currency, dept, 
+    vendorname, trno, trdate, plandate, acomment, max(filename) as file1, min(filename) as file2, count(c.id) as nfiles from PaymentRequest a 
+    left join users b on a.responsible=b.login left join attachment c on a.id=c.prid 
+    where a.id={str(prno)}
+    group by a.id, direction, payer, responsible, b.name, paymenttype, amount, currency, dept, 
+    vendorname, trno, trdate, plandate, acomment
+    order by plandate desc""")
+        print(sql)
+    else:
+        sql = text(f"""select a.id, direction, payer, responsible, b.name as respname, paymenttype, amount, currency, dept, 
+        vendorname, trno, plandate, trdate, acomment, max(filename) as file1, min(filename) as file2, count(c.id) as nfiles from PaymentRequest a 
+        left join users b on a.responsible=b.login left join attachment c on a.id=c.prid 
+        where status='Передано в оплату'
+        group by a.id, direction, payer, responsible, b.name, paymenttype, amount, currency, dept, 
+        vendorname, trno, plandate, trdate, acomment
+        order by plandate  desc""")
 
     conn = db.engine.connect()
     articles = conn.execute(sql).fetchall()
     conn.close
-    return render_template("payments.html", articles=articles)
-
-
-#return render_template("posts.html", articles=articles)
-#    print("index")
-#    print(current_user.get_id())
-#    print("getidf")
+    date1 = request.args.get('date1')
+    date2 = request.args.get('date2')
+    if date2 == None:
+        date2 = datetime.date.today() + timedelta(days=10)
+    if date1 == None:
+        date1 = datetime.date.today() - timedelta(days=90)
+    return render_template("payments.html", articles=articles, date1=date1, date2=date2)
 
 
 @app.route('/about')
@@ -221,19 +239,44 @@ def login1():
         flash("Неверная пара логин/пароль", "error")
     return render_template("login.html")
 
+@app.route('/testf', methods=['POST','GET'])
+def testf():
+    return copyprfiles(22)
 
+def copyprfiles(prid):
+    pr=PaymentRequest.query.filter(PaymentRequest.id == prid).first()
+    files = attachment.query.filter(attachment.prid == prid).all()
+    print('copyprfiles', pr.trno)
+    trno = pr.trno if pr.trno != None else ''
+    trno += '_'+str(prid)
+
+    rstr = 'nothing'
+    dpath = parameters.get('archivepath')
+    if dpath == None:
+        dpath = 'prarchive'
+    if not os.path.exists(os.path.join(dpath, trno)):
+        os.makedirs(os.path.join(dpath, trno))
+    for f in files:
+        sfilepath = os.path.join('archive',str(prid),f.filename)
+        dfilepath = os.path.join(dpath, trno, f.filename)
+
+        if os.path.isfile(sfilepath):
+            shutil.copy2(sfilepath, dfilepath)
+
+            rstr = "copied from " + sfilepath + " into " + dfilepath
+
+    return rstr
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('profile'))
-    print('login!')
+    print('login 1')
     form = LoginForm()
 
     if form.validate_on_submit():
-        print('login')
 #        user = dbase.getUserByEmail(form.email.data)
         user = User.query.filter(User.login == request.form['login']).first()
-        print(user)
+        print('login user', request.form['login'], user.name)
         if user and check_password_hash(user.pwd, form.psw.data):
             userlogin = UserLogin().create(user)
             rm = form.remember.data
@@ -245,7 +288,7 @@ def login():
         flash("Неверная пара логин/пароль", "error")
         return render_template("login1.html", form=form)
     else:
-        print('novalid')
+        print('novalid user')
     return render_template("login1.html", form=form)
 
 @app.route('/logout')
@@ -323,8 +366,7 @@ def test3():
 #        return row
 #    except:
 #        print("Ошибка получения данных из БД (getUser)")
-
-    return False
+#    return False
 
 
 def getUserByLogin(login):
@@ -338,12 +380,10 @@ def getUserByLogin(login):
 
 def addUser(name, login, email, hpsw):
     sql = text(f"select count(*) from dbo.users where upper(login) = upper('{login}') or upper(email)=upper('{email}')       ")
-    print(sql)
     conn = db.engine.connect()
     res = conn.execute(sql)
     for row in res:
         break
-    print('s' + str(row[0]))
     if row[0] > 0:
             print("Пользователь с таким login|email уже существует")
             return False
@@ -354,10 +394,10 @@ def addUser(name, login, email, hpsw):
     try:
         conn.execute(sql)
         trans.commit()
-        print("добавили")
+        print("adduser добавили")
     except:
         trans.rollback()
-        print("При добавлении произошла ошибка")
+        print("adduser При добавлении произошла ошибка")
         return False
 
     return True
@@ -369,10 +409,10 @@ def test1():
     return "test1 finished"+a.userrole
 
 
-@app.route('/posts')
-def posts():
-    articles = PaymentRequest.query.order_by(PaymentRequest.CreateDate.desc()).all()
-    return render_template("posts.html", articles=articles)
+#@app.route('/posts')
+#def posts():
+#    articles = PaymentRequest.query.order_by(PaymentRequest.CreateDate.desc()).all()
+#    return render_template("posts.html", articles=articles)
 
 
 @app.route('/posts/<int:id>')
@@ -384,18 +424,16 @@ def post_detail(id):
 
 @app.route('/approve/<int:prid>/<int:taskid>', methods=['GET', 'POST'])
 def approve(prid, taskid):
-    print('')
     article = PaymentRequest.query.get(prid)
     files =attachment.query.filter(attachment.prid == prid)
 #    tasks =task.query.filter(task.id == taskid).first()
     sql = text(f"""select  a.id, a.prid, b.responsible, c.name as requestorname, a.scomment, a.acomment, a.tasktype, descr  
     from task a left join tasktypes t on a.tasktype=t.tasktype join PaymentRequest b on a.prid=b.id left join users c on b.responsible=c.login 
      where a.id='{taskid}'""")
-    print(sql)
     conn = db.engine.connect()
     tasks = conn.execute(sql).first()
     if request.method == 'POST':
-        print(request.form['action'])
+        print('approve', request.form['action'])
         if request.form['action'] == "Утвердить":
             sql = text(f"update task set taskstatus='Approved', approvedate=getdate() where id={taskid}")
             conn.execute(sql)
@@ -446,7 +484,6 @@ def approve(prid, taskid):
                     msg += f"<p>Договор: {article.contract}, номер счета: {article.invoice}, дата счета: {article.invdate}</p>"
                     msg += f"<p><b>был одобрен можно приступать к обработке</b></p>"
                     msg += '<p>Посмотреть подробности можно по ссылке <a href="'+parameters.get("webserver")+'/posts/' + str(prid) + '">Payment request</a></p>'
-                    print('mail1', respmail[0])
                     mail.sendmail(mailparams, parameters.get('accountingmail'), subj, msg)
 
 
@@ -455,7 +492,6 @@ def approve(prid, taskid):
             sql = text(f"update task set taskstatus='Refused', acomment='{request.form['acomment']}' where id={taskid}")
             conn.execute(sql)
             conn.commit()
-            print('appro')
             return redirect(url_for('index'))
         if request.form['action'] == "Отказать":
             print("отказать!", taskid)
@@ -465,11 +501,10 @@ def approve(prid, taskid):
             #db.session.commit
             sql = text(f"update task set taskstatus='Refused', acomment='{request.form['acomment']}' where id={taskid}")
             conn.execute(sql)
-            print(sql)
             sql = text(f"update task set taskstatus='Canceled' where id<>{taskid} and prid={prid}")
             conn.execute(sql)
             conn.commit()
-            print(sql)
+
 #            conn.close
 #            conn = db.engine.connect()
             sql = text(f"update PaymentRequest set [status]='Отказано в утверждении' where id={prid}")
@@ -484,7 +519,6 @@ def approve(prid, taskid):
 #            conn.execute(sql).first()
 #            conn.commit
 
-            print(3, sql)
             user = User.query.filter(User.login == article.responsible).first()
             respmail = user.email
 
@@ -495,9 +529,7 @@ def approve(prid, taskid):
             msg += f"<p>Договор: {article.contract}, номер счета: {article.invoice}, дата счета: {article.invdate}</p>"
             msg += f"<p><b>был отклонен</b></p>"
             msg += '<p>Посмотреть подробности можно по ссылке <a href="'+parameters.get("webserver")+'/posts/' + str(prid) + '">Payment request</a></p>'
-            print('mail1', respmail[0])
             mail.sendmail(mailparams, respmail, subj, msg)
-            print('mail2')
             return redirect(url_for('index'))
     return render_template("approve.html", article=article, files=files, task=tasks)
 
@@ -510,10 +542,6 @@ def process(id):
     dept = department.query.filter(department.name == article.dept).first()
     print(dept)
     if request.method == 'POST':
-        print('flags')
-        print(request.form.get('std'), type(request.form.get('std')))
-        print(request.form.get('amountlimit'))
-
         subj="PR "+str(id)+" Approve"
         msg ="<p>Здравствуйте,<br>Направляем Вам запрос на утверждение платежа в пользу "+article.vendorname+" сумма "+ str(article.amount)+" "+article.currency+"</p>"
         msg += "Заявитель "+getUserByLogin(current_user.get_login()).name+"<br>"
@@ -526,7 +554,6 @@ def process(id):
         if flag:
             flagline = '1'+flagline[1:]
             nrec = len(task.query.filter(task.prid == id, task.tasktype == 'Approvement std', task.taskstatus == "Created").all())
-            print('nrec1', nrec)
             if nrec == 0:
                 tstd = task(prid=id, tasktype = "Approvement std", taskstatus = "Created", assignee = dept.approver, assigneemail = dept.approvermail)
                 db.session.add(tstd)
@@ -596,7 +623,6 @@ def process(id):
 
         conn = db.engine.connect()
         sql = text(f"update task set scomment='{request.form['scomment']}' where prid={id}")
-        print(sql)
         conn.execute(sql)
         conn.commit()
         db.session.commit()
@@ -604,26 +630,101 @@ def process(id):
 
     return render_template("process.html", article=article, files=files, managermail=dept.approvermail)
 
+@app.route('/toaccounting/<int:id>', methods=['POST', 'GET'])
+def toaccounting(id):
+    article = PaymentRequest.query.get(id)
+#    files = department.query.filter(department.id == article.id)
+    if article.trno != "" or article.trno == None:
+        PaymentRequest.query.filter(PaymentRequest.id == id).update({'status': 'Одобрено'})
+    else:
+        PaymentRequest.query.filter(PaymentRequest.id == id).update({'status': 'Передано в оплату'})
+
+    db.session.commit()
+
+    subj = "PR " + str(id) + " Одобрен. Готов к обработке"
+    msg = "<p>Здравствуйте,<br>Запрос на утверждение платежа в пользу " + article.vendorname + " сумма " + str(
+        article.amount) + " " + article.currency + "</p>"
+    msg += f"<p>Отдел: {article.dept}, плательщик: {article.payer}, офис: {article.direction}</p>"
+    msg += f"<p>Договор: {article.contract}, номер счета: {article.invoice}, дата счета: {article.invdate}</p>"
+    msg += f"<p><b>был одобрен можно приступать к обработке</b></p>"
+    msg += '<p>Посмотреть подробности можно по ссылке <a href="' + parameters.get("webserver") + '/posts/' + str(
+        id) + '">Payment request</a></p>'
+    mail.sendmail(mailparams, parameters.get('accountingmail'), subj, msg)
+
+#    return redirect(url_for('index'))
+
+    return redirect(f"/posts/{id}")
+
 
 @app.route('/accpost/<int:id>', methods=['POST', 'GET'])
 def accpost(id):
     article = PaymentRequest.query.get(id)
 #    files = department.query.filter(department.id == article.id)
     files =attachment.query.filter(attachment.prid == id)
+    tasks = task.query.filter(task.prid == id)
     dept = department.query.filter(department.name == article.dept).first()
     if request.method == 'POST':
+        user = User.query.filter(User.login == article.responsible).first()
+        respmail = user.email
         if request.form['action'] == "Сохранить и передать в оплату":
             article.status = "Передано в оплату"
             article.trno = request.form.get('trno')
             article.trdate = request.form.get('trdate')
+            article.plandate = request.form.get('plandate')
             db.session.commit()
+            copyprfiles(id)
         if request.form['action'] == "Отправить на доработку":
             article.status = "Доработка"
             article.acomment = request.form.get("acomment")
+            mail.sendmail(mailparams, respmail, f"PR {id}. Бухгалтерия вернула на доработку",
+                          f'Здравствуйте,<br> PR вернули на доработку с коментарием {request.form["acomment"]} нет данных.')
             db.session.commit()
 
         return redirect(url_for('index'))
-    return render_template("pr_accpost.html", article=article, files=files, managermail=dept.approvermail)
+    return render_template("pr_accpost.html", article=article, files=files, managermail=dept.approvermail, tasks=tasks)
+
+
+@app.route('/paymentpost/<int:id>', methods=['POST', 'GET'])
+def paymentpost(id):
+    article = PaymentRequest.query.get(id)
+#    files = department.query.filter(department.id == article.id)
+    files =attachment.query.filter(attachment.prid == id)
+    tasks = task.query.filter(task.prid == id)
+    dept = department.query.filter(department.name == article.dept).first()
+    if request.method == 'POST':
+        user = User.query.filter(User.login == article.responsible).first()
+        respmail = user.email
+        if request.form['action'] == "Оплачено":
+            article.status = "Оплачено"
+            article.pcomment = request.form.get("pcomment")
+            mail.sendmail(mailparams, respmail, f"PR {id}. Оплачеено",
+                      f'Здравствуйте,<br> PR оплачено. Дата оплаты {request.form["pdate"]}. Комментарий {request.form["pcomment"]}.')
+            db.session.commit()
+        if request.form['action'] == "Отправить на доработку бухгалтеру":
+            article.status = "Утверждено"
+            article.pcomment = request.form.get("pcomment")
+            mail.sendmail(mailparams, parameters.get('accountingmail'), f"PR {id}. Отклонено",
+                          f'Здравствуйте,<br> Оплата PR была отклонена, требуется доработка бухгалтера. Комментарий {request.form["pcomment"]}.')
+            db.session.commit()
+        if request.form['action'] == "Отправить на доработку инициатору":
+            article.status = "Доработка"
+            article.pcomment = request.form.get("pcomment")
+            mail.sendmail(mailparams, respmail, f"PR {id}. Бухгалтерия вернула из оплаты на доработку",
+                              f'Здравствуйте,<br> PR вернули из оплаты на доработку с комментарием {request.form["pcomment"]}.')
+            db.session.commit()
+        if request.form['action'] == "Отправить на взаимозачет":
+            article.status = "Взаимозачет"
+            article.pcomment = request.form.get("pcomment")
+            mail.sendmail(mailparams, parameters.get('accountingmail'), f"PR {id}. Взаимозачет",
+                          f'Здравствуйте,<br> PR отправили на взаимозачет. Комментарий {request.form["pcomment"]}.')
+            db.session.commit()
+        if request.form['action'] == "Отменить оплату":
+            article.status = "Передано в оплату"
+            article.pcomment = request.form.get("pcomment")
+            db.session.commit()
+        return redirect(url_for('payments'))
+
+    return render_template("pr_payment.html", article=article, files=files, managermail=dept.approvermail, tasks=tasks, pdate=datetime.date.today())
 
 
 @app.route('/attachments/<int:prid>', methods=['POST','GET'])
@@ -658,7 +759,7 @@ def post_delete(id):
     try:
         db.session.delete(article)
         db.session.commit()
-        return redirect('/posts')
+        return redirect(url_for('index'))
     except:
         return "При удалении произошла ошибка"
 
@@ -680,19 +781,19 @@ def pr_update(id):
         pr.dept = form.dept.data
         pr.contract = form.contract.data
         pr.inn = form.inn.data
-        pr.vendorname = form.vendorname.data
+#        pr.vendorname = form.vendorname.data
         try:
             db.session.commit()
         except:
             return "При редактировании произошла ошибка"
-        for file in form.files.data:
-            att = attachment(prid=id, filename=secure_filename(file.filename))
-            db.session.add(att)
-            db.session.commit()
-            file.save(os.path.join('archive', secure_filename(file.filename)))
+#        for file in form.files.data:
+#            att = attachment(prid=id, filename=secure_filename(file.filename))
+##            db.session.add(att)
+ #           db.session.commit()
+ #           file.save(os.path.join('archive', secure_filename(file.filename)))
 
 
-        return redirect('/posts')
+        return redirect(url_for('index'))
     else:
         form.direction.data=pr.direction
         form.payer.data = pr.payer
@@ -706,7 +807,7 @@ def pr_update(id):
         form.dept.data = pr.dept
         form.contract.data = pr.contract
         form.inn.data = pr.inn
-        form.vendorname.data = pr.vendorname
+        #form.vendorname.data = pr.vendorname
         files = attachment.query.filter(attachment.prid == id)
 
         return render_template("pr_update.html", form=form,  files=files)
@@ -715,7 +816,6 @@ def pr_update(id):
 @app.route('/download/<int:id>/<path:filename>', methods=['GET', 'POST'])
 def download(id, filename):
     uploads = os.path.join("archive", str(id))#app.config['UPLOAD_FOLDER'])
-    print(uploads)
     return send_from_directory(uploads, filename)
 
 @app.route('/delattach/<int:id>/<int:prid>', methods=['GET', 'POST'])
@@ -762,7 +862,7 @@ def create_article():
 
             db.session.add(article)
             db.session.commit()
-            return redirect('/posts')
+            return redirect(url_for('index')) #redirect('/posts')
         except:
             flash("При добавлении произошла ошибка", "error")
             return "При добавлении произошла ошибка"
@@ -779,17 +879,16 @@ def pr_create():
     form = PRForm()
     if form.validate_on_submit():
         invdate = datetime.combine(form.invdate.data, datetime.min.time())
-        vendorname=form.vendorname.data
+        vendorname=""#form.vendorname.data
         inn = form.inn.data
         if vendorname == "":
             svendor = getvendorbyinn(form.inn.data)#Vendor.query.filter(Vendor.INN == inn).limit(1).first()
-            print(svendor, type(svendor))
+            print('pr_create', svendor, type(svendor))
             if svendor != None:
                 vendorname = svendor.ShortName
             else:
                 user = User.query.filter(User.login == form.responsible.data).first()
                 respmail = user.email
-                print(parameters.get('supportmail'))
                 if parameters.get('supportmail') != None:
                     respmail += "; "+parameters.get('supportmail')
 
@@ -808,7 +907,7 @@ def pr_create():
         #for file in form.files:
         #    print(file.filename)
         #    file.save(file.filename)
-        return redirect('/posts')
+        return redirect(url_for('index'))#redirect('/posts ')
 #       except:
  #           flash("При добавлении произошла ошибка", "error")
  #           return "При добавлении произошла ошибка"

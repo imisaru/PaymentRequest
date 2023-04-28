@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ article.title }}
+PR {{ article.id }}
 {% endblock %}
 
 {% block body %}
@@ -27,7 +27,8 @@
   <legend>Приложенные файлы</legend>
     <span class="files">
 		{% for e in files %}
-		<a href="/download/{{ e.filename }}">{{ e.filename }}</a><br>
+		<a href="/download/{{ article.id }}/{{ e.filename }}" target="_blank">{{ e.filename }}</a><br>
+
 		{% endfor %}
 	</span>
 </fieldset>

@@ -45,26 +45,35 @@ PR {{ article.id }}
           </fieldset>
 	    </span>
     </div>
-    <form class="form-inline" action="" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="trno">Номер проводки(документа)</label>
-        <input type="text" class="form-control" id="trno" name="trno" value="{{ article.trno }}"required>
-        <label for="trdate">Дата проводки(документа)</label><br>
-        <input type="date"  id="trdate" name="trdate" value="{{ article.trdate }}" required><br>
-        <label for="plandate">Плановая дата платежа</label><br>
-        <input type="date"  id="plandate" name="plandate" value="{{ article.plandate }}" required><br>
-      </div>
-
-      <div>
-             <input type="submit" class="btn btn-success" name="action" value="Сохранить и передать в оплату">
-      </div>
-            </form>
+        <input type="text" class="for m-control" id="trno" name="trno" value="{{ article.trno }}" readonly   >
+        <label for="trdate">Планируемая дата оплаты</label>
+        <input type="date"  id="trdate" name="trdate" value="{{ article.trdate }}" readonly>
+          Комментарий бухгалтера: <input type="text"  id="acomment" name="acomment" value="{{ article.acomment }}" readonly><br>
+        </div>
         <br>
-    <form class="form-inline" action="" method="post" enctype="multipart/form-data">
+        <form class="form-inline" action="" method="post" enctype="multipart/form-data">
         <div>
-        <label for="trno">Комментарий для заявителя</label>
-        <input type="text" class="form-control" id="acomment" name="acomment"  value="{{ article.acomment }}"    required>
-             <input type="submit" class="btn btn-warning" name="action" value="Отправить на доработку">
+        <label for="pcomment">Комментарий банковской группы</label>
+        <input type="text" class="form-control" id="pcomment" name="pcomment"  value="{{ article.pcomment }}"    required>
+        <label for="pdate">Дата оплаты</label>
+
+        <input type="date"  id="pdate" name="pdate" value="{{ pdate }}" required>
+            {%if article.status == 'Передано в оплату' %}
+             <input type="submit" class="btn btn-success" name="action" value="Оплачено">
+        {% endif %}
+
+        </div>
+        <div>
+        <br>
+            {%if article.status == 'Передано в оплату' %}
+             <input type="submit" class="btn btn-warning" name="action" value="Отправить на доработку бухгалтеру">
+             <input type="submit" class="btn btn-warning" name="action" value="Отправить на доработку инициатору">
+             <input type="submit" class="btn btn-warning" name="action" value="Отправить на взаимозачет" disabled>
+            {% endif %}
+            {%if article.status == 'Оплачено' %}
+             <input type="submit" class="btn btn-warning" name="action" value="Отменить оплату" >{% endif %}
             </div>
             </form>
   </div>

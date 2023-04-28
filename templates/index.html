@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Главная страница
-{% endblock %}
-
 {% block body %}
         {% if current_user.is_authenticated %}
             {% if tasks != None and tasks|length>0 %}
