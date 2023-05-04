@@ -10,17 +10,21 @@ PR {{ article.id }}
 
   <div class="alert alert-info">
     <p>Запрос:<b> {{ article.id }}</b>. Статус: <b>{{article.status}}</b>. Дата создания: {{ article.CreateDate }}.</p>
-    Ответственный: {{ article.responsible }}<br>
-    Направление счета: {{ article.direction }}<br>
-    Компания плательщик: {{ article.payer }}<br>
-    Вид оплаты: {{ article.paymenttype }}<br>
-    <p>Номер заказа на закупку: {{ article.porderno }}<br>
-    номер счета: {{ article.invoice }}<br>
-    Дата счета {{ article.invdate }}<br>
-    Сумма счета с НДС: {{ article.amount }} {{ article.currency }}<br>
-    Отдел (центр затрат): {{ article.dept }}<br>
-    Номер зарегистрированного контракта:  {{ article.contract }}<br>
-    Поставщик: {{ article.inn }} {{ article.vendorname }}</br>
+    Ответственный: <i>{{ article.responsible }}</i><br>
+    Направление счета: <i>{{ article.direction }}</i><br>
+    Компания плательщик: <i>{{ article.payer }}</i><br>
+    Вид оплаты: <i>{{ article.paymenttype }}</i><br>
+    Номер заказа на закупку: <i>{{ article.porderno }}</i><br>
+    номер счета: <i>{{ article.invoice }}</i><br>
+    Дата счета: <i>{{ article.invdate }}</i><br>
+    Сумма счета с НДС: <i>{{ article.amount }} {{ article.currency }}</i><br>
+    Отдел (центр затрат): <i>{{ article.dept }}</i><br>
+    Номер зарегистрированного контракта:  <i>{{ article.contract }}</i><br>
+    Поставщик: <i>{{ article.inn }} {{ article.vendorname }}</i></br>
+        Планируемая дата платежа: <i>{{ article.plandate }}</i></br>
+        Фактическая дата платежа: <i>{{ article.paymentdate }}</i></br>
+      Комментарий бухгалтера: <i>{{ article.acomment }}</i></br>
+      Комментарий платежной группы: <i>{{ article.pcomment }}</i></br>
     <div>
     <fieldset class="card">
         <legend>Приложеные файлы</legend>
@@ -46,7 +50,7 @@ PR {{ article.id }}
 	</span>
       </div>
     <div>
-        {% if prstatus.value == '1' %}
+        {% if prstatus.value == '1' or article.status in("Черновик", "Отказано в утверждении","Доработка")%}
     <a href="/posts/{{ article.id }}/del" class="btn btn-danger">Удалить</a>
     <a href="/posts/{{ article.id }}/update" class="btn btn-success">Редактировать</a>
     <a href="/attachments/{{ article.id }}" class="btn btn-success">Управлять вложениями</a>

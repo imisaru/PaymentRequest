@@ -6,31 +6,33 @@ PR Добавление
 
 {% block body %}
 {{ super() }}
-{% for cat, msg in get_flashed_messages(True) %}
-<div class="flash {{cat}}">{{msg}}</div>
-{% endfor %}
 <div class="container mt-5">
 <form action="" method="post" class="form-contact">
-      {{ form.hidden_tag() }}
-{% for field in form if field.name not in ['csrf_token', 'submit'] -%}
-	<p>{{ field.label() }}
-	{% if field.errors %}
-		{{ field(class="invalid") }}
-	<span class="invalid-feedback">
-		{% for e in field.errors %}
-		{{ e }}
-		{% endfor %}
-	</span>
-	{% else %}
-		{{ field() }}
-	{% endif %}
-{% endfor %}
+	{{ form.hidden_tag() }}
+	{% for field in form if field.name not in ['csrf_token', 'submit'] -%}
+		{% if field.name !='action' and field.label != 'Найти' %} <p>{{ field.label() }}{% endif %}
+		{% if field.label == 'Сохранить' %}!!!<br><br><p>{% endif %}
+		{% if field.errors %}
+			{{ field(class="invalid") }}
+			<span class="invalid-feedback">
+			{% for e in field.errors %}
+				{{ e }}
+			{% endfor %}
+			</span>
+		{% else %}
+			{{ field() }}
+		{% endif %}
+		{% if field.name =='vendorname' %}</p><br>{% endif %}
+		{% if field.name == 'action' %}</p>{% endif %}
+		{% if field.label =='Сохранить' %}</p>{% endif %}
+	{% endfor %}
+
 <!--
 	<div class="file-load">
 			<p><input type="file" name="files" multiple>
 		</div>
 --!>
-        <p>{{ form.submit() }}
+        <!--{{ form.submit() }}--!>
     </form>
 	<div class="flash success">Файлы необходимо приложить позже нажав "Детальнее" на созданной заявке.</div>
 </div>

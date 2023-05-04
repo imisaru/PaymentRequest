@@ -8,20 +8,36 @@ PR План платежей
         {% if current_user.is_authenticated %}
       <div class="container mt-5">
             <form method="post">
+        <label for="payer">Юридическое лицо:</label>
+        <select id="payer" name="payer">
+          <option value="Все">Все</option>
+          <option value="Стоков Машинное Оборудование АО">Стоков Машинное Оборудование АО</option>
+          <option value="Стоков Компоненты ООО">Стоков Компоненты ООО</option>
+          <option value="Стоков Конструкция ООО">Стоков Конструкция ООО</option>
+        </select>
+        <label for="sorting">Сортировка:</label>
+        <select id="sorting" name="sorting">
+          <option value="Дата планируемая платежа">Дата планируемая платежа</option>
+          <option value="Получатель платежа">Получатель платежа</option>
+        </select>
+        <!--input type="submit" class="btn btn-secondary btn-sm" value="Выбрать"--!>
+        <br>
         <label for="prno">Номер заказа на закупку</label>
         <input type="text" class="fo rm-control" id="prno" name="prno" placeholder="Номер PR или пусто">
+        <label for="trno">Номер проводки</label>
+        <input type="text" class="fo rm-control" id="trno" name="trno" placeholder="Номер проводки 1с">
       <!--/div><br>
       <div class="container mt-5"--!>
-        <label for="invdate">Дата платежа с </label>
+        <label for="date1">Срок оплаты с </label>
         <input type="date" id="date1" name="date1" value={{ date1 }} required pattern="\d{4}-\d{2}-\d{2}" placeholder="с">
-        <label for="invdate"> по </label>
+        <label for="date2"> по </label>
         <input type="date" id="date2" name="date2" value={{date2}} required pattern="\d{4}-\d{2}-\d{2}" placeholder="по">
-       <input type="submit" class="btn btn-secondary btn-sm" value="Фильтровать">
+       <input type="submit" class="btn btn-secondary btn-sm" value="Показать">
         <!--a href="/payments?date1={{ date1 }}" class="btn btn-secondary btn-sm">Фильтровать</a--!>
             </form>
       </div>
-            <div class="container mt-5">
-              <h3>Платежи ({{articles|length}})</h3>
+            <div class="container mt-2">
+              <h4>Платежи ({{articles|length}})</h4>
             </div>
               <div class="alert alert-info">
               <table class="table table-bordered"><!-- class="table table-hover"table table-sm--!>
@@ -32,7 +48,7 @@ PR План платежей
               {% for el in articles %}
               <tr>
                 <td>{{ el.id }}</td>
-                <td>{{ el.trno }}</td><td>{{ el.trdate }}</td>
+                <td>{{ el.trno }}</td><td>{{ el.plandate }}</td>
                 <td>{{ el.payer }}</td><td>{{ el.vendorname }}</td>
                 <td align="right">{{ el.amount }} {{ el.currency }}</td>
                 <td>{% if el.acomment != None %} {{ el.acomment }} {% endif %}</td>

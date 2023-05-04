@@ -14,12 +14,15 @@
         <span class="fs-4">Payment request </span>
       </a>
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+      {% if current_user.is_authenticated %}
+      {% if userrole == 'accounting' or current_user.getRole() == 'accounting' %}
+      <a class="btn btn-warning" href="/payments">План платежей</a>
+          {%else %}
+                <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
       <a class="btn btn-warning" href="/create-pr">Создать заявку</a>
       </nav>
-      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-      {% if userrole == 'accounting' %}
-      <a class="btn btn-warning" href="/payments">План платежей</a>
-          {% endif %}
+
+          {% endif %}{% endif %}
       </nav>
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Главная</a>
@@ -30,6 +33,12 @@
           {% endif %}
       </nav>
     </div>
+  <div >
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+  </div>
   {% block body %}{% endblock %}
+
 </body>
 </html>

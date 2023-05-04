@@ -29,7 +29,7 @@ mailparams = {}
 mailparams.setdefault('smtpserver', parameters.get("smtpserver"))
 mailparams.setdefault("smtplogin", parameters.get("smtplogin"))
 mailparams.setdefault("smtppassword", parameters.get("smtppassword"))
-app.config['SQLALCHEMY_DATABASE_URI'] =parameters.get('connectionstring')# 'mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0'
+app.config['SQLALCHEMY_DATABASE_URI'] = parameters.get('connectionstring')# 'mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 SECRET_KEY = 'fdgfh78@#5?>gfhf89dx,v06k'
 MAX_CONTENT_LENGTH = 1024 * 1024
@@ -60,7 +60,7 @@ class PaymentRequest(db.Model):
     porderno = db.Column(db.String(50))
     invoice = db.Column(db.String(50))
     invdate = db.Column(db.Date)
-    trno = db.Column(db.String(50))
+    trno = db.Column(db.String(50), default='')
     trdate = db.Column(db.Date)
     paymentdate = db.Column(db.Date)
     plandate = db.Column(db.Date)
@@ -95,6 +95,7 @@ class task(db.Model):
     assigneemail = db.Column(db.String(50))
     scomment = db.Column(db.String(250), default='')
     acomment = db.Column(db.String(250), default='')
+    isactive = db.Column(db.String(1), default='1')
     approvedate =db.Column(db.DateTime)
     CreateDate = db.Column(db.DateTime, default=datetime.datetime.today())
 
@@ -152,17 +153,21 @@ def load_user(user_id):
 @app.route('/')
 @app.route('/home')
 def index():
+    userrole = ''
     if current_user.is_authenticated:
-        if not(parameters.get('userrole')):
-            parameters['userrole'] = getUserByLogin(current_user.get_login()).userrole
-            print('home role', parameters['userrole'], current_user.get_login())
-        if parameters['userrole'] == 'accounting':
+        print('userrole', parameters.get('userrole'))
+        userrole = getUserByLogin(current_user.get_login()).userrole
+#        if not(parameters.get('userrole')):
+#            userrole = getUserByLogin(current_user.get_login()).userrole
+#            print('home role', userrole, current_user.get_login())
+        if userrole == 'accounting':
             articles = PaymentRequest.query.filter(or_(PaymentRequest.status == "Закрыто", PaymentRequest.status == "Одобрено", PaymentRequest.status == "Передано в оплату")).order_by(
                 PaymentRequest.CreateDate.desc()).limit(100).all()
-        elif parameters['userrole'] == 'admin':
+        elif userrole == 'admin':
             articles = PaymentRequest.query.order_by(PaymentRequest.CreateDate.desc()).limit(100).all()
         else:
-            articles = PaymentRequest.query.filter(PaymentRequest.status != "Закрыто" and PaymentRequest.responsible == current_user.get_login()).order_by(PaymentRequest.CreateDate.desc()).limit(100).all()
+            print('user ',current_user.get_login())
+            articles = PaymentRequest.query.filter(PaymentRequest.status != "Закрыто" and PaymentRequest.responsible == current_user.get_login()).order_by(PaymentRequest.CreateDate.desc()).limit(1000).all()
     #    tasks = task.query.filter(task.taskstatus == "Created", task.assignee == current_user.get_login()).limit(100).all()
         sql = text(f"""select  a.id, a.prid, descr, dept, paymenttype, amount, currency, vendorname, b.responsible, c.name, substring(a.tasktype,charindex(' ',a.tasktype),100) as tasktype 
         from task a with(nolock) left join tasktypes t on a.tasktype=t.tasktype join PaymentRequest b with(nolock) on a.prid=b.id left join users c on b.responsible=c.login 
@@ -173,16 +178,37 @@ def index():
     else:
         articles = None
         tasks = None
-    return render_template("index.html", articles=articles, tasks=tasks, userrole=parameters.get('userrole'))
+
+    return render_template("index.html", articles=articles, tasks=tasks, userrole=userrole)
 
 
 @app.route('/payments', methods=["POST", "GET"])
 @login_required
 def payments():
     if request.method == "POST":
+        args=[]
+
         if request.form['prno']>'':
-            return redirect(url_for('payments') + '?prno=' + request.form['prno'])
-        return redirect(url_for('payments') + '?date1='+request.form['date1']+'&date2='+request.form['date2'])
+            args.append('prno=' + request.form['prno'])
+        elif request.form['trno']>'':
+            args.append('trno=' + request.form['trno'])
+        else:
+            args.append('date1='+request.form['date1']+'&date2='+request.form['date2'])
+
+        if request.form['payer'] == 'Стоков Машинное Оборудование АО':
+            args.append('le=SMO')
+        if request.form['payer'] == 'Стоков Компоненты ООО':
+            args.append('le=SK')
+        if request.form['payer'] == 'Стоков Конструкция ООО':
+            args.append('le=SST')
+
+        if request.form['sorting'] == 'Дата планируемая платежа':
+            args.append('sort=plandate')
+        if request.form['sorting'] == 'Получатель платежа':
+            args.append('sort=vendor')
+        if len(args)>0:
+            args='?'+'&'.join(args)
+        return redirect(url_for('payments') + args)
 
     prno = request.args.get('prno')
     print(prno)
@@ -207,6 +233,7 @@ def payments():
     conn = db.engine.connect()
     articles = conn.execute(sql).fetchall()
     conn.close
+    print('request.args.get(date2)', request.args.get('date2'))
     date1 = request.args.get('date1')
     date2 = request.args.get('date2')
     if date2 == None:
@@ -232,7 +259,7 @@ def login1():
         if user and check_password_hash(user.pwd, request.form['psw']):
             userlogin = UserLogin().create(user)
             rm = True if request.form.get('remainme') else False
-            parameters['userrole'] = getUserByLogin(current_user.get_login()).userrole
+            #parameters['userrole'] = getUserByLogin(current_user.get_login()).userrole
             login_user(userlogin, remember=rm)
 #            return redirect(url_for('index'))
             return redirect(request.args.get("next") or url_for("index"))
@@ -281,7 +308,7 @@ def login():
             userlogin = UserLogin().create(user)
             rm = form.remember.data
             login_user(userlogin, remember=rm)
-            parameters['userrole'] = getUserByLogin(current_user.get_login()).userrole
+            #parameters['userrole'] = getUserByLogin(current_user.get_login()).userrole
 
             return redirect(request.args.get("next") or url_for("index"))
 
@@ -294,7 +321,7 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
-    parameters['userrole'] = ""
+    #parameters['userrole'] = ""
     logout_user()
     flash("Вы вышли из аккаунта", "success")
     return redirect(url_for('login'))
@@ -489,7 +516,7 @@ def approve(prid, taskid):
 
             #                sql = text(f"update PaymentRequest set [requeststatus]='{article.requeststatus}' where id={prid}")
 
-            sql = text(f"update task set taskstatus='Refused', acomment='{request.form['acomment']}' where id={taskid}")
+            sql = text(f"update task set taskstatus='Approved', acomment='{request.form['acomment']}' where id={taskid}")
             conn.execute(sql)
             conn.commit()
             return redirect(url_for('index'))
@@ -500,8 +527,6 @@ def approve(prid, taskid):
             #task.query.filter(task.id == taskid).update({'acomment': request.form['acomment']})
             #db.session.commit
             sql = text(f"update task set taskstatus='Refused', acomment='{request.form['acomment']}' where id={taskid}")
-            conn.execute(sql)
-            sql = text(f"update task set taskstatus='Canceled' where id<>{taskid} and prid={prid}")
             conn.execute(sql)
             conn.commit()
 
@@ -527,7 +552,7 @@ def approve(prid, taskid):
                 article.amount) + " " + article.currency + "</p>"
             msg += f"<p>Отдел: {article.dept}, плательщик: {article.payer}, офис: {article.direction}</p>"
             msg += f"<p>Договор: {article.contract}, номер счета: {article.invoice}, дата счета: {article.invdate}</p>"
-            msg += f"<p><b>был отклонен</b></p>"
+            msg += f"<p><b>был отклонен</b> Комментарий: {request.form['acomment']}</p>"
             msg += '<p>Посмотреть подробности можно по ссылке <a href="'+parameters.get("webserver")+'/posts/' + str(prid) + '">Payment request</a></p>'
             mail.sendmail(mailparams, respmail, subj, msg)
             return redirect(url_for('index'))
@@ -548,37 +573,46 @@ def process(id):
         msg +=f"<p>Отдел: {article.dept}, плательщик: {article.payer}, офис: {article.direction}</p>"
         msg +=f"<p>Договор: {article.contract}, номер счета: {article.invoice}, дата счета: {article.invdate}</p>"
         msg +=f"<p>Комментарий заявителя: {request.form.get('scomment')}</p>"
-#        msg +='<p>Одобрить и посмотреть подробности можно по ссылке <a href="http://127.0.0.1:5000/approve/'+str(id)+'/">Payment reques approval</a></p>'
+
         flagline='0'*5
         flag = True if request.form.get('std') == 'on' else False
         if flag:
             flagline = '1'+flagline[1:]
-            nrec = len(task.query.filter(task.prid == id, task.tasktype == 'Approvement std', task.taskstatus == "Created").all())
+            task.query.filter(task.prid == id, task.tasktype == 'Approvement std').update({'isactive': '0'})
+            db.session.commit()
+            nrec = len(task.query.filter(task.prid == id, task.tasktype == 'Approvement std', task.taskstatus == "Created", task.isactive == '1').all())
             if nrec == 0:
-                tstd = task(prid=id, tasktype = "Approvement std", taskstatus = "Created", assignee = dept.approver, assigneemail = dept.approvermail)
+                tstd = task(prid=id, tasktype="Approvement std", taskstatus="Created", assignee=dept.approver, assigneemail=dept.approvermail)
                 db.session.add(tstd)
                 db.session.commit()
 
             taskid = task.query.filter(task.prid == id, task.tasktype == "Approvement std", task.taskstatus == "Created", task.assignee == dept.approver).order_by(task.id.desc()).first()
-            msg1 = msg+'<p>Одобрить и посмотреть подробности можно по ссылке <a href="'+parameters.get("webserver")+'/approve/' + \
-                   str(id) + '/'+str(taskid.id)+'">Payment reques approval</a></p>'
+            print('taskid', taskid)
+            msg1 = msg + '<p>Одобрить и посмотреть подробности можно по ссылке <a href="' + parameters.get(
+                "webserver") + '/approve/' + str(id) + '/' + \
+                str(taskid.id) + '">Payment reques approval</a></p><p><b>В тестовом режиме работает одобрение через ответный имейл. Не отвечайте на это письмо, если не хотите отклонить, отправить на доработку заявку или оставить комментарий!</b>'
 
             mail.sendmail(mailparams, dept.approvermail, subj+' std', msg1)
         flag = True if request.form.get('m5')=='on' else False
         if flag:
             flagline = flagline[:1] +'1'+ flagline[:2]
+            task.query.filter(task.prid == id, task.tasktype == 'Approvement m5').update({'isactive': '0'})
+            db.session.commit()
             nrec = len(task.query.filter(task.prid == id, task.tasktype == 'Approvement m5', task.taskstatus == "Created").all())
             if nrec == 0:
                 tstd = task(prid=id, tasktype = "Approvement m5", taskstatus = "Created", assignee = dept.approver, assigneemail = dept.approvermail)
                 db.session.add(tstd)
                 db.session.commit()
             taskid = task.query.filter(task.prid == id, task.tasktype == "Approvement std", task.taskstatus == "Created", task.assignee == dept.approver).order_by(task.id.desc()).first()
-            msg1 = msg+'<p>Одобрить и посмотреть подробности можно по ссылке <a href="'+parameters.get("webserver")+'/approve/' + \
-                   str(id) + '/'+str(taskid.id)+'">Payment reques approval</a></p>'
+            msg1 = msg + '<p>Одобрить и посмотреть подробности можно по ссылке <a href="' + parameters.get(
+                "webserver") + '/approve/' + str(id) + '/' + \
+                str(taskid.id) + '">Payment reques approval</a></p><p><b>В тестовом режиме работает одобрение через ответный имейл. Не отвечайте на это письмо, если не хотите отклонить, отправить на доработку заявку или оставить комментарий!</b>'
             mail.sendmail(mailparams, dept.approvermail, subj+' >5m', msg1)
 
         if request.form.get('nondeduct'):
             flagline = flagline[:2] + '1'+ flagline[:3]
+            task.query.filter(task.prid == id, task.tasktype == 'Approvement nondeduct').update({'isactive': '0'})
+            db.session.commit()
             nrec = len(task.query.filter(
                 task.prid == id and task.tasktype == 'Approvement nondeduct' and task.taskstatus == "Created").all())
             if nrec == 0:
@@ -586,33 +620,40 @@ def process(id):
                 db.session.add(tstd)
                 db.session.commit()
             taskid = task.query.filter(task.prid==id. task.tasktype == "Approvement nondeduct", task.taskstatus == "Created", task.assignee == dept.approver).order_by(task.id.desc()).first()
-            msg1 = msg+'<p>Одобрить и посмотреть подробности можно по ссылке <a href="'+parameters.get("webserver")+'/approve/' + \
-                   str(id) + '/'+str(taskid.id)+'">Payment reques approval</a></p>'
+            msg1 = msg + '<p>Одобрить и посмотреть подробности можно по ссылке <a href="' + parameters.get(
+                "webserver") + '/approve/' + str(id) + '/' + \
+                str(taskid.id) + '">Payment reques approval</a></p><p><b>В тестовом режиме работает одобрение через ответный имейл. Не отвечайте на это письмо, если не хотите отклонить, отправить на доработку заявку или оставить комментарий!</b>'
             mail.sendmail(mailparams, dept.approvermail, subj+' nondeduct', msg1)
 
         if request.form.get('adv'):
             flagline = flagline[:3] + '1' + flagline[:4]
-            nrec = len(task.query.filter(task.prid == id, task.tasktype == 'Approvement m5', task.taskstatus == "Created").all())
+            task.query.filter(task.prid == id, task.tasktype == 'Approvement adv').update({'isactive': '0'})
+            db.session.commit()
+            nrec = len(task.query.filter(task.prid == id, task.tasktype == 'Approvement adv', task.taskstatus == "Created").all())
             if nrec == 0:
                 tstd = task(prid = id, tasktype = "Approvement adv", taskstatus = "Created", assignee=dept.approver, assigneemail = dept.approvermail)
                 db.session.add(tstd)
                 db.session.commit()
             taskid = task.query.filter(task.prid==id, task.tasktype == "Approvement adv", task.taskstatus == "Created", task.assignee == dept.approver).order_by(task.id.desc()).first()
-            msg1 = msg+'<p>Одобрить и посмотреть подробности можно по ссылке <a href="'+parameters.get("webserver")+'/approve/' + \
-                   str(id) + '/'+str(taskid.id)+'">Payment reques approval</a></p>'
+            msg1 = msg + '<p>Одобрить и посмотреть подробности можно по ссылке <a href="' + parameters.get(
+                "webserver") + '/approve/' + str(id) + '/' + \
+                str(taskid.id) + '">Payment reques approval</a></p><p><b>В тестовом режиме работает одобрение через ответный имейл. Не отвечайте на это письмо, если не хотите отклонить, отправить на доработку заявку или оставить комментарий!</b>'
             mail.sendmail(mailparams, dept.approvermail, subj+' аванс', msg1)
 
         if request.form.get('noorg'):
             flagline = flagline[:4] + '1' + flagline[:5]
+            task.query.filter(task.prid == id, task.tasktype == 'Approvement noorg').update({'isactive': '0'})
+            db.session.commit()
             nrec = len(task.query.filter(task.prid == id, task.tasktype == 'Approvement noorg', task.taskstatus == "Created").all())
             if nrec == 0:
                 tstd = task(prid = id, tasktype="Approvement noorg", taskstatus="Created", assignee=dept.approver, assigneemail=dept.approvermail)
                 db.session.add(tstd)
                 db.session.commit()
             taskid = task.query.filter(task.prid==id, task.tasktype == "Approvement noorg", task.taskstatus == "Created", task.assignee == dept.approver).order_by(task.id.desc()).first()
-            msg1 = msg+'<p>Одобрить и посмотреть подробности можно по ссылке <a href="'+parameters.get("webserver")+'/approve/' + \
-                   str(id) + '/'+str(taskid.id)+'">Payment reques approval</a></p>'
-            mail.sendmail(mailparams, dept.approvermail, subj+' нет оригиналов', msg)
+            msg1 = msg + '<p>Одобрить и посмотреть подробности можно по ссылке <a href="' + parameters.get(
+                "webserver") + '/approve/' + str(id) + '/' + \
+                str(taskid.id) + '">Payment reques approval</a></p><p><b>В тестовом режиме работает одобрение через ответный имейл. Не отвечайте на это письмо, если не хотите отклонить, отправить на доработку заявку или оставить комментарий!</b>'
+            mail.sendmail(mailparams, dept.approvermail, subj+' нет оригиналов', msg1)
 
         article.status = "Ожидание утверждения"
         article.requested = flagline
@@ -622,7 +663,7 @@ def process(id):
                 article = "0"*5
 
         conn = db.engine.connect()
-        sql = text(f"update task set scomment='{request.form['scomment']}' where prid={id}")
+        sql = text(f"update task set scomment='{request.form['scomment']}' where id={taskid.id}")
         conn.execute(sql)
         conn.commit()
         db.session.commit()
@@ -697,11 +738,12 @@ def paymentpost(id):
         if request.form['action'] == "Оплачено":
             article.status = "Оплачено"
             article.pcomment = request.form.get("pcomment")
-            mail.sendmail(mailparams, respmail, f"PR {id}. Оплачеено",
-                      f'Здравствуйте,<br> PR оплачено. Дата оплаты {request.form["pdate"]}. Комментарий {request.form["pcomment"]}.')
+            article.paymentdate = request.form.get("pdate")
             db.session.commit()
+            mail.sendmail(mailparams, respmail, f"PR {id}. Оплачено",
+                      f'Здравствуйте,<br> PR оплачено. Дата оплаты {request.form["pdate"]}. Комментарий {request.form["pcomment"]}.')
         if request.form['action'] == "Отправить на доработку бухгалтеру":
-            article.status = "Утверждено"
+            article.status = "Одобрено"
             article.pcomment = request.form.get("pcomment")
             mail.sendmail(mailparams, parameters.get('accountingmail'), f"PR {id}. Отклонено",
                           f'Здравствуйте,<br> Оплата PR была отклонена, требуется доработка бухгалтера. Комментарий {request.form["pcomment"]}.')
@@ -748,6 +790,7 @@ def post_attach(prid):
             db.session.commit()
 
             file.save(os.path.join('archive', str(prid), file.filename))
+            files = attachment.query.filter(attachment.prid == prid)
 
     return render_template("edit-attachements.html", article=article, files=files)
 
@@ -775,7 +818,7 @@ def pr_update(id):
         pr.paymenttype = form.paymenttype.data
         pr.porderno = form.porderno.data
         pr.invoice = form.invoice.data
-        pr.invdate = datetime.combine(form.invdate.data, datetime.min.time())
+        pr.invdate = datetime.datetime.combine(form.invdate.data, datetime.datetime.min.time())
         pr.amount = form.amount.data
         pr.currency = form.currency.data
         pr.dept = form.dept.data
@@ -831,44 +874,6 @@ def delattach(id, prid):
     return redirect('/attachments/' + str(prid))
 
 
-@app.route('/create-article', methods=['POST','GET'])
-@login_required
-def create_article():
-    if request.method == 'POST':
-        if len(request.form['inn']) != 10 or len(request.form['inn']) != 12:
-            flash("Не верная длинна ИНН", "error")
-            return ''#render_template("create-article.html")
-
-        if not(request.form['mount'].isnumeric()):
-            flash("Не верная длинна ИНН", "error")
-            return ''#render_template("create-article.html")
-
-        direction = request.form['direction']
-        payer = request.form['payer']
-        responsible = request.form['responsible']
-        paymenttype = request.form['paymenttype']
-        porderno = request.form['porderno']
-        invoice = request.form['invoice']
-        invdate = request.form['invdate']
-        amount = request.form['amount']
-        currency = request.form['currency']
-        dept = request.form['dept']
-        contract = request.form['contract']
-        inn = request.form['inn']
-
-        article = PaymentRequest(direction=direction, payer=payer, responsible=responsible, paymenttype=paymenttype, porderno=porderno, invoice=invoice, invdate=invdate, amount=amount, currency=currency, dept=dept, contract=contract, inn=inn)
-
-        try:
-
-            db.session.add(article)
-            db.session.commit()
-            return redirect(url_for('index')) #redirect('/posts')
-        except:
-            flash("При добавлении произошла ошибка", "error")
-            return "При добавлении произошла ошибка"
-    else:
-        return render_template("create-article.html")
-
 def getvendorbyinn(inn):
     return Vendor.query.filter(Vendor.INN == inn).limit(1).first()
 
@@ -878,7 +883,15 @@ def getvendorbyinn(inn):
 def pr_create():
     form = PRForm()
     if form.validate_on_submit():
-        invdate = datetime.combine(form.invdate.data, datetime.min.time())
+        if request.form['action'] == "Найти":
+            svendor = Vendor.query.filter(Vendor.INN == form.inn.data).limit(1).first()
+            if svendor != None:
+                form.vendorname.data = svendor.ShortName
+            else:
+                form.vendorname.data = ""
+                flash("Клиент с этим ИНН не найден. Можно сохранить, уйдет письмо ответстенному за добавление.", "error")
+            return render_template("create-pr.html", form=form)
+        invdate = datetime.datetime.combine(form.invdate.data, datetime.datetime.min.time())
         vendorname=""#form.vendorname.data
         inn = form.inn.data
         if vendorname == "":
@@ -889,10 +902,14 @@ def pr_create():
             else:
                 user = User.query.filter(User.login == form.responsible.data).first()
                 respmail = user.email
+                resplist = []
+                resplist.append(respmail)
                 if parameters.get('supportmail') != None:
-                    respmail += "; "+parameters.get('supportmail')
+                    resplist.appern(parameters.get('supportmail'))
+                else:
+                    resplist.appern('v000529@stokov.ru')
 
-                mail.sendmail(mailparams, respmail, "PR нет данных поставщика",f'Здравствуйте,<br> для инн {form.inn.data} нет данных.')
+                mail.sendmail(mailparams, resplist, "PR нет данных поставщика",f'Здравствуйте,<br> для инн {form.inn.data} нет данных.')
 
         pr = PaymentRequest(direction=form.direction.data, payer=form.payer.data, responsible=form.responsible.data,
                                  paymenttype=form.paymenttype.data, porderno=form.porderno.data, invoice=form.invoice.data, invdate=invdate,

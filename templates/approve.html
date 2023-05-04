@@ -25,7 +25,8 @@ PR {{ article.id }}
 
     <span class="files">
 		{% for e in files %}
-		<a href="/download/{{ e.filename }}">{{ e.filename }}</a><br>
+		<a href="/download/{{ article.id }}/{{ e.filename }}">{{ e.filename }}</a><br>
+
 		{% endfor %}
 	</span>
     <form class="form-inline" action="" method="post" enctype="multipart/form-data">

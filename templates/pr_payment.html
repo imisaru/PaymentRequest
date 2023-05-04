@@ -21,6 +21,10 @@ PR {{ article.id }}
     Отдел (центр затрат): {{ article.dept }}<br>
     Номер зарегистрированного контракта:  {{ article.contract }}<br>
     Поставщик: {{ article.inn }} {{ article.vendorname }}</br>
+        Планируемая дата платежа: <i>{{ article.plandate }}</i></br>
+        Фактическая дата платежа: <i>{{ article.paymentdate }}</i></br>
+      Комментарий бухгалтера: <i>{{ article.acomment }}</i></br>
+      Комментарий платежной группы: <i>{{ article.pcomment }}</i></br>
     <div>
     <fieldset class="card">
         <legend>Приложеные файлы</legend>

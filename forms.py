@@ -15,10 +15,11 @@ class PRForm(FlaskForm):
     currency = SelectField("Валюта: ", coerce=str, choices=['РУБ', 'EUR'])
     dept = SelectField("Отдел (центр затрат): ", coerce=str, choices=['GTO Logistic', 'GTO Prod & Maintn', 'GTO HR/Labor safety', 'GTO Quality', 'GTO VLS', 'HR', 'IT', 'Legal', 'RE', 'SEC', 'TC', 'VFS'])
     contract = StringField("Номер зарегистрированного контракта: ")
-    inn = StringField("ИНН поставщика: ", validators=[DataRequired(), Length(min=10, max=12, message="Неверная длинна Инн")])
-#    vendorname = StringField("Наименование поставщика (не побязательно))")
+    inn = StringField("Поставщик ИНН: ", validators=[DataRequired(), Length(min=10, max=12, message="Неверная длинна Инн")])
+    searchbtn = SubmitField("Найти", name='action')
+    vendorname = StringField("Наименование поставщика", render_kw={'style': 'width: 80ch', 'readonly': True})
 #    files = MultipleFileField("Вложения")
-    submit = SubmitField("Сохранить")
+    submit = SubmitField(label="Сохранить", name='action')
 
 class LoginForm(FlaskForm):
     login = StringField("Login: ", validators=[DataRequired(), Length(min=7, max=7, message="Длинна логина 7. начинается с v")])#[Email("Некорректный email")])

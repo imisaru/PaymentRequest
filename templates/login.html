@@ -16,7 +16,12 @@
         <p><input type="checkbox" name="remainme" /> Запомнить меня
         <p><input type="submit" value="Войти" />
         <hr align=left width="3000px">
-        <p><a href="{{url_for('register')}}">Регистрация</a>
+        <p><a href="{{url_for('register')}}">Регистрация</a> </p>
     </form>
-</p></div>
+<form action="">
+  <label for="gsearch">Search :</label>
+  <input type="search" id="gsearch" name="gsearch">
+  <input type="submit" value="search">
+</form>
+   </div>
 {% endblock %}

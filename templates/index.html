@@ -7,7 +7,7 @@
               <h2>Ваши задачи ( {{ tasks|length }} )</h2>
               {% for el in tasks %}
               <div class="alert alert-info">
-                <a href="/approve/{{ el.prid }}/{{ el.id }}" class="btn btn-warning">Детальнее</a>
+                <a href="/approve/{{ el.prid }}/{{ el.id }}" class="btn btn-warning btn-sm">Детальнее</a>
                   {{ el.prid }}/{{ el.id }} | {{ el.tasktype }} | {{ el.dept }} | {{ el.paymenttype }} | {{ el.amount }} {{ el.currency }} | {{ el.vendorname }} | {{ el.name }}
               </div>
               {% endfor %}
@@ -19,12 +19,12 @@
               <div class="alert alert-info">
                 <p>№{{ el.id }}. Статус "{{ el.status }}" | {{ el.payer }} | {{ el.direction }} | {{ el.inn }} | {{ el.vendorname }} |
                 {{ el.dept }} | {{ el.amount }} {{ el.currency }} | Дата счета: {{ el.invdate }}</p>
-                <a href="/posts/{{ el.id }}" class="btn btn-secondary">Детальнее</a>
+                <a href="/posts/{{ el.id }}" class="btn btn-secondary btn-sm">Детальнее</a>
                   {% if userrole == 'accounting' %}
-                <a href="/accpost/{{ el.id }}" class="btn btn-primary">Ввести проводку</a>
+                <a href="/accpost/{{ el.id }}" class="btn btn-primary btn-sm">Ввести проводку</a>
                 {% endif %}
                 {% if el.status == "Черновик" %}
-                  <a href="/attachments/{{ el.id }}" class="btn btn-secondary">Управлять вложениями</a>
+                  <a href="/attachments/{{ el.id }}" class="btn btn-secondary btn-sm">Управлять вложениями</a>
                   <!--<a href="/attachments/{{ el.id }}" class="btn btn-warning">Управлять вложениями</a>
                    <a href="/posts/{{ el.id }}" class="btn btn-warning">Отправить на согласование</a>
                    --!>
