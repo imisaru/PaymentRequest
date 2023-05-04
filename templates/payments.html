@@ -9,23 +9,23 @@ PR План платежей
       <div class="container mt-5">
             <form method="post">
         <label for="payer">Юридическое лицо:</label>
-        <select id="payer" name="payer">
-          <option value="Все">Все</option>
-          <option value="Стоков Машинное Оборудование АО">Стоков Машинное Оборудование АО</option>
-          <option value="Стоков Компоненты ООО">Стоков Компоненты ООО</option>
-          <option value="Стоков Конструкция ООО">Стоков Конструкция ООО</option>
+        <select id="payer" name="payer" ">
+          <option value="Все" {% if fparams.le != "SMO" and fparams.le != "SK" and fparams.le != "SST" %}selected {% endif %}>Все</option>
+          <option value="Стоков Машинное Оборудование АО" {% if fparams.le == "SMO" %}selected {% endif %}>Стоков Машинное Оборудование АО</option>
+          <option value="Стоков Компоненты ООО" {% if fparams.le == "SK" %}selected {% endif %}>Стоков Компоненты ООО</option>
+          <option value="Стоков Конструкция ООО" {% if fparams.le == "SST" %}selected {% endif %}>Стоков Конструкция ООО</option>
         </select>
         <label for="sorting">Сортировка:</label>
-        <select id="sorting" name="sorting">
-          <option value="Дата планируемая платежа">Дата планируемая платежа</option>
-          <option value="Получатель платежа">Получатель платежа</option>
+        <select id="sorting" name="sorting" >
+          <option value="Дата планируемая платежа" {% if fparams.OrderBy != "Дата платежа планируемая" %} selected {% endif %}>Дата платежа планируемая</option>
+          <option value="Получатель платежа" {% if fparams.OrderBy == "Получатель платежа" %} selected {% endif %}>Получатель платежа</option>
         </select>
         <!--input type="submit" class="btn btn-secondary btn-sm" value="Выбрать"--!>
         <br>
         <label for="prno">Номер заказа на закупку</label>
-        <input type="text" class="fo rm-control" id="prno" name="prno" placeholder="Номер PR или пусто">
+        <input type="text" class="fo rm-control" id="prno" name="prno" placeholder="Номер PR или пусто" value={{fparams.prno}}>
         <label for="trno">Номер проводки</label>
-        <input type="text" class="fo rm-control" id="trno" name="trno" placeholder="Номер проводки 1с">
+        <input type="text" class="fo rm-control" id="trno" name="trno" placeholder="Номер проводки 1с" value="{{ fparams.trno }}">
       <!--/div><br>
       <div class="container mt-5"--!>
         <label for="date1">Срок оплаты с </label>
