@@ -267,6 +267,91 @@ def payments():
         date1 = datetime.date.today() - timedelta(days=90)
     return render_template("payments.html", articles=articles, date1=date1, date2=date2, fparams=fparams)
 
+@app.route('/archive', methods=["POST", "GET"])
+@login_required
+def archive():
+    if request.method == "POST":
+        args = []
+
+        if request.form['prno']>'':
+            args.append('prno=' + request.form['prno'])
+        elif request.form['trno']>'':
+            args.append('trno=' + request.form['trno'])
+        else:
+            args.append('date1='+request.form['date1']+'&date2='+request.form['date2'])
+
+        if request.form['payer'] == 'Стоков Машинное Оборудование АО':
+            args.append('le=SMO')
+        if request.form['payer'] == 'Стоков Компоненты ООО':
+            args.append('le=SK')
+        if request.form['payer'] == 'Стоков Конструкция ООО':
+            args.append('le=SST')
+
+        if request.form['sorting'] == 'Дата планируемая платежа':
+            args.append('sort=plandate')
+        if request.form['sorting'] == 'Получатель платежа':
+            args.append('sort=vendor')
+        if len(args)>0:
+            args = '?'+'&'.join(args)
+        return redirect(url_for('archive') + args)
+
+    fparams = {}
+    if request.args.get('sort') == 'vendor':
+        sOrderBy="vendorname"
+        fparams['OrderBy'] = "Получатель платежа"
+    else:
+        sOrderBy = "plandate desc"
+        fparams['OrderBy'] = "Дата платежа планируемая"
+
+    sWhere = f"status='Передано в оплату'"
+
+    if request.args.get('prno') != None:
+        fparams['prno'] = request.args.get('prno')
+        sWhere=f"a.id={str(request.args.get('prno'))}"
+
+    if request.args.get('trno') != None:
+        fparams['trno'] = request.args.get('trno')
+        print(fparams['trno'])
+        sWhere=f"upper(a.trno) like upper('{str(request.args.get('trno'))}%')"
+
+    if request.args.get('date1') != None and request.args.get('date2') != None:
+        sdate1 = datetime.date.strftime(datetime.datetime.strptime(request.args.get('date1'), '%Y-%m-%d'), r'%m/%d/%Y')
+        sdate2 = datetime.date.strftime(datetime.datetime.strptime(request.args.get('date2'), '%Y-%m-%d'), r'%m/%d/%Y')
+        print(sdate2, type(sdate2))
+        sWhere=f"status='Передано в оплату' and isnull(plandate,trdate)>='{sdate1}' and isnull(plandate,trdate)<='{sdate2}'"
+
+    if request.args.get('le') != None:
+        if request.args.get('le') == 'SMO':
+            fparams['le'] = "SMO"
+            sWhere += f" and payer='Стоков Машинное Оборудование АО'"
+        if request.args.get('le') == 'SK':
+            fparams['le'] = "SK"
+            sWhere += f" and payer='Стоков Компоненты ООО'"
+        if request.args.get('le') == 'SST':
+            fparams['le'] = "SST"
+            sWhere += f" and payer='Стоков Конструкция ООО'"
+
+    sql = text(f"""select a.id, direction, payer, responsible, b.name as respname, paymenttype, amount, currency, dept, 
+    vendorname, trno, trdate, plandate, acomment, max(filename) as file1, min(filename) as file2, count(c.id) as nfiles,
+    b.name AS respname  from PaymentRequest a 
+    left join users b on a.responsible=b.login left join attachment c on a.id=c.prid 
+    where {sWhere}
+    group by a.id, direction, payer, responsible, b.name, paymenttype, amount, currency, dept, 
+    vendorname, trno, trdate, plandate, acomment
+    order by {sOrderBy}""")
+    print(sql)
+
+    conn = db.engine.connect()
+    articles = conn.execute(sql).fetchall()
+    conn.close
+    print('request.args.get(date2)', request.args.get('date2'))
+    date1 = request.args.get('date1')
+    date2 = request.args.get('date2')
+    if date2 == None:
+        date2 = datetime.date.today() + timedelta(days=10)
+    if date1 == None:
+        date1 = datetime.date.today() - timedelta(days=90)
+    return render_template("archive.html", articles=articles, date1=date1, date2=date2, fparams=fparams)
 
 @app.route('/about')
 def about():
