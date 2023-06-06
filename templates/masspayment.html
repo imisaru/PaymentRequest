@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ Массовый ввод платежа
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>Платежи ({{payments|length}})</h2>
+    <form class="form-inline" action="" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered">
+        <thead>
+            <th style="width:10%">№</th><th style="width:10%">Номер</th><th style="width:20%">Юрлицо</th><th style="width:40%">Клиент</th><th style="width:20%">Сумма</th>
+        </thead>
+        {% for el in payments %}
+              <tr>
+                  <td><input type="text" class="form-control" id="prid{{ el.id }}" name="prid{{ el.id }}" size="50" maxlength="1" readonly value="{{ el.id }}"> </td>
+                  <td>{{ el.trno }}</td>
+                  <td>{{ el.payer[:24] }}</td>
+                  <td>{{ el.vendorname }}</td>
+                  <td align="right">{{ el.amount }} {{ el.currency }}</td>
+              </tr>
+        {% endfor %}
+    </table>
+    {% if payments|length>0 %}
+        <label for="pcomment">Комментарий банковской группы</label>
+        <input type="text" class="form-control" id="pcomment" name="pcomment">
+        <label for="pdate">Дата оплаты</label>
+
+        <input type="date"  id="pdate" name="pdate" value="{{ pdate }}" required>
+        <input type="submit" class="btn btn-success" name="action" value="Оплачено">
+    {% endif %}
+    </form>
+</div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-PR План платежей
+Поиск
 {% endblock %}
 
 {% block body %}
@@ -15,48 +15,76 @@ PR План платежей
           <option value="Стоков Компоненты ООО" {% if fparams.le == "SK" %}selected {% endif %}>Стоков Компоненты ООО</option>
           <option value="Стоков Конструкция ООО" {% if fparams.le == "SST" %}selected {% endif %}>Стоков Конструкция ООО</option>
         </select>
+        <label for="direction">Направление:</label>
+        <select id="direction" name="direction" ">
+          <option value="Все" {% if fparams.direction != "" or fparams.direction != "Все" %}selected {% endif %}>Все</option>
+          <option value="Калуга" {% if fparams.direction == "Калуга" %}selected {% endif %}>Калуга</option>
+          <option value="Химки" {% if fparams.direction == "Химки" %}selected {% endif %}>Химки</option>
+        </select>
+        <label for="status">Статус:</label>
+        <select id="status" name="status" ">
+          <option value="Все" {% if fparams.status != "" or fparams.status != "Все" %}selected {% endif %}>Все</option>
+          <option value="Черновик" {% if fparams.status == "Черновик" %}selected {% endif %}>Черновик</option>
+          <option value="Доработка" {% if fparams.status == "Доработка" %}selected {% endif %}>Доработка</option>
+          <option value="Ожидание утверждения" {% if fparams.status == "Ожидание утверждения" %}selected {% endif %}>Ожидание утверждения</option>
+          <option value="Отказано в утверждении" {% if fparams.status == "Отказано в утверждении" %}selected {% endif %}>Отказано в утверждении</option>
+          <option value="Передано в оплату" {% if fparams.status == "Передано в оплату" %}selected {% endif %}>Передано в оплату</option>
+          <option value="Оплачено" {% if fparams.status == "Оплачено" %}selected {% endif %}>Оплачено</option>
+          <option value="Взаимозачет" {% if fparams.status == "Взаимозачет" %}selected {% endif %}>Взаимозачет</option>
+          <option value="Закрыто" {% if fparams.status == "Закрыто" %}selected {% endif %}>Закрыто</option>
+        </select><br>
         <!--input type="submit" class="btn btn-secondary btn-sm" value="Выбрать"--!>
         <label for="prno">Номер заказа на закупку</label>
         <input type="text" class="fo rm-control" id="prno" name="prno" placeholder="Номер PR или пусто" value={{fparams.prno}}>
         <label for="trno">Номер проводки</label>
         <input type="text" class="fo rm-control" id="trno" name="trno" placeholder="Номер проводки 1с" value="{{ fparams.trno }}">
+        <label for="inv">Номер счета</label>
+        <input type="text" class="fo rm-control" id="inv" name="inv" placeholder="Номер счета" value={{fparams.inv}}>
               <br>
-        <label for="requestor">Номер заказа на закупку</label>
-        <input type="text" class="fo rm-control" id="requestor" name="requestor" placeholder="заявитель" value={{fparams.requestor}}>
+        <label for="requestor">Ответственный</label>
+        <input type="text" class="fo rm-control" id="requestor" name="requestor" placeholder="ответственный" value={{fparams.requestor}}>
+        <label for="vendor">Поставщик</label>
+        <input type="text" class="fo rm-control" id="vendor" name="vendor"  size="60" placeholder="Имя или ИНН" value={{fparams.vendor}}>
       <!--/div><br>
       <div class="container mt-5"--!>
+        <br>
         <label for="date1">Срок оплаты с </label>
-        <input type="date" id="date1" name="date1" value={{ date1 }} required pattern="\d{4}-\d{2}-\d{2}" placeholder="с">
+        <input type="date" id="date1" name="date1" value={{ date1 }} pattern="\d{4}-\d{2}-\d{2}" placeholder="с">
         <label for="date2"> по </label>
-        <input type="date" id="date2" name="date2" value={{date2}} required pattern="\d{4}-\d{2}-\d{2}" placeholder="по">
+        <input type="date" id="date2" name="date2" value={{date2}} pattern="\d{4}-\d{2}-\d{2}" placeholder="по">
+        <label for="pmtdate1">Дата платежа с </label>
+        <input type="date" id="pmtdate1" name="pmtdate1" value={{ pmtdate1 }} required pattern="\d{4}-\d{2}-\d{2}" placeholder="с">
+        <label for="pmtdate2"> по </label>
+        <input type="date" id="pmtdate2" name="pmtdate2" value={{pmtdate2}} required pattern="\d{4}-\d{2}-\d{2}" placeholder="по">
         <label for="sorting">Сортировка:</label>
         <select id="sorting" name="sorting" >
           <option value="Дата планируемая платежа" {% if fparams.OrderBy != "Дата платежа планируемая" %} selected {% endif %}>Дата платежа планируемая</option>
           <option value="Получатель платежа" {% if fparams.OrderBy == "Получатель платежа" %} selected {% endif %}>Получатель платежа</option>
+          <option value="Дата счета" {% if fparams.OrderBy == "Дата счета" %} selected {% endif %}>Дата счета</option>
         </select>
        <input type="submit" class="btn btn-secondary btn-sm" value="Показать">
         <!--a href="/payments?date1={{ date1 }}" class="btn btn-secondary btn-sm">Фильтровать</a--!>
             </form>
       </div>
             <div class="container mt-2">
-              <h4>Платежи ({{articles|length}})</h4>
+              <h4>Заявки на оплату ({{articles|length}})</h4>
             </div>
               <div class="alert alert-info">
               <table class="table table-bordered"><!-- class="table table-hover"table table-sm--!>
               <!--thead class="thead-dark" --!>
               <thead>
-                <th>№</th><th>Номер</th><th>Cрок оплаты</th><th>Юрлицо</th><th>Клиент</th><th>Сумма</th><th>Комментарий бухгалтера</th><th>Вложения</th>
+                <th>№</th><th>Номер пр.</th><th>Статус</th><th>Cрок оплаты</th><th>Юрлицо</th><th>Направление</th><th>Клиент</th><th>Счет</th><th>Сумма</th><th>Вложения</th>
                 <th>Заявитель</th>
                 </thead>
               {% for el in articles %}
               <tr>
                 <td><a href="/paymentpost/{{ el.id }}" class="btn btn-secondary btn-sm">{{ el.id }}</a></td>
-                <td>{{ el.trno }}</td><td>{{ el.plandate }}</td>
-                <td><a href="/archive?le=SMO">{{ el.payer }}</a></td><td>{{ el.vendorname }}</td>
+                <td>{{ el.trno }}</td><td>{{ el.status }}</td><td>{{ el.plandate }}</td>
+                <td>{{ el.payer[:15] }}</td><td>{{ el.direction }}</td><td>{{ el.vendorname }} {{ el.inn }}</td>
+                <td>{{ el.invoice }} от {{ el.invdate }}</td>
                 <td align="right">{{ el.amount }} {{ el.currency }}</td>
-                <td>{% if el.acomment != None %} {{ el.acomment }} {% endif %}</td>
-                <td>({{ el.nfiles }}) {% if el.nfiles>0 %}<a href="/download/{{ el.id }}/{{ el.file1 }}" target="_blank">{{ el.file1 }}</a> {% if el.file1 != el.file2 %} <br>
-                  <a href="/download/{{ el.id }}/{{ el.file2 }}" target="_blank">{{ el.file2 }}</a> {% endif %}{% endif %}</td>
+                <td>({{ el.nfiles }}) {% if el.nfiles>0 %}<a href="/download/{{ el.id }}/{{ el.file1 }}" target="_blank">{{ el.file1[:20] }}</a> {% if el.file1 != el.file2 %} <br>
+                  <a href="/download/{{ el.id }}/{{ el.file2 }}" target="_blank">{{ el.file2[:20] }}</a> {% endif %}{% endif %}</td>
                 <td>{{ el.responsible+' '+el.respname }}</td>
                 <!--td><a href="/paymentpost/{{ el.id }}" class="btn btn-secondary btn-sm">Ввести платеж</a></td--!>
               </tr>

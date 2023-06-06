@@ -8,7 +8,10 @@ def sendmail(params, to, subj, body):
     sender_email = params.get("smtplogin")#"v000529@stokov.ru"
     password = params.get("smtppassword")#"Besikr29"
 
-    message = "From: "+sender_email+"\r\nTo: "+','.join(to)+"\r\n"
+    if type(to) == list:
+        message = f"From: {sender_email}\r\nTo: "+','.join(to)+"\r\n"
+    else:
+        message = f"From: {sender_email}\r\nTo: {to}\r\n"
     message += "Subject: "+subj+'\r\nContent-Type: text/html; charset=utf-8\r\n\n<html><meta charset="UTF-8">'+body+"</html>"
 
     context = ssl.create_default_context()

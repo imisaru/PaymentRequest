@@ -2,9 +2,6 @@
 
 {% block body %}
 {{ super() }}
-{% for cat, msg in get_flashed_messages(True) %}
-<div class="flash {{cat}}">{{msg}}</div>
-{% endfor %}
 <form action="" method="post" class="form-contact">
 {{ form.hidden_tag() }}
 <div class="container mt-5">

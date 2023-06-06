@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-PR Профиль пользователя
+Профиль пользователя
 {% endblock %}
 
 {% block body %}
@@ -19,11 +19,13 @@ PR Профиль пользователя
 		</div>
 	</td>
 	<td valign="top" class="profile-panel">
-		<p><a href="{{url_for('logout')}}">Выйти из профиля</a>
+		<p><a href="{{url_for('logout')}}">Выйти из профиля</a></p>
+		<p><a href="{{url_for('changepass')}}">Поменять пароль</a></p>
 		<ul class="profile-info">
 		<li>Имя: {{ current_user.getName() }}</li>
 		<li>email: {{ current_user.getEmail() }}</li>
 		<li>Роль: {{ current_user.getRole() }}</li>
+		<li>Направление по умолчанию: {{ dir }}</li>
 		</ul>
 	</td></tr>
 </table>

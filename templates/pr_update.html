@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-PR Редактирование
+Редактирование
 {% endblock %}
 
 {% block body %}
@@ -13,17 +13,27 @@ PR Редактирование
 <form action="" method="post" class="form-contact" enctype="multipart/form-data">
       {{ form.hidden_tag() }}
 {% for field in form if field.name not in ['csrf_token', 'submit', 'fi les'] -%}
-	<p>{{ field.label() }}
-	{% if field.errors %}
-		{{ field(class="invalid") }}
-	<span class="invalid-feedback">
-		{% for e in field.errors %}
-		{{ e }}
-		{% endfor %}
-	</span>
-	{% else %}
-		{{ field() }}
-	{% endif %}
+		{% if field.name !='action' and field.label != 'Найти' %} <p>
+			{% if field.name != 'preapproved' or (field.name == 'preapproved' and current_user.getRole() == 'accounting') %}
+					{{ field.label() }}
+			{% endif %}
+		{% endif %}
+		{% if field.label == 'Сохранить' %}!!!<br><br><p>{% endif %}
+		{% if field.errors %}
+			{{ field(class="invalid") }}
+			<span class="invalid-feedback">
+			{% for e in field.errors %}
+				{{ e }}
+			{% endfor %}
+			</span>
+		{% else %}
+			{% if field.name != 'preapproved' or (field.name == 'preapproved' and current_user.getRole() == 'accounting') %}
+				{{ field() }}
+			{% endif %}
+		{% endif %}
+		{% if field.name == 'vendorname' %}</p><br>{% endif %}
+		{% if field.name == 'action' %}</p>{% endif %}
+		{% if field.label == 'Сохранить' %}</p>{% endif %}
 {% endfor %}
 
         <br>
@@ -36,7 +46,7 @@ PR Редактирование
 		{% endfor %}
 	</span><br>
 
-        <p>{{ form.submit() }}
+        <!--<p>{{ form.submit() }}--!>
     </form>
 </div>
 	{% endblock %}

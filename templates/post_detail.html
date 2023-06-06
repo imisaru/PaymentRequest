@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-PR {{ article.id }}
+ {{ article.id }}
 {% endblock %}
 
 {% block body %}
@@ -10,7 +10,7 @@ PR {{ article.id }}
 
   <div class="alert alert-info">
     <p>Запрос:<b> {{ article.id }}</b>. Статус: <b>{{article.status}}</b>. Дата создания: {{ article.CreateDate }}.</p>
-    Ответственный: <i>{{ article.responsible }}</i><br>
+    Ответственный: <i>{{ article.responsible }} {{ article.name }} {{ article.email }}</i><br>
     Направление счета: <i>{{ article.direction }}</i><br>
     Компания плательщик: <i>{{ article.payer }}</i><br>
     Вид оплаты: <i>{{ article.paymenttype }}</i><br>
@@ -50,18 +50,19 @@ PR {{ article.id }}
 	</span>
       </div>
     <div>
+        <a href="/create-pr?cpy={{ article.id }}" class="btn btn-secondary">Создать на основании</a>
         {% if prstatus.value == '1' or article.status in("Черновик", "Отказано в утверждении","Доработка")%}
-    <a href="/posts/{{ article.id }}/del" class="btn btn-danger">Удалить</a>
-    <a href="/posts/{{ article.id }}/update" class="btn btn-success">Редактировать</a>
-    <a href="/attachments/{{ article.id }}" class="btn btn-success">Управлять вложениями</a>
+            <a href="/posts/{{ article.id }}/del" class="btn btn-danger">Удалить</a>
+            <a href="/posts/{{ article.id }}/update" class="btn btn-success">Редактировать</a>
+            <a href="/attachments/{{ article.id }}" class="btn btn-success">Управлять вложениями</a>
         {% endif %}
         {% if article.status in("Ожидание утверждения", "Черновик", "Отказано в утверждении","Доработка") %}
-    <a href="/process/{{ article.id }}" class="btn btn-success">Отправить на согласование</a>
+           <a href="/process/{{ article.id }}" class="btn btn-success">Отправить на согласование</a>
         {% endif %}
         {% if article.status in("Доработка") %}
-    <a href="/toaccounting/{{ article.id }}" class="btn btn-success">Отправить в бухгалтерию</a>
+            <a href="/toaccounting/{{ article.id }}" class="btn btn-success">Отправить в бухгалтерию</a>
         {% endif %}
-    <br>
+  <br>
     </div>
   </div>
 

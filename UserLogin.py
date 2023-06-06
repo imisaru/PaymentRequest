@@ -34,13 +34,13 @@ class UserLogin(UserMixin):
         return str(self.__user.id)
 
     def get_login(self):
-        return str(self.__user.login)
+        return self.__user.login if self.__user else ""  # str(self.__user.login)
 
     def get_email(self):
-        return str(self.__user.email)
+        return self.__user.email if self.__user else ""  # str(self.__user.email)
 
     def getRole(self):
-        return str(self.__user.userrole)
+        return self.__user.userrole if self.__user else ""  # str(self.__user.userrole)
 
     def getName(self):
         return self.__user.name if self.__user else "Без имени"

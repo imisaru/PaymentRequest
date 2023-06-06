@@ -15,9 +15,11 @@ class PRForm(FlaskForm):
     invdate = DateField("Дата счета :")
     amount = DecimalField("Сумма счета с НДС: ")
     currency = SelectField("Валюта: ", coerce=str, choices=['РУБ', 'EUR'])
-    dept = SelectField("Отдел (центр затрат): ", coerce=str,
-                       choices=['GTO Logistic', 'GTO Prod & Maintn', 'GTO HR/Labor safety', 'GTO Quality', 'GTO VLS',
-                                'HR', 'IT', 'Legal', 'RE', 'SEC', 'TC', 'VFS'])
+#    dept = SelectField("Отдел (центр затрат): ", coerce=str,
+#                       choices=['GTO Logistic', 'GTO Prod & Maintn', 'GTO HR/Labor safety', 'GTO Quality', 'GTO VLS',
+#                                'HR', 'IT', 'Legal', 'RE', 'SEC', 'TC', 'VFS'])
+    dept = SelectField("Отдел (центр затрат): ", coerce=str)
+    preapproved = BooleanField("Заранее одобрено: ", default=False)
     contract = StringField("Номер зарегистрированного контракта: ")
     inn = StringField("Поставщик ИНН: ",
                       validators=[DataRequired(), Length(min=10, max=12, message="Неверная длинна Инн")])
@@ -28,7 +30,7 @@ class PRForm(FlaskForm):
     
 class LoginForm(FlaskForm):
     login = StringField("Login: ", validators=[DataRequired(), Length(min=7, max=7, message="Длинна логина 7. начинается с v")])#[Email("Некорректный email")])
-    psw = PasswordField("Пароль: ", validators=[DataRequired(), Length(min=4, max=100, message="Пароль должен быть от 4 до 100 символов")])
+    psw = PasswordField("Пароль: ")
     remember = BooleanField("Запомнить", default = False)
     submit = SubmitField("Войти")
 

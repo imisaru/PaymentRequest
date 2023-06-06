@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-PR {{ article.id }}
+{{ article.id }}
 {% endblock %}
 
 {% block body %}
@@ -40,14 +40,14 @@ PR {{ article.id }}
 
   <table class="table">
       <tr>
-        <td><input type="checkbox" id="std" name="std" checked onclick="return false;"></td>
+        <td><input type="checkbox" id="std" name="std" {% if article.preapproved != '1' %} checked {% endif %} onclick="return false;"></td>
         <td>Стандартная заявка на оплату  (счёт + закрывающие документы)</td>
         <td>Руководитель подразделения</td>
         <td>{{ managermail }}</td>
       </tr>
       <tr>
           {% if article.amount >=5000000 or article.requested[1]=='1' %}
-            <td><input type="checkbox" id="m5" name="m5"  checked onclick="return false;"></td>
+            <td><input type="checkbox" id="m5" name="m5" {% if article.requested[1]=='1' %}  checked onclick="return false;" {% endif %}></td>
         {% else %}
           <td><input type="checkbox" id="m5" name="m5"></td>
         {% endif %}
@@ -65,13 +65,23 @@ PR {{ article.id }}
         <td><input type="checkbox" id="adv" name="adv" {% if article.requested[3]=='1' %}  checked onclick="return false;" {% endif %}></td>
         <td>Авансовый платеж, если в договоре не отражена оплата авансом</b></td>
         <td></td>
-        <td>Галины Дубровская или Анна Крейдик. </td>
+        <td>
+            <select id="approveradv" name="approveradv"  >
+                <option value="Галина Дубровская">Галина Дубровская</option>
+                <option value="Анна Кредик">Анна Кредик</option>
+            </select>
+        </td>
       </tr>
       <tr>
         <td><input type="checkbox" id="noorg" name="noorg"  {% if article.requested[4]=='1' %}  checked onclick="return false;" {% endif %}></td>
         <td>Оплата по сканам, без наличия оригиналов</b></td>
         <td></td>
-        <td>Ольга Агафонова, Светлана Можар</td>
+        <td>
+            <select id="approvernoorg" name="approvernoorg"  >
+                <option value="Светлана Можар">Светлана Можар</option>
+                <option value="Ольга Агафонова">Ольга Агафонова</option>
+            </select>
+        </td>
       </tr>
     </table>
     </div>

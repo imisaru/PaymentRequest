@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-PR {{ article.id }}
+ {{ article.id }}
 {% endblock %}
 
 {% block body %}
@@ -52,8 +52,8 @@ PR {{ article.id }}
       <div class="form-group">
         <label for="trno">Номер проводки(документа)</label>
         <input type="text" class="for m-control" id="trno" name="trno" value="{{ article.trno }}" readonly   >
-        <label for="trdate">Планируемая дата оплаты</label>
-        <input type="date"  id="trdate" name="trdate" value="{{ article.trdate }}" readonly>
+        <label for="plandate">Планируемая дата оплаты</label>
+        <input type="date"  id="plandate" name="plandate" value="{{ article.plandate }}" readonly ">
           Комментарий бухгалтера: <input type="text"  id="acomment" name="acomment" value="{{ article.acomment }}" readonly><br>
         </div>
         <br>
