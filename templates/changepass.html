@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Смена пароля
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Смена пароль</h1>
+    <form action="" method="post">
+        <p><label>Пароль: </label>  <input type="password" name="oldpsw" value="" requied />
+        <p><label>Новый пароль: </label>  <input type="password" name="psw1" value="" requied />
+        <p><label>Новый пароль: </label>  <input type="password" name="psw2" value="" requied />
+        <p><input type="submit" value="Сохранить" />
+    </form>
+</div>
+{% endblock %}
