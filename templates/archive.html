@@ -28,6 +28,7 @@
           <option value="Доработка" {% if fparams.status == "Доработка" %}selected {% endif %}>Доработка</option>
           <option value="Ожидание утверждения" {% if fparams.status == "Ожидание утверждения" %}selected {% endif %}>Ожидание утверждения</option>
           <option value="Отказано в утверждении" {% if fparams.status == "Отказано в утверждении" %}selected {% endif %}>Отказано в утверждении</option>
+          <option value="Одобрено" {% if fparams.status == "Одобрено" %}selected {% endif %}>Одобрено</option>
           <option value="Передано в оплату" {% if fparams.status == "Передано в оплату" %}selected {% endif %}>Передано в оплату</option>
           <option value="Оплачено" {% if fparams.status == "Оплачено" %}selected {% endif %}>Оплачено</option>
           <option value="Взаимозачет" {% if fparams.status == "Взаимозачет" %}selected {% endif %}>Взаимозачет</option>
@@ -73,16 +74,16 @@
               <table class="table table-bordered"><!-- class="table table-hover"table table-sm--!>
               <!--thead class="thead-dark" --!>
               <thead>
-                <th>№</th><th>Номер пр.</th><th>Статус</th><th>Cрок оплаты</th><th>Юрлицо</th><th>Направление</th><th>Клиент</th><th>Счет</th><th>Сумма</th><th>Вложения</th>
+                <th>№</th><th>Номер пр.</th><th>Статус</th><th>Cрок оплаты</th><th>Юрлицо</th><th>Направление</th><th>Клиент</th><th>Счет</th><th>Сумма</th><th>Дата одобрения</th><th>Вложения</th>
                 <th>Заявитель</th>
                 </thead>
               {% for el in articles %}
               <tr>
-                <td><a href="/paymentpost/{{ el.id }}" class="btn btn-secondary btn-sm">{{ el.id }}</a></td>
+                <td><a href="/posts/{{ el.id }}" class="btn btn-secondary btn-sm">{{ el.id }}</a></td>
                 <td>{{ el.trno }}</td><td>{{ el.status }}</td><td>{{ el.plandate }}</td>
                 <td>{{ el.payer[:15] }}</td><td>{{ el.direction }}</td><td>{{ el.vendorname }} {{ el.inn }}</td>
                 <td>{{ el.invoice }} от {{ el.invdate }}</td>
-                <td align="right">{{ el.amount }} {{ el.currency }}</td>
+                <td align="right">{{ el.amount }} {{ el.currency }}</td><td>{{el.approvedate}}</td>
                 <td>({{ el.nfiles }}) {% if el.nfiles>0 %}<a href="/download/{{ el.id }}/{{ el.file1 }}" target="_blank">{{ el.file1[:20] }}</a> {% if el.file1 != el.file2 %} <br>
                   <a href="/download/{{ el.id }}/{{ el.file2 }}" target="_blank">{{ el.file2[:20] }}</a> {% endif %}{% endif %}</td>
                 <td>{{ el.responsible+' '+el.respname }}</td>

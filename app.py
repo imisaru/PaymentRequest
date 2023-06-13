@@ -21,6 +21,7 @@ from UserLogin import UserLogin
 from forms import PRForm, LoginForm
 from flask import send_from_directory
 
+errormsg = ""
 app = Flask(__name__)
 app.secret_key = 'fdgfh78@#5?>gfhf89dx,v06k'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
@@ -68,6 +69,7 @@ class PaymentRequest(db.Model):
     trdate = db.Column(db.Date)
     paymentdate = db.Column(db.Date)
     plandate = db.Column(db.Date)
+    approvedate = db.Column(db.Date)
     amount = db.Column(db.Numeric(20, 2))
     currency = db.Column(db.String(3))
     dept = db.Column(db.String(50))
@@ -157,15 +159,22 @@ def load_user(user_id):
 @app.route('/', methods=["POST", "GET"])
 @app.route('/home', methods=["POST", "GET"])
 def index():
+    global errormsg
     dir = ''
+    st = ''
     if request.method == "POST":
         args = []
         if request.form['direction'] > '' and request.form['direction'] != 'Все':
             args.append('dir=' + request.form['direction'])
+
+        if request.form['status'] > '' and request.form['status'] != 'Все':
+            args.append('st=' + request.form['status'])
+
         if len(args) > 0:
             args = '?' + '&'.join(args)
         else:
             args = ''
+        print(request.form['status'], args)
         return redirect(url_for('index') + args)
 
     userrole = ''
@@ -180,50 +189,39 @@ def index():
         #            userrole = getUserByLogin(current_user.get_login()).userrole
         #            print('home role', userrole, current_user.get_login())
         if userrole == 'accounting':
-            if request.args.get('dir') is None:
-                print('arg', 'none')
-#                articles = PaymentRequest.query.filter(
- #                   or_(PaymentRequest.status == "Одобрено",
-  #                      PaymentRequest.status == "Передано в оплату")).order_by(
-   #                 PaymentRequest.CreateDate.desc()).limit(100).all()
-                sql = text(f"""select top 100 * 
-                from PaymentRequest with(nolock) 
-                 where PaymentRequest.status in ('Одобрено', 'Пер едано в оплату') or (Status<>'Оплачено' and upper(responsible)=upper('{current_user.get_login()}'))
-                 order by CreateDate desc """)
-                try:
-                    conn = db.engine.connect()
-                    articles = conn.execute(sql).fetchall()
-                    conn.close()
-                except Exception as e:
-                    logging.error("index. articles " + str(e))
-                    return redirect('bderror')
-                dir = ''
-                print(len(articles))
-            else:
-                print('arg', request.args.get('dir'))
-#                articles = PaymentRequest.query.filter(
-##                    and_(PaymentRequest.direction == request.args.get('dir'), or_(PaymentRequest.status == "Одобрено",
-#                                                                                  PaymentRequest.status == "Передано в оплату"))).order_by(
-#                    PaymentRequest.CreateDate.desc()).limit(100).all()
-                sql = text(f"""select top 100 * 
-                from PaymentRequest with(nolock) 
-                 where direction ='{ request.args.get('dir')}' and (PaymentRequest.status in ('Одобрено', 'Пере дано в оплату') or (Status<>'Оплачено' and upper(responsible)=upper('{current_user.get_login()}')))
-                 order by CreateDate desc """)
-                print(sql)
-                try:
-                    conn = db.engine.connect()
-                    articles = conn.execute(sql).fetchall()
-                    conn.close()
-                except Exception as e:
-                    logging.error("index. articles. dir. " + str(e))
-                    return redirect('bderror')
+            sWhere = ""
+            if request.args.get('dir') is not None:
+                sWhere= f"(direction ='{ request.args.get('dir')}')"
 
-                dir = request.args.get('dir')
+            if request.args.get('st') is not None:
+                if request.args.get('st') == 'own':
+                    sWhere = f"upper(responsible)=upper('{current_user.get_login()}')"
+                elif request.args.get('st') == 'waiting':
+                    if sWhere > "":
+                        sWhere += " and "
+                    sWhere = sWhere + f" (PaymentRequest.status in ('Одобрено')) "
+
+            if sWhere > "":
+                sWhere = " where  "+sWhere
+            print(sWhere)
+            sql = text(f"""select top 100 * from PaymentRequest with(nolock) {sWhere} order by CreateDate desc """)
+            try:
+                conn = db.engine.connect()
+                articles = conn.execute(sql).fetchall()
+                conn.close()
+            except Exception as e:
+                errormsg = str(e)
+                logging.error("index. articles. dir. " + str(e))
+                return redirect('bderror')
+
+            dir = request.args.get('dir')
+            st = request.args.get('st')
 
         elif userrole == 'admin':
             try:
                 articles = PaymentRequest.query.order_by(PaymentRequest.id.desc()).limit(100).all()
             except Exception as e:
+                errormsg = str(e)
                 logging.error("index. articles admin. " + str(e))
                 return redirect('bderror')
         else:
@@ -233,6 +231,7 @@ def index():
                     PaymentRequest.status != "Закрыто" and PaymentRequest.responsible == current_user.get_login()).order_by(
                     PaymentRequest.id.desc()).limit(1000).all()
             except Exception as e:
+                errormsg = str(e)
                 logging.error("index. articles. acc. " + str(e))
                 return redirect('bderror')
 
@@ -241,19 +240,20 @@ def index():
             c.name, substring(a.tasktype,charindex(' ',a.tasktype),100) as tasktype 
             from task a with(nolock) left join tasktypes t on a.tasktype=t.tasktype 
             join PaymentRequest b with(nolock) on a.prid=b.id left join users c on b.responsible=c.login 
-             where a.taskstatus='Created' and upper(a.assignee)=upper('{current_user.get_login()}')""")
+             where a.taskstatus='Created' and isnull(a.isactive,'1')='1' and upper(a.assignee)=upper('{current_user.get_login()}')""")
 
             conn = db.engine.connect()
             tasks = conn.execute(sql).fetchall()
             conn.close()
         except Exception as e:
+            errormsg = str(e)
             logging.error("index. tasks " + str(e))
             return redirect('/bddderror')
     else:
         articles = None
         tasks = None
 
-    return render_template("index.html", articles=articles, tasks=tasks, userrole=userrole, dir=dir)
+    return render_template("index.html", articles=articles, tasks=tasks, userrole=userrole, dir=dir, st=st)
 
 
 @app.route('/payments', methods=["POST", "GET"])
@@ -384,6 +384,7 @@ def payments():
 @app.route('/archive', methods=["POST", "GET"])
 @login_required
 def archive():
+    global errormsg
     if request.method == "POST":
         args = []
 
@@ -528,12 +529,12 @@ def archive():
 
     sql = f"""select top 1000 a.id, a.direction, payer, responsible, b.name as respname, paymenttype, amount, currency, dept, 
     vendorname, trno, trdate, plandate, acomment, a.inn, a.invoice, cast(a.invdate as date) as invdate, max(filename) as file1, min(filename) as file2, count(c.id) as nfiles,
-    b.name AS respname, status  from PaymentRequest a 
+    b.name AS respname, status, approvedate  from PaymentRequest a 
     left join users b on a.responsible=b.login left join attachment c on a.id=c.prid """
     if sWhere != "":
         sql += f"where {sWhere}"
     sql = text(sql + f""" group by a.id, a.direction, status, payer, responsible, b.name, paymenttype, amount, currency, dept, 
-    vendorname, trno, trdate, plandate, acomment, a.inn, a.invoice, a.invdate
+    vendorname, trno, trdate, plandate, acomment, a.inn, a.invoice, a.invdate, approvedate
     order by {sOrderBy}""")
 
     try:
@@ -541,7 +542,8 @@ def archive():
         articles = conn.execute(sql).fetchall()
         conn.close()
     except Exception as e:
-        print(e)
+        errormsg = str(e)
+        logging.error(str(e))
         return redirect('bderror')
 
     print('request.args.get(date2)', request.args.get('date2'))
@@ -561,13 +563,16 @@ def about():
 
 @app.route("/login1", methods=["POST", "GET"])
 def login1():
+    global errormsg
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     if request.method == "POST":
         # user = db.session.query(User).filter(User.login == request.form['login']).first()
         try:
             user = User.query.filter(User.login == request.form['login']).first()
-        except:
+        except Exception as e:
+            errormsg = str(e)
+            logging.error(str(e))
             return redirect("bderror")
         # user = getUserByLogin(request.form['login'])
         if user and check_password_hash(user.pwd, request.form['psw']):
@@ -613,6 +618,7 @@ def copyprfiles(prid):
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    global errormsg
     if current_user.is_authenticated:
         return redirect(url_for('profile'))
     print('login 1')
@@ -633,6 +639,7 @@ def login():
             else:
                 return redirect(f"changepass?u={request.form['login']}")
         except Exception as e:
+            errormsg = str(e)
             logging.error("login. user. " + str(e))
             return redirect("bderror")
 
@@ -645,7 +652,9 @@ def login():
 
 @app.route('/bderror')
 def bderror():
-    return render_template("bderror.html")
+    global errormsg
+    print('errormsg',errormsg)
+    return render_template("bderror.html", msg=errormsg)
 
 
 @app.route('/logout')
@@ -657,11 +666,27 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/profile')
+@app.route('/profile', methods=["POST", "GET"])
 @login_required
 def profile():
     #    return f"""<p><a href="{url_for('logout')}">Выйти из профиля</a><p>user info: {current_user.get_id()}"""
-    return render_template("profile.html")
+    uid = current_user.get_id()
+    sql = text(f"select * from users where id={uid}")
+    conn = db.engine.connect()
+    rec = conn.execute(sql).fetchone()
+    if request.method == "POST":
+        teluser = request.form['teluser']
+        if teluser[0] == '@':
+            teluser = teluser [1:]
+        sql = text(f"update users set teluser='{teluser}' where id={uid}")
+        conn.execute(sql)
+        conn.commit()
+        sql = text(f"select * from users where id={uid}")
+        conn = db.engine.connect()
+        rec = conn.execute(sql).fetchone()
+    conn.close()
+
+    return render_template("profile.html", fparams=rec)
 
 
 @app.route('/register', methods=["POST", "GET"])
@@ -762,17 +787,20 @@ def test3():
 
 
 def getUserByLogin(userlogin):
+    global errormsg
     try:
         user = User.query.filter(User.login == userlogin).first()
         return user
-    except:
-        print("Ошибка получения данных из БД getuserbylogin ")
+    except Exception as e:
+        errormsg = str(e)
+        logging.error('getUserByLogin '+str(e))
         return redirect("/bderror")
 
     return False
 
 
 def addUser(name, userlogin, email, hpsw):
+    global errormsg
     sql = text(
         f"select count(*) from dbo.users where upper(login) = upper('{userlogin}') or upper(email)=upper('{email}')")
     conn = db.engine.connect()
@@ -790,7 +818,9 @@ def addUser(name, userlogin, email, hpsw):
         conn.execute(sql)
         trans.commit()
         print("adduser добавили")
-    except:
+    except Exception as e:
+        errormsg = str(e)
+        logging.error("adduser " + str(e))
         trans.rollback()
         print("adduser При добавлении произошла ошибка")
         return False
@@ -837,6 +867,7 @@ def approvepr(prid):
         approvetask(prid, t.id)
 
 def approvetask(prid, taskid):
+    global errormsg
     conn = db.engine.connect()
     sql = text(f"""SELECT a.id, a.direction, a.payer, a.responsible, a.paymenttype, a.porderno, a.invoice, 
     a.invdate, a.amount, a.currency, a.dept, a.contract, a.inn, a.CreateDate, a.vendorname, a.uuid, a.status, 
@@ -894,7 +925,13 @@ def approvetask(prid, taskid):
             msg += '<p>Посмотреть подробности можно по ссылке <a href="' + parameters.get(
                 "webserver") + '/posts/' + str(prid) + '">Payment request</a></p>'
             print('mail1', respmail[0])
-            mail.sendmail(mailparams, respmail, subj, msg)
+            try:
+                mail.sendmail(mailparams, respmail, subj, msg)
+            except Exception as e:
+                errormsg = str(e)
+                logging.error("sendmail Oдобрено " + str(e))
+                return redirect("bderror", msg=str(e))
+
             logging.info(f"mail sent pr {prid}. to {respmail}. subj: {subj}")
             if parameters.get('accountingmail') is not None and parameters.get('accountingmail') > '':
                 subj = "PR " + str(prid) + " Одобрен. Готов к обработке"
@@ -916,6 +953,7 @@ def approvetask(prid, taskid):
 
 @app.route('/approve/<int:prid>/<int:taskid>', methods=['GET', 'POST'])
 def approve(prid, taskid):
+    ulogin = current_user.get_login()
     conn = db.engine.connect()
     #article = PaymentRequest.query.get(prid)
     sql = text(f"""SELECT a.id, a.direction, a.payer, a.responsible, a.paymenttype, a.porderno, a.invoice, 
@@ -927,14 +965,18 @@ def approve(prid, taskid):
     files = attachment.query.filter(attachment.prid == prid)
     #    tasks =task.query.filter(task.id == taskid).first()
     sql = text(f"""select  a.id, a.prid, b.responsible, c.name as requestorname, a.scomment, a.acomment, a.tasktype, 
-    descr from task a left join tasktypes t on a.tasktype=t.tasktype join PaymentRequest b on a.prid=b.id 
+    descr, assignee from task a left join tasktypes t on a.tasktype=t.tasktype join PaymentRequest b on a.prid=b.id 
     left join users c on b.responsible=c.login 
     where a.id='{taskid}'""")
     tasks = conn.execute(sql).first()
+    if ulogin != tasks.assignee and ulogin != 'v000529':
+        flash("Вы не можете это одобрять", "error")
+        print(ulogin, tasks.assignee)
+        return redirect(url_for('index'))
     if request.method == 'POST':
         print('approve', request.form['action'])
         if request.form['action'] == "Утвердить":
-            sql = text(f"update task set taskstatus='Approved', approvedate=getdate() where id={taskid}")
+            sql = text(f"update task set taskstatus='Approved', approvedate=getdate(), approvetype='web' where id={taskid}")
             conn.execute(sql)
             conn.commit()
             n = -1
@@ -966,7 +1008,7 @@ def approve(prid, taskid):
                             break
 
                 if isclosed:
-                    sql = text(f"update PaymentRequest set status='Одобрено' where id={prid}")
+                    sql = text(f"update PaymentRequest set status='Одобрено', approvedate=getdate() where id={prid}")
                     conn.execute(sql)
                     conn.commit()
 
@@ -1044,6 +1086,12 @@ def process(prid):
     dept = department.query.filter(department.name == article.dept).first()
     print(dept)
     if request.method == 'POST':
+        if article.preapproved:
+            conn = db.engine.connect()
+            sql = text(f"update PaymentRequest set status='Одобрено' where id={prid}")
+            conn.execute(sql)
+            conn.commit()
+            return redirect(url_for('index'))
         subj = "PR " + str(prid) + " Approve"
         msg = "<p>Здравствуйте,<br>Направляем Вам запрос на утверждение платежа в пользу " + article.vendorname + \
               " сумма " + str(article.amount) + " " + article.currency + "</p>"
@@ -1051,7 +1099,7 @@ def process(prid):
         msg += f"<p>Отдел: {article.dept}, плательщик: {article.payer}, офис: {article.direction}</p>"
         msg += f"<p>Договор: {article.contract}, номер счета: {article.invoice}, дата счета: {article.invdate}</p>"
         msg += f"<p>Комментарий заявителя: {request.form.get('scomment')}</p>"
-
+        curtask = None
         flagline = '0' * 5
         flag = True if request.form.get('std') == 'on' else False
         if flag:
@@ -1063,7 +1111,7 @@ def process(prid):
                                   task.isactive == '1').all())
             if nrec == 0:
                 tstd = task(prid=prid, tasktype="Approvement std", taskstatus="Created", assignee=dept.approver,
-                            assigneemail=dept.approvermail)
+                            assigneemail=dept.approvermail, scomment=request.form['scomment'])
                 db.session.add(tstd)
                 db.session.commit()
 
@@ -1087,7 +1135,7 @@ def process(prid):
                                          task.taskstatus == "Created").all())
             if nrec == 0:
                 tstd = task(prid=prid, tasktype="Approvement m5", taskstatus="Created", assignee=dept.approver,
-                            assigneemail=dept.approvermail)
+                            assigneemail=dept.approvermail, scomment=request.form['scomment'])
                 db.session.add(tstd)
                 db.session.commit()
             curtask = task.query.filter(task.prid == prid, task.tasktype == "Approvement std",
@@ -1108,7 +1156,7 @@ def process(prid):
                 task.prid == prid and task.tasktype == 'Approvement nondeduct' and task.taskstatus == "Created").all())
             if nrec == 0:
                 tstd = task(prid=prid, tasktype="Approvement nondeduct", taskstatus="Created", assignee=dept.approver,
-                            assigneemail=dept.approvermail)
+                            assigneemail=dept.approvermail, scomment=request.form['scomment'])
                 db.session.add(tstd)
                 db.session.commit()
             curtask = task.query.filter(task.prid == prid, task.tasktype == "Approvement nondeduct",
@@ -1129,7 +1177,7 @@ def process(prid):
                                          task.taskstatus == "Created").all())
             if nrec == 0:
                 tstd = task(prid=prid, tasktype="Approvement adv", taskstatus="Created", assignee=dept.approver,
-                            assigneemail=dept.approvermail)
+                            assigneemail=dept.approvermail, scomment=request.form['scomment'])
                 db.session.add(tstd)
                 db.session.commit()
             curtask = task.query.filter(task.prid == prid, task.tasktype == "Approvement adv",
@@ -1150,13 +1198,13 @@ def process(prid):
                                          task.taskstatus == "Created").all())
             if nrec == 0:
                 tstd = task(prid=prid, tasktype="Approvement noorg", taskstatus="Created", assignee=dept.approver,
-                            assigneemail=dept.approvermail)
+                            assigneemail=dept.approvermail, scomment=request.form['scomment'])
                 db.session.add(tstd)
                 db.session.commit()
             assignee = selectfield("users", "email", "name", request.form.get('approvernoorg'))
             curtask = task.query.filter(task.prid == prid, task.tasktype == "Approvement noorg",
-                                       task.taskstatus == "Created", task.assignee == dept.approver).order_by(
-                task.id.desc()).first()
+                                        task.taskstatus == "Created",
+                                        task.assignee == dept.approver).order_by(task.id.desc()).first()
             msg1 = msg + '<p>Одобрить и посмотреть подробности можно по ссылке <a href="' + parameters.get(
                 "webserver") + '/approve/' + str(prid) + '/' + \
                    str(curtask.id) + '''">Payment reques approval</a></p><p><b>В тестовом режиме работает одобрение 
@@ -1174,12 +1222,13 @@ def process(prid):
         #        elif len(article.requeststatus) < 5:
         #            article.requeststatus = "0"*5
 
-        conn = db.engine.connect()
-        sql = text(f"update task set scomment='{request.form['scomment']}' where prid={curtask.prid}")
-        print(sql)
-        conn.execute(sql)
-        conn.commit()
-        db.session.commit()
+        #if curtask.prid is not None:
+        #    conn = db.engine.connect()
+        #    sql = text(f"update task set scomment='{request.form['scomment']}' where prid={curtask.prid}")
+        #    print(sql)
+        #    conn.execute(sql)
+        #    conn.commit()
+        #    db.session.commit()
         return redirect(url_for('index'))
 
     return render_template("process.html", article=article, files=files, managermail=dept.approvermail)
@@ -1324,19 +1373,21 @@ def post_attach(prid):
 
 @app.route('/posts/<int:prid>/del')
 def post_delete(prid):
+    global errormsg
     article = PaymentRequest.query.get_or_404(prid)
-
     try:
         db.session.delete(article)
         db.session.commit()
         return redirect(url_for('index'))
-    except:
+    except Exception as e:
+        errormsg = str(e)
+        logging.error("del post " + str(e))
         return "При удалении произошла ошибка"
 
 
 @app.route('/posts/<int:prid>/update', methods=['POST', 'GET'])
 def pr_update(prid):
-
+    global errormsg
     pr = PaymentRequest.query.get(prid)
 
     sql = text(f"select name from department with(nolock) order by name")
@@ -1371,7 +1422,9 @@ def pr_update(prid):
         #        pr.vendorname = form.vendorname.data
         try:
             db.session.commit()
-        except:
+        except Exception as e:
+            errormsg = str(e)
+            logging.error("edit " + str(e))
             return "При редактировании произошла ошибка"
         #        for file in form.files.data:
         #            att = attachment(prid=prid, filename=secure_filename(file.filename))
@@ -1407,12 +1460,15 @@ def download(prid, filename):
 
 @app.route('/delattach/<int:attid>/<int:prid>', methods=['GET', 'POST'])
 def delattach(attid, prid):
+    global errormsg
     file = attachment.query.get_or_404(attid)
 
     try:
         db.session.delete(file)
         db.session.commit()
-    except:
+    except Exception as e:
+        errormsg = str(e)
+        logging.error("dell attach " + str(e))
         flash("ошибка удаления", "error")
 
     return redirect('/attachments/' + str(prid))
@@ -1426,6 +1482,7 @@ def getvendorbyinn(inn):
 @app.route('/create_pr', methods=['POST', 'GET'])
 @login_required
 def pr_create():
+    global errormsg
     sql = text(f"select name from department with(nolock) order by name")
     conn = db.engine.connect()
     depts = conn.execute(sql).all()
@@ -1481,6 +1538,14 @@ def pr_create():
         # for file in form.files:
         #    print(file.filename)
         #    file.save(file.filename)
+
+        conn = db.engine.connect()
+        sql = text("""update PaymentRequest.dbo.PaymentRequest set legalcode = b.code 
+            from PaymentRequest.dbo.PaymentRequest a join PaymentRequest.dbo.legalcompanies b on a.payer = b.legalname
+            where isnull(legalcode, '') = ''""")
+        conn.execute(sql)
+        conn.commit()
+
         return redirect(url_for('index'))  # redirect('/posts ')
     #       except:
     #           flash("При добавлении произошла ошибка", "error")
@@ -1489,13 +1554,15 @@ def pr_create():
     else:
         try:
             form.responsible.data = current_user.get_login()
-        except:
+        except Exception as e:
+            errormsg = str(e)
             return redirect("bderror")
         # копировать
         if request.args.get('cpy') is not None and request.args.get('cpy') != "":
             try:
                 pr = PaymentRequest.query.filter(PaymentRequest.id == request.args.get('cpy')).first()
-            except:
+            except Exception as e:
+                errormsg = str(e)
                 return redirect("bderror")
             print(pr,request.args.get('cpy'))
             if pr is not None:
@@ -1522,11 +1589,13 @@ def pr_create():
 
 
 def selectfield(table, field, idname, idvalue):
+    global errormsg
     conn = db.engine.connect()
     sql = text(f"select {field} from {table} where upper(cast({idname} as varchar(50))) = upper('{idvalue}')")
     try:
         res = conn.execute(sql).first()
     except Exception as e:
+        errormsg = str(e)
         logging.error("selectfield " + str(e))
         return None
     return res[0]
@@ -1534,6 +1603,7 @@ def selectfield(table, field, idname, idvalue):
 
 @app.route('/test', methods=['POST', 'GET'])
 def test():
+    global errormsg
     sql = text("insert into dbo.users (name, email, pwd) values('test','','')")
 
     conn = db.engine.connect()
@@ -1542,7 +1612,8 @@ def test():
         conn.execute(sql)
         trans.commit()
         return "добавили"
-    except:
+    except Exception as e:
+        errormsg = str(e)
         trans.rollback()
         return "При добавлении произошла ошибка"
 

@@ -5,28 +5,30 @@
 {% endblock %}
 
 {% block body %}
-{% for cat, msg in get_flashed_messages(True) %}
-<div class="flash {{cat}}">{{msg}}</div>
-{% endfor %}
 <table border="0" class="profile-table">
 	<tr><td valign="top">
+	<form action="{{url_for('upload')}}" method="POST" enctype="multipart/form-data">
 		<div class="profile-ava"><img src="{{ url_for('userava') }}"></div>
 		<div class="profile-load">
-		<form action="{{url_for('upload')}}" method="POST" enctype="multipart/form-data">
 			<p><input type="file" name="file">
 			<p><input type="submit" value="Загрузить">
-		</form>
 		</div>
+	</form>
 	</td>
 	<td valign="top" class="profile-panel">
+		<form method="post">
 		<p><a href="{{url_for('logout')}}">Выйти из профиля</a></p>
 		<p><a href="{{url_for('changepass')}}">Поменять пароль</a></p>
 		<ul class="profile-info">
-		<li>Имя: {{ current_user.getName() }}</li>
-		<li>email: {{ current_user.getEmail() }}</li>
-		<li>Роль: {{ current_user.getRole() }}</li>
-		<li>Направление по умолчанию: {{ dir }}</li>
+		<li>Имя: {{ fparams.name }}</li>
+		<li>email: {{ fparams.email }}</li>
+		<li>Роль: {{ fparams.userrole }}</li>
+		<li>Направление по умолчанию: {{ fparams.direction }}</li>
+        <label for="teluser">Telegram username: </label>
+        <input type="text" class="fo rm-control" id="teluser" name="teluser" placeholder="" value={{fparams.teluser}}>
+			<p><input type="submit" value="Обновить"></p>
 		</ul>
+		</form>
 	</td></tr>
 </table>
 {% endblock %}
