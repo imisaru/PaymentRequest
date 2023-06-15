@@ -282,9 +282,6 @@ def payments():
                 args.append('sort=plandate')
             if request.form['sorting'] == 'Получатель платежа':
                 args.append('sort=vendor')
-            if len(args) > 0:
-                args = '?' + '&'.join(args)
-            print(args)
         if request.form['action'] == "Ввести платеж по отмеченым":
             conn = db.engine.connect()
             payments = []
@@ -321,6 +318,11 @@ def payments():
                         logging.info(
                             f"mail sent pr {req[5:]}. to {pmt.email}. subj: PR {req[5:]}. Оплачено")
 
+        if len(args) > 0:
+            args = '?' + '&'.join(args)
+        else:
+            args =''
+        print(args)
         return redirect(url_for('payments') + args)
 
     fparams = {}
@@ -1086,7 +1088,7 @@ def process(prid):
     dept = department.query.filter(department.name == article.dept).first()
     print(dept)
     if request.method == 'POST':
-        if article.preapproved:
+        if article.preapproved == '1':
             conn = db.engine.connect()
             sql = text(f"update PaymentRequest set status='Одобрено' where id={prid}")
             conn.execute(sql)
@@ -1212,11 +1214,17 @@ def process(prid):
                 заявку или оставить комментарий!</b>'''
             mail.sendmail(mailparams, dept.approvermail, subj + ' нет оригиналов', msg1)
 
+
         if flagline == '00000':
-            article.status = "Одобрено"
+            sarticlestatus = "Одобрено"
         else:
-            article.status = "Ожидание утверждения"
-        article.requested = flagline
+            sarticlestatus = "Ожидание утверждения"
+        sarticlerequested = flagline
+
+        sql = text(f"update PaymentRequest set status='{sarticlestatus}', requested='{flagline}' where id={article.id}")
+        conn = db.engine.connect()
+        conn.execute(sql)
+        conn.commit()
         #        if article.requeststatus is None:
         #            article.requeststatus = "0" * 5
         #        elif len(article.requeststatus) < 5:
