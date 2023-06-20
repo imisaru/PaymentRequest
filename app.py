@@ -1073,7 +1073,7 @@ def approve(prid, taskid):
             user = User.query.filter(User.login == article.responsible).first()
             respmail = user.email
 
-            subj = "PR " + str(prid) + " Rejected"
+            subj = f"PR {prid} Rejected"
             msg = "<p>Здравствуйте,<br>Ваш запрос на утверждение платежа в пользу " + article.vendorname + " сумма " + \
                   str(article.amount) + " " + article.currency + "</p>"
             msg += f"<p>Отдел: {article.dept}, плательщик: {article.payer}, офис: {article.direction}</p>"
