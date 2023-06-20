@@ -924,3 +924,20 @@ INFO:werkzeug:127.0.0.1 - - [02/Jun/2023 10:49:21] "[36mGET /static/css/main.cs
 2023-06-13 22:02:13 INFO     127.0.0.1 - - [13/Jun/2023 22:02:13] "GET / HTTP/1.1" 200 -
 2023-06-13 22:02:13 INFO     127.0.0.1 - - [13/Jun/2023 22:02:13] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
 2023-06-13 22:02:13 INFO     127.0.0.1 - - [13/Jun/2023 22:02:13] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-15 08:49:53 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-15 08:49:53 INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.150:5000
+2023-06-15 08:49:53 INFO     [33mPress CTRL+C to quit[0m
+2023-06-15 08:49:53 INFO      * Restarting with stat
+2023-06-15 08:49:53 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-15 08:49:53 WARNING   * Debugger is active!
+2023-06-15 08:49:53 INFO      * Debugger PIN: 281-252-357
+2023-06-15 10:12:28 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-15 10:12:28 INFO      * Restarting with stat
+2023-06-15 10:12:29 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-15 10:12:29 WARNING   * Debugger is active!
+2023-06-15 10:12:29 INFO      * Debugger PIN: 281-252-357
+2023-06-20 13:58:51 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-20 13:58:52 INFO      * Restarting with stat

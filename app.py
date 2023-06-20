@@ -724,6 +724,7 @@ def register():
     return render_template("register.html")
 
 
+@login_required
 @app.route('/changepass', methods=["POST", "GET"])
 def changepass():
     if request.method == "POST":
@@ -836,6 +837,7 @@ def test1():
     return redirect("/bderror") #  "test1 finished" + a.userrole
 
 
+@login_required
 @app.route('/posts/<int:postid>')
 def post_detail(postid):
     #  article = PaymentRequest.query.get(postid)
@@ -953,6 +955,7 @@ def approvetask(prid, taskid):
     conn.commit()
 
 
+@login_required
 @app.route('/approve/<int:prid>/<int:taskid>', methods=['GET', 'POST'])
 def approve(prid, taskid):
     ulogin = current_user.get_login()
@@ -966,13 +969,17 @@ def approve(prid, taskid):
     article = conn.execute(sql).first()
     files = attachment.query.filter(attachment.prid == prid)
     #    tasks =task.query.filter(task.id == taskid).first()
-    sql = text(f"""select  a.id, a.prid, b.responsible, c.name as requestorname, a.scomment, a.acomment, a.tasktype, 
+    sql = text(f"""select  a.id, a.prid, b.responsible, c.name as requestorname, a.scomment, a.acomment, a.tasktype, a.taskstatus,  
     descr, assignee from task a left join tasktypes t on a.tasktype=t.tasktype join PaymentRequest b on a.prid=b.id 
     left join users c on b.responsible=c.login 
     where a.id='{taskid}'""")
     tasks = conn.execute(sql).first()
-    if ulogin != tasks.assignee and ulogin != 'v000529':
+    if ulogin.upper() != tasks.assignee.upper() and ulogin != 'v000529':
         flash("Вы не можете это одобрять", "error")
+        print(ulogin, tasks.assignee)
+        return redirect(url_for('index'))
+    if tasks.taskstatus != 'Created':
+        flash(f"Задача уже в статусе {tasks.taskstatus}. Одобрение не возможно", "error")
         print(ulogin, tasks.assignee)
         return redirect(url_for('index'))
     if request.method == 'POST':
@@ -1010,7 +1017,7 @@ def approve(prid, taskid):
                             break
 
                 if isclosed:
-                    sql = text(f"update PaymentRequest set status='Одобрено', approvedate=getdate() where id={prid}")
+                    sql = text(f"update PaymentRequest set status='Одобрено', approvedate=getdate() where id={prid} and status in ('Ожидание утверждения')")
                     conn.execute(sql)
                     conn.commit()
 
@@ -1079,6 +1086,7 @@ def approve(prid, taskid):
     return render_template("approve.html", article=article, files=files, task=tasks)
 
 
+@login_required
 @app.route('/process/<int:prid>', methods=['POST', 'GET'])
 def process(prid):
     print('process')
@@ -1242,6 +1250,7 @@ def process(prid):
     return render_template("process.html", article=article, files=files, managermail=dept.approvermail)
 
 
+@login_required
 @app.route('/toaccounting/<int:prid>', methods=['POST', 'GET'])
 def toaccounting(prid):
     article = PaymentRequest.query.get(prid)
@@ -1269,6 +1278,7 @@ def toaccounting(prid):
     return redirect(f"/posts/{prid}")
 
 
+@login_required
 @app.route('/accpost/<int:prid>', methods=['POST', 'GET'])
 def accpost(prid):
     article = PaymentRequest.query.get(prid)
@@ -1306,6 +1316,7 @@ def accpost(prid):
     return render_template("pr_accpost.html", article=article, files=files, managermail=dept.approvermail, tasks=tasks, requestor=requestor)
 
 
+@login_required
 @app.route('/paymentpost/<int:prid>', methods=['POST', 'GET'])
 def paymentpost(prid):
     article = PaymentRequest.query.get(prid)
@@ -1379,6 +1390,7 @@ def post_attach(prid):
     return render_template("edit-attachements.html", article=article, files=files)
 
 
+@login_required
 @app.route('/posts/<int:prid>/del')
 def post_delete(prid):
     global errormsg
@@ -1393,6 +1405,7 @@ def post_delete(prid):
         return "При удалении произошла ошибка"
 
 
+@login_required
 @app.route('/posts/<int:prid>/update', methods=['POST', 'GET'])
 def pr_update(prid):
     global errormsg
@@ -1427,7 +1440,7 @@ def pr_update(prid):
         pr.dept = form.dept.data
         pr.contract = form.contract.data
         pr.inn = form.inn.data
-        #        pr.vendorname = form.vendorname.data
+        pr.vendorname = form.vendorname.data
         try:
             db.session.commit()
         except Exception as e:
@@ -1466,6 +1479,7 @@ def download(prid, filename):
     return send_from_directory(uploads, filename)
 
 
+@login_required
 @app.route('/delattach/<int:attid>/<int:prid>', methods=['GET', 'POST'])
 def delattach(attid, prid):
     global errormsg
