@@ -951,3 +951,927 @@ INFO:werkzeug:127.0.0.1 - - [02/Jun/2023 10:49:21] "[36mGET /static/css/main.cs
 2023-06-20 17:56:12 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
 2023-06-20 17:56:12 WARNING   * Debugger is active!
 2023-06-20 17:56:12 INFO      * Debugger PIN: 281-252-357
+2023-06-27 10:53:49 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-27 10:53:49 INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.150:5000
+2023-06-27 10:53:49 INFO     [33mPress CTRL+C to quit[0m
+2023-06-27 10:53:49 INFO      * Restarting with stat
+2023-06-27 10:53:49 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-27 10:53:49 WARNING   * Debugger is active!
+2023-06-27 10:53:49 INFO      * Debugger PIN: 281-252-357
+2023-06-27 10:54:45 INFO     127.0.0.1 - - [27/Jun/2023 10:54:45] "GET /process/12 HTTP/1.1" 200 -
+2023-06-27 10:54:45 INFO     127.0.0.1 - - [27/Jun/2023 10:54:45] "GET /static/css/main.css HTTP/1.1" 200 -
+2023-06-27 10:54:45 INFO     127.0.0.1 - - [27/Jun/2023 10:54:45] "GET /static/css/style.css HTTP/1.1" 200 -
+2023-06-27 10:54:45 INFO     127.0.0.1 - - [27/Jun/2023 10:54:45] "GET /static/favicon/favicon-16x16.png HTTP/1.1" 200 -
+2023-06-27 10:54:48 INFO     127.0.0.1 - - [27/Jun/2023 10:54:48] "GET / HTTP/1.1" 200 -
+2023-06-27 10:54:48 INFO     127.0.0.1 - - [27/Jun/2023 10:54:48] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:54:48 INFO     127.0.0.1 - - [27/Jun/2023 10:54:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:54:50 INFO     127.0.0.1 - - [27/Jun/2023 10:54:50] "GET /login HTTP/1.1" 200 -
+2023-06-27 10:54:50 INFO     127.0.0.1 - - [27/Jun/2023 10:54:50] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:54:50 INFO     127.0.0.1 - - [27/Jun/2023 10:54:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:55:16 INFO     127.0.0.1 - - [27/Jun/2023 10:55:16] "GET / HTTP/1.1" 200 -
+2023-06-27 10:55:16 INFO     127.0.0.1 - - [27/Jun/2023 10:55:16] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:55:16 INFO     127.0.0.1 - - [27/Jun/2023 10:55:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:55:18 INFO     127.0.0.1 - - [27/Jun/2023 10:55:18] "GET /login HTTP/1.1" 200 -
+2023-06-27 10:55:18 INFO     127.0.0.1 - - [27/Jun/2023 10:55:18] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:55:18 INFO     127.0.0.1 - - [27/Jun/2023 10:55:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:55:30 INFO     127.0.0.1 - - [27/Jun/2023 10:55:30] "[32mPOST /login HTTP/1.1[0m" 302 -
+2023-06-27 10:55:30 INFO     127.0.0.1 - - [27/Jun/2023 10:55:30] "GET /home HTTP/1.1" 200 -
+2023-06-27 10:55:30 INFO     127.0.0.1 - - [27/Jun/2023 10:55:30] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:55:30 INFO     127.0.0.1 - - [27/Jun/2023 10:55:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:55:35 INFO     127.0.0.1 - - [27/Jun/2023 10:55:35] "GET /attachments/20 HTTP/1.1" 200 -
+2023-06-27 10:55:35 INFO     127.0.0.1 - - [27/Jun/2023 10:55:35] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:55:35 INFO     127.0.0.1 - - [27/Jun/2023 10:55:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:56:05 INFO     127.0.0.1 - - [27/Jun/2023 10:56:05] "POST /attachments/20 HTTP/1.1" 200 -
+2023-06-27 10:56:05 INFO     127.0.0.1 - - [27/Jun/2023 10:56:05] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:56:05 INFO     127.0.0.1 - - [27/Jun/2023 10:56:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:56:11 INFO     127.0.0.1 - - [27/Jun/2023 10:56:11] "GET /posts/20 HTTP/1.1" 200 -
+2023-06-27 10:56:11 INFO     127.0.0.1 - - [27/Jun/2023 10:56:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:56:11 INFO     127.0.0.1 - - [27/Jun/2023 10:56:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:56:13 INFO     127.0.0.1 - - [27/Jun/2023 10:56:13] "GET /download/20/—˜ÂÚ-ÓÙÂÚ‡%2004761%20ÓÚ%2010%20Ë˛Ìˇ%202023%20-%20__%20¿Œ%20—“Œ Œ¬%20Ã¿ÿ»ÕÕŒ≈%20Œ¡Œ–”ƒŒ¬¿Õ»≈.pdf HTTP/1.1" 200 -
+2023-06-27 10:56:13 INFO     127.0.0.1 - - [27/Jun/2023 10:56:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2023-06-27 10:56:19 INFO     127.0.0.1 - - [27/Jun/2023 10:56:19] "[32mGET /posts/20/del HTTP/1.1[0m" 302 -
+2023-06-27 10:56:19 INFO     127.0.0.1 - - [27/Jun/2023 10:56:19] "GET /home HTTP/1.1" 200 -
+2023-06-27 10:56:19 INFO     127.0.0.1 - - [27/Jun/2023 10:56:19] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:56:19 INFO     127.0.0.1 - - [27/Jun/2023 10:56:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:56:59 INFO     127.0.0.1 - - [27/Jun/2023 10:56:59] "GET /posts/25 HTTP/1.1" 200 -
+2023-06-27 10:56:59 INFO     127.0.0.1 - - [27/Jun/2023 10:56:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:56:59 INFO     127.0.0.1 - - [27/Jun/2023 10:56:59] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:04 INFO     127.0.0.1 - - [27/Jun/2023 10:57:04] "GET /profile HTTP/1.1" 200 -
+2023-06-27 10:57:04 INFO     127.0.0.1 - - [27/Jun/2023 10:57:04] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:04 INFO     127.0.0.1 - - [27/Jun/2023 10:57:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:04 INFO     127.0.0.1 - - [27/Jun/2023 10:57:04] "GET /userava HTTP/1.1" 200 -
+2023-06-27 10:57:06 INFO     127.0.0.1 - - [27/Jun/2023 10:57:06] "[32mGET /logout HTTP/1.1[0m" 302 -
+2023-06-27 10:57:06 INFO     127.0.0.1 - - [27/Jun/2023 10:57:06] "GET /login HTTP/1.1" 200 -
+2023-06-27 10:57:06 INFO     127.0.0.1 - - [27/Jun/2023 10:57:06] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:06 INFO     127.0.0.1 - - [27/Jun/2023 10:57:06] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:11 INFO     127.0.0.1 - - [27/Jun/2023 10:57:11] "POST /login HTTP/1.1" 200 -
+2023-06-27 10:57:11 INFO     127.0.0.1 - - [27/Jun/2023 10:57:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:11 INFO     127.0.0.1 - - [27/Jun/2023 10:57:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:14 INFO     127.0.0.1 - - [27/Jun/2023 10:57:14] "[32mPOST /login HTTP/1.1[0m" 302 -
+2023-06-27 10:57:14 INFO     127.0.0.1 - - [27/Jun/2023 10:57:14] "GET /home HTTP/1.1" 200 -
+2023-06-27 10:57:14 INFO     127.0.0.1 - - [27/Jun/2023 10:57:14] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:14 INFO     127.0.0.1 - - [27/Jun/2023 10:57:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:18 INFO     127.0.0.1 - - [27/Jun/2023 10:57:18] "GET /accpost/41 HTTP/1.1" 200 -
+2023-06-27 10:57:18 INFO     127.0.0.1 - - [27/Jun/2023 10:57:18] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 10:57:18 INFO     127.0.0.1 - - [27/Jun/2023 10:57:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:01:18 INFO     127.0.0.1 - - [27/Jun/2023 11:01:18] "GET /accpost/41 HTTP/1.1" 200 -
+2023-06-27 11:01:18 INFO     127.0.0.1 - - [27/Jun/2023 11:01:18] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:01:18 INFO     127.0.0.1 - - [27/Jun/2023 11:01:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:01:18 INFO     127.0.0.1 - - [27/Jun/2023 11:01:18] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:02:00 INFO     127.0.0.1 - - [27/Jun/2023 11:02:00] "GET /accpost/41 HTTP/1.1" 200 -
+2023-06-27 11:02:00 INFO     127.0.0.1 - - [27/Jun/2023 11:02:00] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:02:00 INFO     127.0.0.1 - - [27/Jun/2023 11:02:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:02:00 INFO     127.0.0.1 - - [27/Jun/2023 11:02:00] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:02:21 INFO     127.0.0.1 - - [27/Jun/2023 11:02:21] "GET /accpost/41 HTTP/1.1" 200 -
+2023-06-27 11:02:21 INFO     127.0.0.1 - - [27/Jun/2023 11:02:21] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:02:21 INFO     127.0.0.1 - - [27/Jun/2023 11:02:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:02:21 INFO     127.0.0.1 - - [27/Jun/2023 11:02:21] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:02:53 INFO     127.0.0.1 - - [27/Jun/2023 11:02:53] "GET /payments HTTP/1.1" 200 -
+2023-06-27 11:02:53 INFO     127.0.0.1 - - [27/Jun/2023 11:02:53] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:02:53 INFO     127.0.0.1 - - [27/Jun/2023 11:02:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:04:10 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-27 11:04:10 INFO      * Restarting with stat
+2023-06-27 11:04:11 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-27 11:04:11 WARNING   * Debugger is active!
+2023-06-27 11:04:11 INFO      * Debugger PIN: 281-252-357
+2023-06-27 11:04:23 INFO     127.0.0.1 - - [27/Jun/2023 11:04:23] "GET /accpost/41 HTTP/1.1" 200 -
+2023-06-27 11:04:23 INFO     127.0.0.1 - - [27/Jun/2023 11:04:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:04:23 INFO     127.0.0.1 - - [27/Jun/2023 11:04:23] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:04:23 INFO     127.0.0.1 - - [27/Jun/2023 11:04:23] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:04:34 INFO     127.0.0.1 - - [27/Jun/2023 11:04:34] "[32mPOST /accpost/41 HTTP/1.1[0m" 302 -
+2023-06-27 11:04:34 INFO     127.0.0.1 - - [27/Jun/2023 11:04:34] "GET /home HTTP/1.1" 200 -
+2023-06-27 11:04:34 INFO     127.0.0.1 - - [27/Jun/2023 11:04:34] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:04:34 INFO     127.0.0.1 - - [27/Jun/2023 11:04:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:04:37 INFO     127.0.0.1 - - [27/Jun/2023 11:04:37] "GET /payments HTTP/1.1" 200 -
+2023-06-27 11:04:37 INFO     127.0.0.1 - - [27/Jun/2023 11:04:37] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:04:37 INFO     127.0.0.1 - - [27/Jun/2023 11:04:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:04:40 INFO     127.0.0.1 - - [27/Jun/2023 11:04:40] "GET /paymentpost/41 HTTP/1.1" 200 -
+2023-06-27 11:04:40 INFO     127.0.0.1 - - [27/Jun/2023 11:04:40] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:04:40 INFO     127.0.0.1 - - [27/Jun/2023 11:04:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:08:56 INFO     127.0.0.1 - - [27/Jun/2023 11:08:56] "[35m[1mGET /paymentpost/41 HTTP/1.1[0m" 500 -
+2023-06-27 11:08:56 INFO     127.0.0.1 - - [27/Jun/2023 11:08:56] "GET /paymentpost/41?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2023-06-27 11:08:56 INFO     127.0.0.1 - - [27/Jun/2023 11:08:56] "GET /paymentpost/41?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2023-06-27 11:08:56 INFO     127.0.0.1 - - [27/Jun/2023 11:08:56] "GET /paymentpost/41?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2023-06-27 11:08:56 INFO     127.0.0.1 - - [27/Jun/2023 11:08:56] "[36mGET /paymentpost/41?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-27 11:08:57 INFO     127.0.0.1 - - [27/Jun/2023 11:08:57] "[35m[1mGET /paymentpost/41 HTTP/1.1[0m" 500 -
+2023-06-27 11:08:57 INFO     127.0.0.1 - - [27/Jun/2023 11:08:57] "[36mGET /paymentpost/41?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:08:57 INFO     127.0.0.1 - - [27/Jun/2023 11:08:57] "[36mGET /paymentpost/41?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-27 11:08:57 INFO     127.0.0.1 - - [27/Jun/2023 11:08:57] "[36mGET /paymentpost/41?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-27 11:08:57 INFO     127.0.0.1 - - [27/Jun/2023 11:08:57] "[36mGET /paymentpost/41?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-27 11:09:27 INFO     127.0.0.1 - - [27/Jun/2023 11:09:27] "GET /paymentpost/41 HTTP/1.1" 200 -
+2023-06-27 11:09:27 INFO     127.0.0.1 - - [27/Jun/2023 11:09:27] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:09:27 INFO     127.0.0.1 - - [27/Jun/2023 11:09:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:09:27 INFO     127.0.0.1 - - [27/Jun/2023 11:09:27] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:09:38 INFO     127.0.0.1 - - [27/Jun/2023 11:09:38] "GET /paymentpost/41 HTTP/1.1" 200 -
+2023-06-27 11:09:38 INFO     127.0.0.1 - - [27/Jun/2023 11:09:38] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:09:38 INFO     127.0.0.1 - - [27/Jun/2023 11:09:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:09:38 INFO     127.0.0.1 - - [27/Jun/2023 11:09:38] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:09:39 INFO     127.0.0.1 - - [27/Jun/2023 11:09:39] "GET /paymentpost/41 HTTP/1.1" 200 -
+2023-06-27 11:09:39 INFO     127.0.0.1 - - [27/Jun/2023 11:09:39] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:09:39 INFO     127.0.0.1 - - [27/Jun/2023 11:09:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:09:39 INFO     127.0.0.1 - - [27/Jun/2023 11:09:39] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:10:46 INFO     127.0.0.1 - - [27/Jun/2023 11:10:46] "GET /paymentpost/41 HTTP/1.1" 200 -
+2023-06-27 11:10:46 INFO     127.0.0.1 - - [27/Jun/2023 11:10:46] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:10:46 INFO     127.0.0.1 - - [27/Jun/2023 11:10:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:10:46 INFO     127.0.0.1 - - [27/Jun/2023 11:10:46] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:11:58 INFO     127.0.0.1 - - [27/Jun/2023 11:11:58] "GET /paymentpost/41 HTTP/1.1" 200 -
+2023-06-27 11:11:58 INFO     127.0.0.1 - - [27/Jun/2023 11:11:58] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:11:58 INFO     127.0.0.1 - - [27/Jun/2023 11:11:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:11:58 INFO     127.0.0.1 - - [27/Jun/2023 11:11:58] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 11:12:22 INFO     127.0.0.1 - - [27/Jun/2023 11:12:22] "GET /paymentpost/41 HTTP/1.1" 200 -
+2023-06-27 11:12:22 INFO     127.0.0.1 - - [27/Jun/2023 11:12:22] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 11:12:22 INFO     127.0.0.1 - - [27/Jun/2023 11:12:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 11:12:22 INFO     127.0.0.1 - - [27/Jun/2023 11:12:22] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-27 13:04:34 INFO     127.0.0.1 - - [27/Jun/2023 13:04:34] "GET / HTTP/1.1" 200 -
+2023-06-27 13:04:34 INFO     127.0.0.1 - - [27/Jun/2023 13:04:34] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 13:04:34 INFO     127.0.0.1 - - [27/Jun/2023 13:04:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 20:58:16 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-27 20:58:16 INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.150:5000
+2023-06-27 20:58:16 INFO     [33mPress CTRL+C to quit[0m
+2023-06-27 20:58:16 INFO      * Restarting with stat
+2023-06-27 20:58:17 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-27 20:58:17 WARNING   * Debugger is active!
+2023-06-27 20:58:17 INFO      * Debugger PIN: 281-252-357
+2023-06-27 20:58:43 INFO     127.0.0.1 - - [27/Jun/2023 20:58:43] "GET /process/12 HTTP/1.1" 200 -
+2023-06-27 20:58:43 INFO     127.0.0.1 - - [27/Jun/2023 20:58:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 20:58:43 INFO     127.0.0.1 - - [27/Jun/2023 20:58:43] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 20:58:57 INFO     127.0.0.1 - - [27/Jun/2023 20:58:57] "GET / HTTP/1.1" 200 -
+2023-06-27 20:58:57 INFO     127.0.0.1 - - [27/Jun/2023 20:58:57] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 20:58:57 INFO     127.0.0.1 - - [27/Jun/2023 20:58:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 20:59:01 INFO     127.0.0.1 - - [27/Jun/2023 20:59:01] "GET /posts/42 HTTP/1.1" 200 -
+2023-06-27 20:59:01 INFO     127.0.0.1 - - [27/Jun/2023 20:59:01] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 20:59:01 INFO     127.0.0.1 - - [27/Jun/2023 20:59:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-27 20:59:11 INFO     127.0.0.1 - - [27/Jun/2023 20:59:11] "GET /archive HTTP/1.1" 200 -
+2023-06-27 20:59:11 INFO     127.0.0.1 - - [27/Jun/2023 20:59:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-27 20:59:11 INFO     127.0.0.1 - - [27/Jun/2023 20:59:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:41:24 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-28 20:41:25 INFO      * Restarting with stat
+2023-06-28 20:41:26 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-28 20:41:26 WARNING   * Debugger is active!
+2023-06-28 20:41:26 INFO      * Debugger PIN: 281-252-357
+2023-06-28 20:41:28 INFO     127.0.0.1 - - [28/Jun/2023 20:41:28] "GET /process/12 HTTP/1.1" 200 -
+2023-06-28 20:41:28 INFO     127.0.0.1 - - [28/Jun/2023 20:41:28] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:41:28 INFO     127.0.0.1 - - [28/Jun/2023 20:41:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:41:30 INFO     127.0.0.1 - - [28/Jun/2023 20:41:30] "GET / HTTP/1.1" 200 -
+2023-06-28 20:41:30 INFO     127.0.0.1 - - [28/Jun/2023 20:41:30] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:41:30 INFO     127.0.0.1 - - [28/Jun/2023 20:41:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:41:33 INFO     127.0.0.1 - - [28/Jun/2023 20:41:33] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:41:33 INFO     127.0.0.1 - - [28/Jun/2023 20:41:33] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:41:33 INFO     127.0.0.1 - - [28/Jun/2023 20:41:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:42:27 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-28 20:42:28 INFO      * Restarting with stat
+2023-06-28 20:42:28 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-28 20:42:28 WARNING   * Debugger is active!
+2023-06-28 20:42:28 INFO      * Debugger PIN: 281-252-357
+2023-06-28 20:42:29 INFO     127.0.0.1 - - [28/Jun/2023 20:42:29] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:42:29 INFO     127.0.0.1 - - [28/Jun/2023 20:42:29] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:42:29 INFO     127.0.0.1 - - [28/Jun/2023 20:42:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:42:29 INFO     127.0.0.1 - - [28/Jun/2023 20:42:29] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:46:03 INFO     127.0.0.1 - - [28/Jun/2023 20:46:03] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:46:03 INFO     127.0.0.1 - - [28/Jun/2023 20:46:03] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:46:03 INFO     127.0.0.1 - - [28/Jun/2023 20:46:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:46:03 INFO     127.0.0.1 - - [28/Jun/2023 20:46:03] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:46:26 INFO     127.0.0.1 - - [28/Jun/2023 20:46:26] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:46:26 INFO     127.0.0.1 - - [28/Jun/2023 20:46:26] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:46:26 INFO     127.0.0.1 - - [28/Jun/2023 20:46:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:46:26 INFO     127.0.0.1 - - [28/Jun/2023 20:46:26] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:49:07 INFO     127.0.0.1 - - [28/Jun/2023 20:49:07] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:49:07 INFO     127.0.0.1 - - [28/Jun/2023 20:49:07] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:49:07 INFO     127.0.0.1 - - [28/Jun/2023 20:49:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:49:07 INFO     127.0.0.1 - - [28/Jun/2023 20:49:07] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:49:26 INFO     127.0.0.1 - - [28/Jun/2023 20:49:26] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:49:26 INFO     127.0.0.1 - - [28/Jun/2023 20:49:26] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:49:26 INFO     127.0.0.1 - - [28/Jun/2023 20:49:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:49:26 INFO     127.0.0.1 - - [28/Jun/2023 20:49:26] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:50:38 INFO     127.0.0.1 - - [28/Jun/2023 20:50:38] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:50:38 INFO     127.0.0.1 - - [28/Jun/2023 20:50:38] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:50:38 INFO     127.0.0.1 - - [28/Jun/2023 20:50:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:50:38 INFO     127.0.0.1 - - [28/Jun/2023 20:50:38] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:51:38 INFO     127.0.0.1 - - [28/Jun/2023 20:51:38] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:51:38 INFO     127.0.0.1 - - [28/Jun/2023 20:51:38] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:51:38 INFO     127.0.0.1 - - [28/Jun/2023 20:51:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:51:38 INFO     127.0.0.1 - - [28/Jun/2023 20:51:38] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:51:39 INFO     127.0.0.1 - - [28/Jun/2023 20:51:39] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:51:39 INFO     127.0.0.1 - - [28/Jun/2023 20:51:39] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:51:39 INFO     127.0.0.1 - - [28/Jun/2023 20:51:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:51:39 INFO     127.0.0.1 - - [28/Jun/2023 20:51:39] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:52:10 INFO     127.0.0.1 - - [28/Jun/2023 20:52:10] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:52:10 INFO     127.0.0.1 - - [28/Jun/2023 20:52:10] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:10 INFO     127.0.0.1 - - [28/Jun/2023 20:52:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:10 INFO     127.0.0.1 - - [28/Jun/2023 20:52:10] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:52:29 INFO     127.0.0.1 - - [28/Jun/2023 20:52:29] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:52:29 INFO     127.0.0.1 - - [28/Jun/2023 20:52:29] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:29 INFO     127.0.0.1 - - [28/Jun/2023 20:52:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:29 INFO     127.0.0.1 - - [28/Jun/2023 20:52:29] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:52:30 INFO     127.0.0.1 - - [28/Jun/2023 20:52:30] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:52:30 INFO     127.0.0.1 - - [28/Jun/2023 20:52:30] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:30 INFO     127.0.0.1 - - [28/Jun/2023 20:52:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:30 INFO     127.0.0.1 - - [28/Jun/2023 20:52:30] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:52:32 INFO     127.0.0.1 - - [28/Jun/2023 20:52:32] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:52:32 INFO     127.0.0.1 - - [28/Jun/2023 20:52:32] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:32 INFO     127.0.0.1 - - [28/Jun/2023 20:52:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:50 INFO     127.0.0.1 - - [28/Jun/2023 20:52:50] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:52:50 INFO     127.0.0.1 - - [28/Jun/2023 20:52:50] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:50 INFO     127.0.0.1 - - [28/Jun/2023 20:52:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:50 INFO     127.0.0.1 - - [28/Jun/2023 20:52:50] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:52:51 INFO     127.0.0.1 - - [28/Jun/2023 20:52:51] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:52:51 INFO     127.0.0.1 - - [28/Jun/2023 20:52:51] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:51 INFO     127.0.0.1 - - [28/Jun/2023 20:52:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:51 INFO     127.0.0.1 - - [28/Jun/2023 20:52:51] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:52:52 INFO     127.0.0.1 - - [28/Jun/2023 20:52:52] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:52:52 INFO     127.0.0.1 - - [28/Jun/2023 20:52:52] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:52 INFO     127.0.0.1 - - [28/Jun/2023 20:52:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:52 INFO     127.0.0.1 - - [28/Jun/2023 20:52:52] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:52:52 INFO     127.0.0.1 - - [28/Jun/2023 20:52:52] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:52:52 INFO     127.0.0.1 - - [28/Jun/2023 20:52:52] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:52 INFO     127.0.0.1 - - [28/Jun/2023 20:52:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:52:52 INFO     127.0.0.1 - - [28/Jun/2023 20:52:52] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:53:33 INFO     127.0.0.1 - - [28/Jun/2023 20:53:33] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:53:33 INFO     127.0.0.1 - - [28/Jun/2023 20:53:33] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:33 INFO     127.0.0.1 - - [28/Jun/2023 20:53:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:33 INFO     127.0.0.1 - - [28/Jun/2023 20:53:33] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:53:34 INFO     127.0.0.1 - - [28/Jun/2023 20:53:34] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:53:34 INFO     127.0.0.1 - - [28/Jun/2023 20:53:34] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:34 INFO     127.0.0.1 - - [28/Jun/2023 20:53:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:34 INFO     127.0.0.1 - - [28/Jun/2023 20:53:34] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:53:34 INFO     127.0.0.1 - - [28/Jun/2023 20:53:34] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:53:34 INFO     127.0.0.1 - - [28/Jun/2023 20:53:34] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:34 INFO     127.0.0.1 - - [28/Jun/2023 20:53:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:34 INFO     127.0.0.1 - - [28/Jun/2023 20:53:34] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:53:35 INFO     127.0.0.1 - - [28/Jun/2023 20:53:35] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:53:35 INFO     127.0.0.1 - - [28/Jun/2023 20:53:35] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:35 INFO     127.0.0.1 - - [28/Jun/2023 20:53:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:35 INFO     127.0.0.1 - - [28/Jun/2023 20:53:35] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:53:44 INFO     127.0.0.1 - - [28/Jun/2023 20:53:44] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:53:44 INFO     127.0.0.1 - - [28/Jun/2023 20:53:44] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:44 INFO     127.0.0.1 - - [28/Jun/2023 20:53:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:44 INFO     127.0.0.1 - - [28/Jun/2023 20:53:44] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:53:45 INFO     127.0.0.1 - - [28/Jun/2023 20:53:45] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:53:45 INFO     127.0.0.1 - - [28/Jun/2023 20:53:45] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:45 INFO     127.0.0.1 - - [28/Jun/2023 20:53:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:45 INFO     127.0.0.1 - - [28/Jun/2023 20:53:45] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:53:45 INFO     127.0.0.1 - - [28/Jun/2023 20:53:45] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:53:45 INFO     127.0.0.1 - - [28/Jun/2023 20:53:45] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:45 INFO     127.0.0.1 - - [28/Jun/2023 20:53:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:53:45 INFO     127.0.0.1 - - [28/Jun/2023 20:53:45] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:54:05 INFO     127.0.0.1 - - [28/Jun/2023 20:54:05] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:54:05 INFO     127.0.0.1 - - [28/Jun/2023 20:54:05] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:54:05 INFO     127.0.0.1 - - [28/Jun/2023 20:54:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:54:05 INFO     127.0.0.1 - - [28/Jun/2023 20:54:05] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:54:06 INFO     127.0.0.1 - - [28/Jun/2023 20:54:06] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:54:06 INFO     127.0.0.1 - - [28/Jun/2023 20:54:06] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:54:06 INFO     127.0.0.1 - - [28/Jun/2023 20:54:06] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:54:06 INFO     127.0.0.1 - - [28/Jun/2023 20:54:06] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:56:30 INFO     127.0.0.1 - - [28/Jun/2023 20:56:30] "[35m[1mGET /create-pr HTTP/1.1[0m" 500 -
+2023-06-28 20:56:30 INFO     127.0.0.1 - - [28/Jun/2023 20:56:30] "GET /create-pr?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2023-06-28 20:56:30 INFO     127.0.0.1 - - [28/Jun/2023 20:56:30] "GET /create-pr?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2023-06-28 20:56:30 INFO     127.0.0.1 - - [28/Jun/2023 20:56:30] "GET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2023-06-28 20:56:30 INFO     127.0.0.1 - - [28/Jun/2023 20:56:30] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 20:57:20 INFO     127.0.0.1 - - [28/Jun/2023 20:57:20] "[35m[1mGET /create-pr HTTP/1.1[0m" 500 -
+2023-06-28 20:57:20 INFO     127.0.0.1 - - [28/Jun/2023 20:57:20] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:57:20 INFO     127.0.0.1 - - [28/Jun/2023 20:57:20] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-28 20:57:20 INFO     127.0.0.1 - - [28/Jun/2023 20:57:20] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 20:57:20 INFO     127.0.0.1 - - [28/Jun/2023 20:57:20] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 20:58:03 INFO     127.0.0.1 - - [28/Jun/2023 20:58:03] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:58:03 INFO     127.0.0.1 - - [28/Jun/2023 20:58:03] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:58:03 INFO     127.0.0.1 - - [28/Jun/2023 20:58:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:58:03 INFO     127.0.0.1 - - [28/Jun/2023 20:58:03] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:58:23 INFO     127.0.0.1 - - [28/Jun/2023 20:58:23] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:58:23 INFO     127.0.0.1 - - [28/Jun/2023 20:58:23] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:58:23 INFO     127.0.0.1 - - [28/Jun/2023 20:58:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:58:23 INFO     127.0.0.1 - - [28/Jun/2023 20:58:23] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 20:59:56 INFO     127.0.0.1 - - [28/Jun/2023 20:59:56] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 20:59:56 INFO     127.0.0.1 - - [28/Jun/2023 20:59:56] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 20:59:56 INFO     127.0.0.1 - - [28/Jun/2023 20:59:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 20:59:56 INFO     127.0.0.1 - - [28/Jun/2023 20:59:56] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:00:27 INFO     127.0.0.1 - - [28/Jun/2023 21:00:27] "[35m[1mGET /create-pr HTTP/1.1[0m" 500 -
+2023-06-28 21:00:27 INFO     127.0.0.1 - - [28/Jun/2023 21:00:27] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:00:27 INFO     127.0.0.1 - - [28/Jun/2023 21:00:27] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-28 21:00:27 INFO     127.0.0.1 - - [28/Jun/2023 21:00:27] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 21:00:27 INFO     127.0.0.1 - - [28/Jun/2023 21:00:27] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 21:02:08 INFO     127.0.0.1 - - [28/Jun/2023 21:02:08] "[35m[1mGET /create-pr HTTP/1.1[0m" 500 -
+2023-06-28 21:02:08 INFO     127.0.0.1 - - [28/Jun/2023 21:02:08] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:02:08 INFO     127.0.0.1 - - [28/Jun/2023 21:02:08] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-28 21:02:08 INFO     127.0.0.1 - - [28/Jun/2023 21:02:08] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 21:02:08 INFO     127.0.0.1 - - [28/Jun/2023 21:02:08] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 21:02:21 INFO     127.0.0.1 - - [28/Jun/2023 21:02:21] "[35m[1mGET /create-pr HTTP/1.1[0m" 500 -
+2023-06-28 21:02:21 INFO     127.0.0.1 - - [28/Jun/2023 21:02:21] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:02:21 INFO     127.0.0.1 - - [28/Jun/2023 21:02:21] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-28 21:02:21 INFO     127.0.0.1 - - [28/Jun/2023 21:02:21] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 21:02:21 INFO     127.0.0.1 - - [28/Jun/2023 21:02:21] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-28 21:02:45 INFO     127.0.0.1 - - [28/Jun/2023 21:02:45] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 21:02:45 INFO     127.0.0.1 - - [28/Jun/2023 21:02:45] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:02:45 INFO     127.0.0.1 - - [28/Jun/2023 21:02:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:02:46 INFO     127.0.0.1 - - [28/Jun/2023 21:02:46] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:03:04 INFO     127.0.0.1 - - [28/Jun/2023 21:03:04] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 21:03:04 INFO     127.0.0.1 - - [28/Jun/2023 21:03:04] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:03:04 INFO     127.0.0.1 - - [28/Jun/2023 21:03:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:03:04 INFO     127.0.0.1 - - [28/Jun/2023 21:03:04] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:03:36 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-28 21:03:36 INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.150:5000
+2023-06-28 21:03:36 INFO     [33mPress CTRL+C to quit[0m
+2023-06-28 21:03:36 INFO      * Restarting with stat
+2023-06-28 21:03:37 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-28 21:03:37 WARNING   * Debugger is active!
+2023-06-28 21:03:37 INFO      * Debugger PIN: 281-252-357
+2023-06-28 21:03:37 INFO     127.0.0.1 - - [28/Jun/2023 21:03:37] "GET / HTTP/1.1" 200 -
+2023-06-28 21:03:37 INFO     127.0.0.1 - - [28/Jun/2023 21:03:37] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:03:37 INFO     127.0.0.1 - - [28/Jun/2023 21:03:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:03:37 INFO     127.0.0.1 - - [28/Jun/2023 21:03:37] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:03:39 INFO     127.0.0.1 - - [28/Jun/2023 21:03:39] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 21:03:39 INFO     127.0.0.1 - - [28/Jun/2023 21:03:39] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:03:39 INFO     127.0.0.1 - - [28/Jun/2023 21:03:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:03:53 INFO     127.0.0.1 - - [28/Jun/2023 21:03:53] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 21:03:53 INFO     127.0.0.1 - - [28/Jun/2023 21:03:53] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:03:53 INFO     127.0.0.1 - - [28/Jun/2023 21:03:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:03:53 INFO     127.0.0.1 - - [28/Jun/2023 21:03:53] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:04:02 INFO     127.0.0.1 - - [28/Jun/2023 21:04:02] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:04:02 INFO     127.0.0.1 - - [28/Jun/2023 21:04:02] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:04:02 INFO     127.0.0.1 - - [28/Jun/2023 21:04:02] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:04:10 INFO     127.0.0.1 - - [28/Jun/2023 21:04:10] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:04:10 INFO     127.0.0.1 - - [28/Jun/2023 21:04:10] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:04:10 INFO     127.0.0.1 - - [28/Jun/2023 21:04:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:14:59 INFO     127.0.0.1 - - [28/Jun/2023 21:14:59] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:14:59 INFO     127.0.0.1 - - [28/Jun/2023 21:14:59] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:14:59 INFO     127.0.0.1 - - [28/Jun/2023 21:14:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:14:59 INFO     127.0.0.1 - - [28/Jun/2023 21:14:59] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:16:37 INFO     127.0.0.1 - - [28/Jun/2023 21:16:37] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 21:16:37 INFO     127.0.0.1 - - [28/Jun/2023 21:16:37] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:16:37 INFO     127.0.0.1 - - [28/Jun/2023 21:16:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:16:42 INFO     127.0.0.1 - - [28/Jun/2023 21:16:42] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:16:42 INFO     127.0.0.1 - - [28/Jun/2023 21:16:42] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:16:42 INFO     127.0.0.1 - - [28/Jun/2023 21:16:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:16:44 INFO     127.0.0.1 - - [28/Jun/2023 21:16:44] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:16:44 INFO     127.0.0.1 - - [28/Jun/2023 21:16:44] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:16:44 INFO     127.0.0.1 - - [28/Jun/2023 21:16:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:22:13 INFO     127.0.0.1 - - [28/Jun/2023 21:22:13] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:22:13 INFO     127.0.0.1 - - [28/Jun/2023 21:22:13] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:22:13 INFO     127.0.0.1 - - [28/Jun/2023 21:22:13] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:22:13 INFO     127.0.0.1 - - [28/Jun/2023 21:22:13] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:22:20 INFO     127.0.0.1 - - [28/Jun/2023 21:22:20] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:22:20 INFO     127.0.0.1 - - [28/Jun/2023 21:22:20] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:22:20 INFO     127.0.0.1 - - [28/Jun/2023 21:22:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:22:20 INFO     127.0.0.1 - - [28/Jun/2023 21:22:20] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:22:26 INFO     127.0.0.1 - - [28/Jun/2023 21:22:26] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:22:26 INFO     127.0.0.1 - - [28/Jun/2023 21:22:26] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:22:26 INFO     127.0.0.1 - - [28/Jun/2023 21:22:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:22:26 INFO     127.0.0.1 - - [28/Jun/2023 21:22:26] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:29:50 INFO     127.0.0.1 - - [28/Jun/2023 21:29:50] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 21:29:50 INFO     127.0.0.1 - - [28/Jun/2023 21:29:50] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:29:50 INFO     127.0.0.1 - - [28/Jun/2023 21:29:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:30:03 INFO     127.0.0.1 - - [28/Jun/2023 21:30:03] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:30:03 INFO     127.0.0.1 - - [28/Jun/2023 21:30:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:30:03 INFO     127.0.0.1 - - [28/Jun/2023 21:30:03] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:30:11 INFO     127.0.0.1 - - [28/Jun/2023 21:30:11] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:30:11 INFO     127.0.0.1 - - [28/Jun/2023 21:30:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:30:11 INFO     127.0.0.1 - - [28/Jun/2023 21:30:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:30:12 INFO     127.0.0.1 - - [28/Jun/2023 21:30:12] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:30:12 INFO     127.0.0.1 - - [28/Jun/2023 21:30:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:30:12 INFO     127.0.0.1 - - [28/Jun/2023 21:30:12] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:33 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-28 21:32:33 INFO      * Restarting with stat
+2023-06-28 21:32:34 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-28 21:32:34 WARNING   * Debugger is active!
+2023-06-28 21:32:34 INFO      * Debugger PIN: 281-252-357
+2023-06-28 21:32:38 INFO     127.0.0.1 - - [28/Jun/2023 21:32:38] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:32:38 INFO     127.0.0.1 - - [28/Jun/2023 21:32:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:38 INFO     127.0.0.1 - - [28/Jun/2023 21:32:38] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:38 INFO     127.0.0.1 - - [28/Jun/2023 21:32:38] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:32:41 INFO     127.0.0.1 - - [28/Jun/2023 21:32:41] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:32:41 INFO     127.0.0.1 - - [28/Jun/2023 21:32:41] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:41 INFO     127.0.0.1 - - [28/Jun/2023 21:32:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:42 INFO     127.0.0.1 - - [28/Jun/2023 21:32:42] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:32:42 INFO     127.0.0.1 - - [28/Jun/2023 21:32:42] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:42 INFO     127.0.0.1 - - [28/Jun/2023 21:32:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:47 INFO     127.0.0.1 - - [28/Jun/2023 21:32:47] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:32:47 INFO     127.0.0.1 - - [28/Jun/2023 21:32:47] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:47 INFO     127.0.0.1 - - [28/Jun/2023 21:32:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:48 INFO     127.0.0.1 - - [28/Jun/2023 21:32:48] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:32:48 INFO     127.0.0.1 - - [28/Jun/2023 21:32:48] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:32:48 INFO     127.0.0.1 - - [28/Jun/2023 21:32:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:34:06 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-28 21:34:06 INFO      * Restarting with stat
+2023-06-28 21:34:41 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-28 21:34:41 INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.150:5000
+2023-06-28 21:34:41 INFO     [33mPress CTRL+C to quit[0m
+2023-06-28 21:34:41 INFO      * Restarting with stat
+2023-06-28 21:34:41 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-28 21:34:41 WARNING   * Debugger is active!
+2023-06-28 21:34:41 INFO      * Debugger PIN: 281-252-357
+2023-06-28 21:34:45 INFO     127.0.0.1 - - [28/Jun/2023 21:34:45] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:34:45 INFO     127.0.0.1 - - [28/Jun/2023 21:34:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:34:45 INFO     127.0.0.1 - - [28/Jun/2023 21:34:45] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:34:45 INFO     127.0.0.1 - - [28/Jun/2023 21:34:45] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-28 21:34:48 INFO     127.0.0.1 - - [28/Jun/2023 21:34:48] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:34:48 INFO     127.0.0.1 - - [28/Jun/2023 21:34:48] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:34:48 INFO     127.0.0.1 - - [28/Jun/2023 21:34:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:34:49 INFO     127.0.0.1 - - [28/Jun/2023 21:34:49] "POST /create-pr HTTP/1.1" 200 -
+2023-06-28 21:34:49 INFO     127.0.0.1 - - [28/Jun/2023 21:34:49] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:34:49 INFO     127.0.0.1 - - [28/Jun/2023 21:34:49] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-28 21:34:52 INFO     127.0.0.1 - - [28/Jun/2023 21:34:52] "GET /create-pr HTTP/1.1" 200 -
+2023-06-28 21:34:52 INFO     127.0.0.1 - - [28/Jun/2023 21:34:52] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-28 21:34:52 INFO     127.0.0.1 - - [28/Jun/2023 21:34:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 08:31:43 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-29 08:31:43 INFO      * Restarting with stat
+2023-06-29 08:31:45 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 08:31:45 WARNING   * Debugger is active!
+2023-06-29 08:31:45 INFO      * Debugger PIN: 281-252-357
+2023-06-29 08:31:46 INFO     127.0.0.1 - - [29/Jun/2023 08:31:46] "GET /create-pr HTTP/1.1" 200 -
+2023-06-29 08:31:46 INFO     127.0.0.1 - - [29/Jun/2023 08:31:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 08:31:46 INFO     127.0.0.1 - - [29/Jun/2023 08:31:46] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 08:31:46 INFO     127.0.0.1 - - [29/Jun/2023 08:31:46] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 08:31:50 INFO     127.0.0.1 - - [29/Jun/2023 08:31:50] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 08:31:50 INFO     127.0.0.1 - - [29/Jun/2023 08:31:50] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 08:31:50 INFO     127.0.0.1 - - [29/Jun/2023 08:31:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 08:41:31 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-29 08:41:31 INFO      * Restarting with stat
+2023-06-29 08:41:32 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 08:41:32 WARNING   * Debugger is active!
+2023-06-29 08:41:32 INFO      * Debugger PIN: 281-252-357
+2023-06-29 08:41:35 INFO     127.0.0.1 - - [29/Jun/2023 08:41:35] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 08:41:35 INFO     127.0.0.1 - - [29/Jun/2023 08:41:35] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 08:41:35 INFO     127.0.0.1 - - [29/Jun/2023 08:41:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 08:41:35 INFO     127.0.0.1 - - [29/Jun/2023 08:41:35] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 08:42:05 INFO     127.0.0.1 - - [29/Jun/2023 08:42:05] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 08:42:05 INFO     127.0.0.1 - - [29/Jun/2023 08:42:05] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 08:42:05 INFO     127.0.0.1 - - [29/Jun/2023 08:42:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 08:42:05 INFO     127.0.0.1 - - [29/Jun/2023 08:42:05] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 09:04:28 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-29 09:04:29 INFO      * Restarting with stat
+2023-06-29 09:04:30 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 09:04:30 WARNING   * Debugger is active!
+2023-06-29 09:04:30 INFO      * Debugger PIN: 281-252-357
+2023-06-29 09:05:40 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-29 09:05:40 INFO      * Restarting with stat
+2023-06-29 09:05:41 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 09:05:41 WARNING   * Debugger is active!
+2023-06-29 09:05:41 INFO      * Debugger PIN: 281-252-357
+2023-06-29 09:05:49 INFO     127.0.0.1 - - [29/Jun/2023 09:05:49] "[35m[1mPOST /create-pr HTTP/1.1[0m" 500 -
+2023-06-29 09:05:49 INFO     127.0.0.1 - - [29/Jun/2023 09:05:49] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:05:49 INFO     127.0.0.1 - - [29/Jun/2023 09:05:49] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-29 09:05:49 INFO     127.0.0.1 - - [29/Jun/2023 09:05:49] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-29 09:05:49 INFO     127.0.0.1 - - [29/Jun/2023 09:05:49] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-29 09:06:33 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-29 09:06:33 INFO      * Restarting with stat
+2023-06-29 09:06:34 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 09:06:34 WARNING   * Debugger is active!
+2023-06-29 09:06:34 INFO      * Debugger PIN: 281-252-357
+2023-06-29 09:06:37 INFO     127.0.0.1 - - [29/Jun/2023 09:06:37] "[35m[1mPOST /create-pr HTTP/1.1[0m" 500 -
+2023-06-29 09:06:37 INFO     127.0.0.1 - - [29/Jun/2023 09:06:37] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:06:37 INFO     127.0.0.1 - - [29/Jun/2023 09:06:37] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-29 09:06:37 INFO     127.0.0.1 - - [29/Jun/2023 09:06:37] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-29 09:06:37 INFO     127.0.0.1 - - [29/Jun/2023 09:06:37] "[36mGET /create-pr?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-29 09:07:14 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-29 09:07:14 INFO      * Restarting with stat
+2023-06-29 09:07:15 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 09:07:15 WARNING   * Debugger is active!
+2023-06-29 09:07:15 INFO      * Debugger PIN: 281-252-357
+2023-06-29 09:07:18 INFO     127.0.0.1 - - [29/Jun/2023 09:07:18] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 09:07:18 INFO     127.0.0.1 - - [29/Jun/2023 09:07:18] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:18 INFO     127.0.0.1 - - [29/Jun/2023 09:07:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:23 INFO     127.0.0.1 - - [29/Jun/2023 09:07:23] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 09:07:23 INFO     127.0.0.1 - - [29/Jun/2023 09:07:23] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:23 INFO     127.0.0.1 - - [29/Jun/2023 09:07:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:25 INFO     127.0.0.1 - - [29/Jun/2023 09:07:25] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 09:07:25 INFO     127.0.0.1 - - [29/Jun/2023 09:07:25] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:25 INFO     127.0.0.1 - - [29/Jun/2023 09:07:25] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:26 INFO     127.0.0.1 - - [29/Jun/2023 09:07:26] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 09:07:26 INFO     127.0.0.1 - - [29/Jun/2023 09:07:26] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:26 INFO     127.0.0.1 - - [29/Jun/2023 09:07:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:40 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-29 09:07:40 INFO      * Restarting with stat
+2023-06-29 09:07:41 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 09:07:41 WARNING   * Debugger is active!
+2023-06-29 09:07:41 INFO      * Debugger PIN: 281-252-357
+2023-06-29 09:07:41 INFO     127.0.0.1 - - [29/Jun/2023 09:07:41] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 09:07:41 INFO     127.0.0.1 - - [29/Jun/2023 09:07:41] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:41 INFO     127.0.0.1 - - [29/Jun/2023 09:07:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:41 INFO     127.0.0.1 - - [29/Jun/2023 09:07:41] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 09:07:50 INFO     127.0.0.1 - - [29/Jun/2023 09:07:50] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 09:07:50 INFO     127.0.0.1 - - [29/Jun/2023 09:07:50] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:50 INFO     127.0.0.1 - - [29/Jun/2023 09:07:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:51 INFO     127.0.0.1 - - [29/Jun/2023 09:07:51] "POST /create-pr HTTP/1.1" 200 -
+2023-06-29 09:07:51 INFO     127.0.0.1 - - [29/Jun/2023 09:07:51] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:51 INFO     127.0.0.1 - - [29/Jun/2023 09:07:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:55 INFO     127.0.0.1 - - [29/Jun/2023 09:07:55] "[32mPOST /create-pr HTTP/1.1[0m" 302 -
+2023-06-29 09:07:55 INFO     127.0.0.1 - - [29/Jun/2023 09:07:55] "GET /home HTTP/1.1" 200 -
+2023-06-29 09:07:55 INFO     127.0.0.1 - - [29/Jun/2023 09:07:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:55 INFO     127.0.0.1 - - [29/Jun/2023 09:07:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:59 INFO     127.0.0.1 - - [29/Jun/2023 09:07:59] "GET /posts/46 HTTP/1.1" 200 -
+2023-06-29 09:07:59 INFO     127.0.0.1 - - [29/Jun/2023 09:07:59] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:07:59 INFO     127.0.0.1 - - [29/Jun/2023 09:07:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:12:47 INFO     127.0.0.1 - - [29/Jun/2023 09:12:47] "GET /create-pr HTTP/1.1" 200 -
+2023-06-29 09:12:47 INFO     127.0.0.1 - - [29/Jun/2023 09:12:47] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:12:47 INFO     127.0.0.1 - - [29/Jun/2023 09:12:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 09:27:01 INFO     127.0.0.1 - - [29/Jun/2023 09:27:01] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 09:27:01 INFO     127.0.0.1 - - [29/Jun/2023 09:27:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 10:58:28 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-29 10:58:29 INFO      * Restarting with stat
+2023-06-29 10:59:03 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 10:59:03 INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.150:5000
+2023-06-29 10:59:03 INFO     [33mPress CTRL+C to quit[0m
+2023-06-29 10:59:03 INFO      * Restarting with stat
+2023-06-29 10:59:03 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 10:59:03 WARNING   * Debugger is active!
+2023-06-29 10:59:03 INFO      * Debugger PIN: 281-252-357
+2023-06-29 10:59:13 INFO     127.0.0.1 - - [29/Jun/2023 10:59:13] "GET /modal HTTP/1.1" 200 -
+2023-06-29 10:59:13 INFO     127.0.0.1 - - [29/Jun/2023 10:59:13] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 10:59:13 INFO     127.0.0.1 - - [29/Jun/2023 10:59:13] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 11:00:04 INFO     127.0.0.1 - - [29/Jun/2023 11:00:04] "GET /modal HTTP/1.1" 200 -
+2023-06-29 11:00:04 INFO     127.0.0.1 - - [29/Jun/2023 11:00:04] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 11:00:04 INFO     127.0.0.1 - - [29/Jun/2023 11:00:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 11:00:04 INFO     127.0.0.1 - - [29/Jun/2023 11:00:04] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 11:00:31 INFO     127.0.0.1 - - [29/Jun/2023 11:00:31] "GET /modal HTTP/1.1" 200 -
+2023-06-29 11:00:31 INFO     127.0.0.1 - - [29/Jun/2023 11:00:31] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 11:00:31 INFO     127.0.0.1 - - [29/Jun/2023 11:00:31] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 11:00:31 INFO     127.0.0.1 - - [29/Jun/2023 11:00:31] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 11:01:06 INFO     127.0.0.1 - - [29/Jun/2023 11:01:06] "GET /modal HTTP/1.1" 200 -
+2023-06-29 11:01:06 INFO     127.0.0.1 - - [29/Jun/2023 11:01:06] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 11:01:06 INFO     127.0.0.1 - - [29/Jun/2023 11:01:06] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 11:01:06 INFO     127.0.0.1 - - [29/Jun/2023 11:01:06] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 11:01:25 INFO     127.0.0.1 - - [29/Jun/2023 11:01:25] "GET /modal HTTP/1.1" 200 -
+2023-06-29 11:01:25 INFO     127.0.0.1 - - [29/Jun/2023 11:01:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2023-06-29 11:01:41 INFO     127.0.0.1 - - [29/Jun/2023 11:01:41] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 14:34:15 INFO     127.0.0.1 - - [29/Jun/2023 14:34:15] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:34:15 INFO     127.0.0.1 - - [29/Jun/2023 14:34:15] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:34:15 INFO     127.0.0.1 - - [29/Jun/2023 14:34:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:34:25 INFO     127.0.0.1 - - [29/Jun/2023 14:34:25] "[33mGET /modalindex HTTP/1.1[0m" 404 -
+2023-06-29 14:34:54 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-29 14:34:54 INFO      * Restarting with stat
+2023-06-29 14:34:55 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 14:35:01 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 14:35:11 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 14:35:11 INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.150:5000
+2023-06-29 14:35:11 INFO     [33mPress CTRL+C to quit[0m
+2023-06-29 14:35:11 INFO      * Restarting with stat
+2023-06-29 14:35:12 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-29 14:35:12 WARNING   * Debugger is active!
+2023-06-29 14:35:12 INFO      * Debugger PIN: 281-252-357
+2023-06-29 14:35:15 INFO     127.0.0.1 - - [29/Jun/2023 14:35:15] "GET /modalindex HTTP/1.1" 200 -
+2023-06-29 14:35:15 INFO     127.0.0.1 - - [29/Jun/2023 14:35:15] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:15 INFO     127.0.0.1 - - [29/Jun/2023 14:35:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:22 INFO     127.0.0.1 - - [29/Jun/2023 14:35:22] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:35:22 INFO     127.0.0.1 - - [29/Jun/2023 14:35:22] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:22 INFO     127.0.0.1 - - [29/Jun/2023 14:35:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:27 INFO     127.0.0.1 - - [29/Jun/2023 14:35:27] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:35:27 INFO     127.0.0.1 - - [29/Jun/2023 14:35:27] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:27 INFO     127.0.0.1 - - [29/Jun/2023 14:35:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:27 INFO     127.0.0.1 - - [29/Jun/2023 14:35:27] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 14:35:32 INFO     127.0.0.1 - - [29/Jun/2023 14:35:32] "GET /modalindex HTTP/1.1" 200 -
+2023-06-29 14:35:32 INFO     127.0.0.1 - - [29/Jun/2023 14:35:32] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:32 INFO     127.0.0.1 - - [29/Jun/2023 14:35:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:32 INFO     127.0.0.1 - - [29/Jun/2023 14:35:32] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 14:35:36 INFO     127.0.0.1 - - [29/Jun/2023 14:35:36] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:35:36 INFO     127.0.0.1 - - [29/Jun/2023 14:35:36] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:35:36 INFO     127.0.0.1 - - [29/Jun/2023 14:35:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:40:26 INFO     127.0.0.1 - - [29/Jun/2023 14:40:26] "GET /modalindex HTTP/1.1" 200 -
+2023-06-29 14:40:26 INFO     127.0.0.1 - - [29/Jun/2023 14:40:26] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:40:26 INFO     127.0.0.1 - - [29/Jun/2023 14:40:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:40:30 INFO     127.0.0.1 - - [29/Jun/2023 14:40:30] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:40:30 INFO     127.0.0.1 - - [29/Jun/2023 14:40:30] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:40:30 INFO     127.0.0.1 - - [29/Jun/2023 14:40:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:40:32 INFO     127.0.0.1 - - [29/Jun/2023 14:40:32] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:40:32 INFO     127.0.0.1 - - [29/Jun/2023 14:40:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:40:32 INFO     127.0.0.1 - - [29/Jun/2023 14:40:32] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:40:32 INFO     127.0.0.1 - - [29/Jun/2023 14:40:32] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 14:45:07 INFO     127.0.0.1 - - [29/Jun/2023 14:45:07] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:45:07 INFO     127.0.0.1 - - [29/Jun/2023 14:45:07] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:45:07 INFO     127.0.0.1 - - [29/Jun/2023 14:45:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:45:07 INFO     127.0.0.1 - - [29/Jun/2023 14:45:07] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 14:45:15 INFO     127.0.0.1 - - [29/Jun/2023 14:45:15] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:45:15 INFO     127.0.0.1 - - [29/Jun/2023 14:45:15] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:45:15 INFO     127.0.0.1 - - [29/Jun/2023 14:45:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:02 INFO     127.0.0.1 - - [29/Jun/2023 14:47:02] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:47:02 INFO     127.0.0.1 - - [29/Jun/2023 14:47:02] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:02 INFO     127.0.0.1 - - [29/Jun/2023 14:47:02] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:02 INFO     127.0.0.1 - - [29/Jun/2023 14:47:02] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 14:47:05 INFO     127.0.0.1 - - [29/Jun/2023 14:47:05] "GET / HTTP/1.1" 200 -
+2023-06-29 14:47:05 INFO     127.0.0.1 - - [29/Jun/2023 14:47:05] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:05 INFO     127.0.0.1 - - [29/Jun/2023 14:47:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:28 INFO     127.0.0.1 - - [29/Jun/2023 14:47:28] "GET /modalindex HTTP/1.1" 200 -
+2023-06-29 14:47:28 INFO     127.0.0.1 - - [29/Jun/2023 14:47:28] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:28 INFO     127.0.0.1 - - [29/Jun/2023 14:47:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:32 INFO     127.0.0.1 - - [29/Jun/2023 14:47:32] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:47:32 INFO     127.0.0.1 - - [29/Jun/2023 14:47:32] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:32 INFO     127.0.0.1 - - [29/Jun/2023 14:47:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:37 INFO     127.0.0.1 - - [29/Jun/2023 14:47:37] "GET / HTTP/1.1" 200 -
+2023-06-29 14:47:37 INFO     127.0.0.1 - - [29/Jun/2023 14:47:37] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:37 INFO     127.0.0.1 - - [29/Jun/2023 14:47:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:40 INFO     127.0.0.1 - - [29/Jun/2023 14:47:40] "GET /modal HTTP/1.1" 200 -
+2023-06-29 14:47:40 INFO     127.0.0.1 - - [29/Jun/2023 14:47:40] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 14:47:40 INFO     127.0.0.1 - - [29/Jun/2023 14:47:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:10:19 INFO     127.0.0.1 - - [29/Jun/2023 15:10:19] "GET /modalindex HTTP/1.1" 200 -
+2023-06-29 15:10:19 INFO     127.0.0.1 - - [29/Jun/2023 15:10:19] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:10:19 INFO     127.0.0.1 - - [29/Jun/2023 15:10:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:10:23 INFO     127.0.0.1 - - [29/Jun/2023 15:10:23] "GET /modal HTTP/1.1" 200 -
+2023-06-29 15:10:23 INFO     127.0.0.1 - - [29/Jun/2023 15:10:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:10:23 INFO     127.0.0.1 - - [29/Jun/2023 15:10:23] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:16:39 INFO     127.0.0.1 - - [29/Jun/2023 15:16:39] "GET / HTTP/1.1" 200 -
+2023-06-29 15:16:39 INFO     127.0.0.1 - - [29/Jun/2023 15:16:39] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:16:39 INFO     127.0.0.1 - - [29/Jun/2023 15:16:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:16:48 INFO     127.0.0.1 - - [29/Jun/2023 15:16:48] "GET / HTTP/1.1" 200 -
+2023-06-29 15:16:48 INFO     127.0.0.1 - - [29/Jun/2023 15:16:48] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:16:48 INFO     127.0.0.1 - - [29/Jun/2023 15:16:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:16:48 INFO     127.0.0.1 - - [29/Jun/2023 15:16:48] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-29 15:26:10 INFO     127.0.0.1 - - [29/Jun/2023 15:26:10] "GET /create-pr HTTP/1.1" 200 -
+2023-06-29 15:26:10 INFO     127.0.0.1 - - [29/Jun/2023 15:26:10] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:10 INFO     127.0.0.1 - - [29/Jun/2023 15:26:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:19 INFO     127.0.0.1 - - [29/Jun/2023 15:26:19] "GET / HTTP/1.1" 200 -
+2023-06-29 15:26:19 INFO     127.0.0.1 - - [29/Jun/2023 15:26:19] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:19 INFO     127.0.0.1 - - [29/Jun/2023 15:26:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:22 INFO     127.0.0.1 - - [29/Jun/2023 15:26:22] "GET /archive HTTP/1.1" 200 -
+2023-06-29 15:26:22 INFO     127.0.0.1 - - [29/Jun/2023 15:26:22] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:22 INFO     127.0.0.1 - - [29/Jun/2023 15:26:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:24 INFO     127.0.0.1 - - [29/Jun/2023 15:26:24] "GET /posts/41 HTTP/1.1" 200 -
+2023-06-29 15:26:24 INFO     127.0.0.1 - - [29/Jun/2023 15:26:24] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:24 INFO     127.0.0.1 - - [29/Jun/2023 15:26:24] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:34 INFO     127.0.0.1 - - [29/Jun/2023 15:26:34] "GET /payments HTTP/1.1" 200 -
+2023-06-29 15:26:34 INFO     127.0.0.1 - - [29/Jun/2023 15:26:34] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:34 INFO     127.0.0.1 - - [29/Jun/2023 15:26:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:43 INFO     127.0.0.1 - - [29/Jun/2023 15:26:43] "GET / HTTP/1.1" 200 -
+2023-06-29 15:26:43 INFO     127.0.0.1 - - [29/Jun/2023 15:26:43] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-29 15:26:43 INFO     127.0.0.1 - - [29/Jun/2023 15:26:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 12:14:11 INFO     127.0.0.1 - - [30/Jun/2023 12:14:11] "GET /modal HTTP/1.1" 200 -
+2023-06-30 12:14:11 INFO     127.0.0.1 - - [30/Jun/2023 12:14:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 12:14:11 INFO     127.0.0.1 - - [30/Jun/2023 12:14:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 13:51:54 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-30 13:51:54 INFO      * Restarting with stat
+2023-06-30 13:51:56 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 13:51:56 WARNING   * Debugger is active!
+2023-06-30 13:51:56 INFO      * Debugger PIN: 281-252-357
+2023-06-30 13:54:25 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-30 13:54:25 INFO      * Restarting with stat
+2023-06-30 13:54:26 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 13:54:26 WARNING   * Debugger is active!
+2023-06-30 13:54:26 INFO      * Debugger PIN: 281-252-357
+2023-06-30 13:54:58 INFO     127.0.0.1 - - [30/Jun/2023 13:54:58] "GET /process/12 HTTP/1.1" 200 -
+2023-06-30 13:54:58 INFO     127.0.0.1 - - [30/Jun/2023 13:54:58] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 13:54:58 INFO     127.0.0.1 - - [30/Jun/2023 13:54:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 13:55:00 INFO     127.0.0.1 - - [30/Jun/2023 13:55:00] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 13:55:00 INFO     127.0.0.1 - - [30/Jun/2023 13:55:00] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 13:55:00 INFO     127.0.0.1 - - [30/Jun/2023 13:55:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:00:46 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:00:46 INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.150:5000
+2023-06-30 14:00:46 INFO     [33mPress CTRL+C to quit[0m
+2023-06-30 14:00:46 INFO      * Restarting with stat
+2023-06-30 14:00:47 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:00:47 WARNING   * Debugger is active!
+2023-06-30 14:00:47 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:00:47 INFO     127.0.0.1 - - [30/Jun/2023 14:00:47] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:00:47 INFO     127.0.0.1 - - [30/Jun/2023 14:00:47] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:00:47 INFO     127.0.0.1 - - [30/Jun/2023 14:00:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:00:47 INFO     127.0.0.1 - - [30/Jun/2023 14:00:47] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:01:05 INFO     127.0.0.1 - - [30/Jun/2023 14:01:05] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:01:05 INFO     127.0.0.1 - - [30/Jun/2023 14:01:05] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:01:05 INFO     127.0.0.1 - - [30/Jun/2023 14:01:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:01:05 INFO     127.0.0.1 - - [30/Jun/2023 14:01:05] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:01:30 INFO     127.0.0.1 - - [30/Jun/2023 14:01:30] "GET /modal HTTP/1.1" 200 -
+2023-06-30 14:01:30 INFO     127.0.0.1 - - [30/Jun/2023 14:01:30] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:01:30 INFO     127.0.0.1 - - [30/Jun/2023 14:01:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:02:02 INFO     127.0.0.1 - - [30/Jun/2023 14:02:02] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:02:02 INFO     127.0.0.1 - - [30/Jun/2023 14:02:02] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:02:02 INFO     127.0.0.1 - - [30/Jun/2023 14:02:02] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:02:02 INFO     127.0.0.1 - - [30/Jun/2023 14:02:02] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:02:03 INFO     127.0.0.1 - - [30/Jun/2023 14:02:03] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:02:03 INFO     127.0.0.1 - - [30/Jun/2023 14:02:03] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:02:03 INFO     127.0.0.1 - - [30/Jun/2023 14:02:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:02:03 INFO     127.0.0.1 - - [30/Jun/2023 14:02:03] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:02:04 INFO     127.0.0.1 - - [30/Jun/2023 14:02:04] "[35m[1mGET /modal HTTP/1.1[0m" 500 -
+2023-06-30 14:02:05 INFO     127.0.0.1 - - [30/Jun/2023 14:02:05] "GET /modal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2023-06-30 14:02:05 INFO     127.0.0.1 - - [30/Jun/2023 14:02:05] "GET /modal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2023-06-30 14:02:05 INFO     127.0.0.1 - - [30/Jun/2023 14:02:05] "GET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2023-06-30 14:02:05 INFO     127.0.0.1 - - [30/Jun/2023 14:02:05] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 14:02:58 INFO     127.0.0.1 - - [30/Jun/2023 14:02:58] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:02:58 INFO     127.0.0.1 - - [30/Jun/2023 14:02:58] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:02:58 INFO     127.0.0.1 - - [30/Jun/2023 14:02:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:02:58 INFO     127.0.0.1 - - [30/Jun/2023 14:02:58] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:03:00 INFO     127.0.0.1 - - [30/Jun/2023 14:03:00] "GET /modal HTTP/1.1" 200 -
+2023-06-30 14:03:00 INFO     127.0.0.1 - - [30/Jun/2023 14:03:00] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:03:00 INFO     127.0.0.1 - - [30/Jun/2023 14:03:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:03:07 INFO     127.0.0.1 - - [30/Jun/2023 14:03:07] "GET /modal HTTP/1.1" 200 -
+2023-06-30 14:03:07 INFO     127.0.0.1 - - [30/Jun/2023 14:03:07] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:03:07 INFO     127.0.0.1 - - [30/Jun/2023 14:03:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:04:41 INFO     127.0.0.1 - - [30/Jun/2023 14:04:41] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:04:41 INFO     127.0.0.1 - - [30/Jun/2023 14:04:41] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:04:41 INFO     127.0.0.1 - - [30/Jun/2023 14:04:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:04:41 INFO     127.0.0.1 - - [30/Jun/2023 14:04:41] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:04:48 INFO     127.0.0.1 - - [30/Jun/2023 14:04:48] "[35m[1mGET /modal HTTP/1.1[0m" 500 -
+2023-06-30 14:04:48 INFO     127.0.0.1 - - [30/Jun/2023 14:04:48] "[36mGET /modal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:04:48 INFO     127.0.0.1 - - [30/Jun/2023 14:04:48] "[36mGET /modal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-30 14:04:48 INFO     127.0.0.1 - - [30/Jun/2023 14:04:48] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 14:04:48 INFO     127.0.0.1 - - [30/Jun/2023 14:04:48] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 14:06:11 INFO     127.0.0.1 - - [30/Jun/2023 14:06:11] "[35m[1mGET /modal HTTP/1.1[0m" 500 -
+2023-06-30 14:06:11 INFO     127.0.0.1 - - [30/Jun/2023 14:06:11] "[36mGET /modal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:06:11 INFO     127.0.0.1 - - [30/Jun/2023 14:06:11] "[36mGET /modal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-30 14:06:11 INFO     127.0.0.1 - - [30/Jun/2023 14:06:11] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 14:06:11 INFO     127.0.0.1 - - [30/Jun/2023 14:06:11] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 14:09:40 INFO     127.0.0.1 - - [30/Jun/2023 14:09:40] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:09:40 INFO     127.0.0.1 - - [30/Jun/2023 14:09:40] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:09:40 INFO     127.0.0.1 - - [30/Jun/2023 14:09:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:09:44 INFO     127.0.0.1 - - [30/Jun/2023 14:09:44] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:09:44 INFO     127.0.0.1 - - [30/Jun/2023 14:09:44] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:09:44 INFO     127.0.0.1 - - [30/Jun/2023 14:09:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:09:44 INFO     127.0.0.1 - - [30/Jun/2023 14:09:44] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:10:25 INFO     127.0.0.1 - - [30/Jun/2023 14:10:25] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:10:25 INFO     127.0.0.1 - - [30/Jun/2023 14:10:25] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:10:25 INFO     127.0.0.1 - - [30/Jun/2023 14:10:25] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:10:25 INFO     127.0.0.1 - - [30/Jun/2023 14:10:25] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:10:36 INFO     127.0.0.1 - - [30/Jun/2023 14:10:36] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:10:36 INFO     127.0.0.1 - - [30/Jun/2023 14:10:36] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:10:36 INFO     127.0.0.1 - - [30/Jun/2023 14:10:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:10:36 INFO     127.0.0.1 - - [30/Jun/2023 14:10:36] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:10:39 INFO     127.0.0.1 - - [30/Jun/2023 14:10:39] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:10:39 INFO     127.0.0.1 - - [30/Jun/2023 14:10:39] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:10:39 INFO     127.0.0.1 - - [30/Jun/2023 14:10:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:10:39 INFO     127.0.0.1 - - [30/Jun/2023 14:10:39] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:10:39 INFO     127.0.0.1 - - [30/Jun/2023 14:10:39] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:10:39 INFO     127.0.0.1 - - [30/Jun/2023 14:10:39] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:10:39 INFO     127.0.0.1 - - [30/Jun/2023 14:10:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:10:39 INFO     127.0.0.1 - - [30/Jun/2023 14:10:39] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:11:14 INFO     127.0.0.1 - - [30/Jun/2023 14:11:14] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:11:14 INFO     127.0.0.1 - - [30/Jun/2023 14:11:14] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:11:14 INFO     127.0.0.1 - - [30/Jun/2023 14:11:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:11:14 INFO     127.0.0.1 - - [30/Jun/2023 14:11:14] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:11:16 INFO     127.0.0.1 - - [30/Jun/2023 14:11:16] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:11:16 INFO     127.0.0.1 - - [30/Jun/2023 14:11:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:11:16 INFO     127.0.0.1 - - [30/Jun/2023 14:11:16] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:11:16 INFO     127.0.0.1 - - [30/Jun/2023 14:11:16] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:11:19 INFO     127.0.0.1 - - [30/Jun/2023 14:11:19] "[35m[1mGET /modal HTTP/1.1[0m" 500 -
+2023-06-30 14:11:19 INFO     127.0.0.1 - - [30/Jun/2023 14:11:19] "[36mGET /modal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:11:19 INFO     127.0.0.1 - - [30/Jun/2023 14:11:19] "[36mGET /modal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-30 14:11:19 INFO     127.0.0.1 - - [30/Jun/2023 14:11:19] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 14:14:23 INFO     127.0.0.1 - - [30/Jun/2023 14:14:23] "[35m[1mGET /modal HTTP/1.1[0m" 500 -
+2023-06-30 14:14:23 INFO     127.0.0.1 - - [30/Jun/2023 14:14:23] "[36mGET /modal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:14:23 INFO     127.0.0.1 - - [30/Jun/2023 14:14:23] "[36mGET /modal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-30 14:14:23 INFO     127.0.0.1 - - [30/Jun/2023 14:14:23] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 14:14:23 INFO     127.0.0.1 - - [30/Jun/2023 14:14:23] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 14:17:15 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 14:17:16 INFO      * Restarting with stat
+2023-06-30 14:17:17 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:17:17 WARNING   * Debugger is active!
+2023-06-30 14:17:17 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:18:56 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 14:18:56 INFO      * Restarting with stat
+2023-06-30 14:18:58 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:18:58 WARNING   * Debugger is active!
+2023-06-30 14:18:58 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:19:25 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 14:19:25 INFO      * Restarting with stat
+2023-06-30 14:19:28 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:19:28 WARNING   * Debugger is active!
+2023-06-30 14:19:28 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:20:03 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 14:20:03 INFO      * Restarting with stat
+2023-06-30 14:20:04 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:20:04 WARNING   * Debugger is active!
+2023-06-30 14:20:04 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:21:28 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 14:21:28 INFO      * Restarting with stat
+2023-06-30 14:21:29 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:21:29 WARNING   * Debugger is active!
+2023-06-30 14:21:29 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:21:34 INFO     127.0.0.1 - - [30/Jun/2023 14:21:34] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:21:35 INFO     127.0.0.1 - - [30/Jun/2023 14:21:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:21:35 INFO     127.0.0.1 - - [30/Jun/2023 14:21:35] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:21:48 INFO     127.0.0.1 - - [30/Jun/2023 14:21:48] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 14:21:48 INFO     127.0.0.1 - - [30/Jun/2023 14:21:48] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:21:48 INFO     127.0.0.1 - - [30/Jun/2023 14:21:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:22:44 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\forms.py', reloading
+2023-06-30 14:22:44 INFO      * Restarting with stat
+2023-06-30 14:22:44 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:22:45 WARNING   * Debugger is active!
+2023-06-30 14:22:45 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:22:46 INFO     127.0.0.1 - - [30/Jun/2023 14:22:46] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 14:22:46 INFO     127.0.0.1 - - [30/Jun/2023 14:22:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:22:46 INFO     127.0.0.1 - - [30/Jun/2023 14:22:46] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:22:46 INFO     127.0.0.1 - - [30/Jun/2023 14:22:46] "[36mGET /static/favicon/favicon-16x16.png HTTP/1.1[0m" 304 -
+2023-06-30 14:22:49 INFO     127.0.0.1 - - [30/Jun/2023 14:22:49] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:22:49 INFO     127.0.0.1 - - [30/Jun/2023 14:22:49] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:22:49 INFO     127.0.0.1 - - [30/Jun/2023 14:22:49] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:22:55 INFO     127.0.0.1 - - [30/Jun/2023 14:22:55] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 14:22:55 INFO     127.0.0.1 - - [30/Jun/2023 14:22:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:22:55 INFO     127.0.0.1 - - [30/Jun/2023 14:22:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:23:19 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 14:23:20 INFO      * Restarting with stat
+2023-06-30 14:23:21 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:23:21 WARNING   * Debugger is active!
+2023-06-30 14:23:21 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:23:22 INFO     127.0.0.1 - - [30/Jun/2023 14:23:22] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:23:22 INFO     127.0.0.1 - - [30/Jun/2023 14:23:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:23:22 INFO     127.0.0.1 - - [30/Jun/2023 14:23:22] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:23:28 INFO     127.0.0.1 - - [30/Jun/2023 14:23:28] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 14:23:28 INFO     127.0.0.1 - - [30/Jun/2023 14:23:28] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:23:28 INFO     127.0.0.1 - - [30/Jun/2023 14:23:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:24:33 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 14:24:33 INFO      * Restarting with stat
+2023-06-30 14:24:34 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:24:34 WARNING   * Debugger is active!
+2023-06-30 14:24:34 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:24:34 INFO     127.0.0.1 - - [30/Jun/2023 14:24:34] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 14:24:34 INFO     127.0.0.1 - - [30/Jun/2023 14:24:34] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:24:34 INFO     127.0.0.1 - - [30/Jun/2023 14:24:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:24:37 INFO     127.0.0.1 - - [30/Jun/2023 14:24:37] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:24:37 INFO     127.0.0.1 - - [30/Jun/2023 14:24:37] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:24:37 INFO     127.0.0.1 - - [30/Jun/2023 14:24:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:24:41 INFO     127.0.0.1 - - [30/Jun/2023 14:24:41] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 14:24:41 INFO     127.0.0.1 - - [30/Jun/2023 14:24:41] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:24:41 INFO     127.0.0.1 - - [30/Jun/2023 14:24:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:25:19 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 14:25:19 INFO      * Restarting with stat
+2023-06-30 14:25:20 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 14:25:20 WARNING   * Debugger is active!
+2023-06-30 14:25:20 INFO      * Debugger PIN: 281-252-357
+2023-06-30 14:25:21 INFO     127.0.0.1 - - [30/Jun/2023 14:25:21] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 14:25:21 INFO     127.0.0.1 - - [30/Jun/2023 14:25:21] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:25:21 INFO     127.0.0.1 - - [30/Jun/2023 14:25:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 14:25:27 INFO     127.0.0.1 - - [30/Jun/2023 14:25:27] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 14:25:27 INFO     127.0.0.1 - - [30/Jun/2023 14:25:27] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 14:25:27 INFO     127.0.0.1 - - [30/Jun/2023 14:25:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 15:36:28 INFO     The CSRF token has expired.
+2023-06-30 15:36:28 INFO     127.0.0.1 - - [30/Jun/2023 15:36:28] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 15:36:28 INFO     127.0.0.1 - - [30/Jun/2023 15:36:28] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 15:36:28 INFO     127.0.0.1 - - [30/Jun/2023 15:36:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 20:44:54 ERROR    Exception during reset or similar
+Traceback (most recent call last):
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\pool\base.py", line 991, in _finalize_fairy
+    fairy._reset(
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\pool\base.py", line 1440, in _reset
+    pool._dialect.do_rollback(self)
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\dialects\mssql\base.py", line 3100, in do_rollback
+    super().do_rollback(dbapi_connection)
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\engine\default.py", line 657, in do_rollback
+    dbapi_connection.rollback()
+pyodbc.OperationalError: ('08S01', '[08S01] [Microsoft][SQL Server Native Client 11.0]Shared Memory Provider: No process is on the other end of the pipe.\r\n (233) (SQLEndTran); [08S01] [Microsoft][SQL Server Native Client 11.0]Communication link failure (233)')
+2023-06-30 20:44:54 ERROR    Exception during reset or similar
+Traceback (most recent call last):
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\pool\base.py", line 991, in _finalize_fairy
+    fairy._reset(
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\pool\base.py", line 1440, in _reset
+    pool._dialect.do_rollback(self)
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\dialects\mssql\base.py", line 3100, in do_rollback
+    super().do_rollback(dbapi_connection)
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\engine\default.py", line 657, in do_rollback
+    dbapi_connection.rollback()
+pyodbc.OperationalError: ('08S01', '[08S01] [Microsoft][SQL Server Native Client 11.0]Shared Memory Provider: No process is on the other end of the pipe.\r\n (233) (SQLEndTran); [08S01] [Microsoft][SQL Server Native Client 11.0]Communication link failure (233)')
+2023-06-30 20:44:54 ERROR    Exception during reset or similar
+Traceback (most recent call last):
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\pool\base.py", line 991, in _finalize_fairy
+    fairy._reset(
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\pool\base.py", line 1440, in _reset
+    pool._dialect.do_rollback(self)
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\dialects\mssql\base.py", line 3100, in do_rollback
+    super().do_rollback(dbapi_connection)
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\engine\default.py", line 657, in do_rollback
+    dbapi_connection.rollback()
+pyodbc.OperationalError: ('08S01', '[08S01] [Microsoft][SQL Server Native Client 11.0]Shared Memory Provider: No process is on the other end of the pipe.\r\n (233) (SQLEndTran); [08S01] [Microsoft][SQL Server Native Client 11.0]Communication link failure (233)')
+2023-06-30 20:44:54 INFO     The CSRF token has expired.
+2023-06-30 20:44:54 INFO     127.0.0.1 - - [30/Jun/2023 20:44:54] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 20:44:54 INFO     127.0.0.1 - - [30/Jun/2023 20:44:54] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 20:44:54 INFO     127.0.0.1 - - [30/Jun/2023 20:44:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 20:44:56 INFO     127.0.0.1 - - [30/Jun/2023 20:44:56] "[35m[1mGET /modal HTTP/1.1[0m" 500 -
+2023-06-30 20:44:56 INFO     127.0.0.1 - - [30/Jun/2023 20:44:56] "[36mGET /modal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2023-06-30 20:44:56 INFO     127.0.0.1 - - [30/Jun/2023 20:44:56] "[36mGET /modal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2023-06-30 20:44:56 INFO     127.0.0.1 - - [30/Jun/2023 20:44:56] "[36mGET /modal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2023-06-30 20:55:09 INFO      * Detected change in 'C:\\Users\\v000529\\PycharmProjects\\PaymentRequest\\app.py', reloading
+2023-06-30 20:55:10 ERROR    Exception during reset or similar
+Traceback (most recent call last):
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\pool\base.py", line 991, in _finalize_fairy
+    fairy._reset(
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\pool\base.py", line 1440, in _reset
+    pool._dialect.do_rollback(self)
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\dialects\mssql\base.py", line 3100, in do_rollback
+    super().do_rollback(dbapi_connection)
+  File "C:\Users\v000529\AppData\Roaming\Python\Python311\site-packages\sqlalchemy\engine\default.py", line 657, in do_rollback
+    dbapi_connection.rollback()
+pyodbc.OperationalError: ('08S01', '[08S01] [Microsoft][SQL Server Native Client 11.0]Shared Memory Provider: No process is on the other end of the pipe.\r\n (233) (SQLEndTran); [08S01] [Microsoft][SQL Server Native Client 11.0]Communication link failure (233)')
+2023-06-30 20:55:10 INFO      * Restarting with stat
+2023-06-30 20:55:12 INFO     started. webserverhttp://127.0.0.1:5000, connection string mssql+pyodbc://localhost/PaymentRequest?driver=SQL+Server+Native+Client+11.0
+2023-06-30 20:55:12 WARNING   * Debugger is active!
+2023-06-30 20:55:12 INFO      * Debugger PIN: 281-252-357
+2023-06-30 20:55:14 INFO     127.0.0.1 - - [30/Jun/2023 20:55:14] "GET /create-pr HTTP/1.1" 200 -
+2023-06-30 20:55:14 INFO     127.0.0.1 - - [30/Jun/2023 20:55:14] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 20:55:14 INFO     127.0.0.1 - - [30/Jun/2023 20:55:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-06-30 20:55:21 INFO     127.0.0.1 - - [30/Jun/2023 20:55:21] "POST /create-pr HTTP/1.1" 200 -
+2023-06-30 20:55:21 INFO     127.0.0.1 - - [30/Jun/2023 20:55:21] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2023-06-30 20:55:21 INFO     127.0.0.1 - - [30/Jun/2023 20:55:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -

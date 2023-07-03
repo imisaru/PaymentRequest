@@ -14,7 +14,7 @@
     Направление счета: {{ article.direction }}<br>
     Компания плательщик: {{ article.payer }}<br>
     Вид оплаты: {{ article.paymenttype }}<br>
-    <p>Номер заказа на закупку: {{ article.porderno }}<br>
+    Номер заказа на закупку: {{ article.porderno }}<br>
     номер счета: {{ article.invoice }}<br>
     Дата счета {{ article.invdate }}<br>
     Сумма счета с НДС: {{ article.amount }} {{ article.currency }}<br>
@@ -23,7 +23,10 @@
     Поставщик: {{ article.inn }} {{ article.vendorname }}</br>
         Планируемая дата платежа: <i>{{ article.plandate }}</i></br>
         Фактическая дата платежа: <i>{{ article.paymentdate }}</i></br>
-      Комментарий бухгалтера: <i>{{ article.acomment }}</i></br>
+          Комментарий бухгалтера: {%if article.acomment > '' %}<span class="border border-danger">{%endif%}
+      <i>{{ article.acomment }}</i></br>
+          {%if article.acomment > '' %}</span>{%endif%}
+
       Комментарий платежной группы: <i>{{ article.pcomment }}</i></br>
     <div>
     <fieldset class="card">
@@ -53,14 +56,14 @@
         <label for="trno">Номер проводки(документа)</label>
         <input type="text" class="for m-control" id="trno" name="trno" value="{{ article.trno }}" readonly   >
         <label for="plandate">Планируемая дата оплаты</label>
-        <input type="date"  id="plandate" name="plandate" value="{{ article.plandate }}" readonly ">
-          Комментарий бухгалтера: <input type="text"  id="acomment" name="acomment" value="{{ article.acomment }}" readonly><br>
+        <input type="date"  id="plandate" name="plandate" value="{{ article.plandate }}" readonly>
+
         </div>
         <br>
         <form class="form-inline" action="" method="post" enctype="multipart/form-data">
         <div>
         <label for="pcomment">Комментарий банковской группы</label>
-        <input type="text" class="form-control" id="pcomment" name="pcomment"  value="{{ article.pcomment }}"    required>
+        <input type="text" class="form-control" id="pcomment" name="pcomment"  value="{{ article.pcomment }}">
         <label for="pdate">Дата оплаты</label>
 
         <input type="date"  id="pdate" name="pdate" value="{{ pdate }}" required>

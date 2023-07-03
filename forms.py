@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, DecimalField, PasswordField, SelectField, DateField, FileField, MultipleFileField
-from wtforms.validators import DataRequired, Email, Length, EqualTo
+from wtforms import StringField, SubmitField, BooleanField, DecimalField, PasswordField, SelectField, DateField, URLField, FileField, MultipleFileField
+from wtforms.validators import DataRequired, Email, Length, EqualTo, Optional
 
 class PRForm(FlaskForm):
     responsible = StringField("Ответственный: ", validators=[DataRequired("Обязательное поле"), Length(min=7, max=7,
@@ -10,23 +10,23 @@ class PRForm(FlaskForm):
                                                                       'Стоков Компоненты ООО',
                                                                       'Стоков Конструкция ООО'])
     paymenttype = SelectField("Вид оплаты: ", coerce=str, choices=['постоплата', 'предоплата'])
+#    inn = StringField("Поставщик ИНН: ", validators=[DataRequired(), Length(min=10, max=12, message="Неверная длинна Инн")])
+    inn = StringField("Поставщик ИНН: ", validators=[DataRequired()])
+    searchbtn = SubmitField("Найти", name='action')
+    vendorname = StringField("Наименование поставщика", render_kw={'style': 'width: 80ch', 'readonly': True})
+    dept = SelectField("Отдел (центр затрат): ", coerce=str)
+    preapproved = BooleanField("Заранее одобрено: ", default=False)
+    contract = StringField("Номер зарегистрированного контракта: ")
     porderno = StringField("Номер заказа на закупку: ")
     invoice = StringField("номер счета: ")
-    invdate = DateField("Дата счета :")
-    amount = DecimalField("Сумма счета с НДС: ")
+    invdate = DateField("Дата счета :", validators=[Optional()])
+    amount = DecimalField("Сумма счета с НДС: ", default=0)
     currency = SelectField("Валюта: ", coerce=str, choices=['РУБ', 'EUR'])
 #    dept = SelectField("Отдел (центр затрат): ", coerce=str,
 #                       choices=['GTO Logistic', 'GTO Prod & Maintn', 'GTO HR/Labor safety', 'GTO Quality', 'GTO VLS',
 #                                'HR', 'IT', 'Legal', 'RE', 'SEC', 'TC', 'VFS'])
-    dept = SelectField("Отдел (центр затрат): ", coerce=str)
-    preapproved = BooleanField("Заранее одобрено: ", default=False)
-    contract = StringField("Номер зарегистрированного контракта: ")
-    inn = StringField("Поставщик ИНН: ",
-                      validators=[DataRequired(), Length(min=10, max=12, message="Неверная длинна Инн")])
-    searchbtn = SubmitField("Найти", name='action')
-    vendorname = StringField("Наименование поставщика", render_kw={'style': 'width: 80ch', 'readonly': True})
     #    files = MultipleFileField("Вложения")
-    submit = SubmitField(label="Сохранить", name='action')
+    submit = SubmitField(label="Сохранить", name='action',render_kw={'class': 'btn btn-success btn-block'})
     
 class LoginForm(FlaskForm):
     login = StringField("Login: ", validators=[DataRequired(), Length(min=7, max=7, message="Длинна логина 7. начинается с v")])#[Email("Некорректный email")])

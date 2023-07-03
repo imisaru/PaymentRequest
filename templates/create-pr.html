@@ -9,13 +9,20 @@
 <div class="container mt-5">
 <form action="" method="post" class="form-contact">
 	{{ form.hidden_tag() }}
+	{% set bcount = namespace(value=0) %}
 	{% for field in form if field.name not in ['csrf_token', 'submit'] -%}
+		{% if field.label == "Сохранить" %} eeeсохранить!{% endif %}
+		{% if field.name == 'action' %}
+			{% set bcount.value = bcount.value + 1 %}
+			{% if bcount.value > 1 %}
+			</p><br>
+			{% endif %}
+		{% endif %}
 		{% if field.name !='action' and field.label != 'Найти' %} <p>
 			{% if field.name != 'preapproved' or (field.name == 'preapproved' and current_user.getRole() == 'accounting') %}
 					{{ field.label() }}
 			{% endif %}
 		{% endif %}
-		{% if field.label == 'Сохранить' %}!!!<br><br><p>{% endif %}
 		{% if field.errors %}
 			{{ field(class="invalid") }}
 			<span class="invalid-feedback">
@@ -28,9 +35,9 @@
 				{{ field() }}
 			{% endif %}
 		{% endif %}
-		{% if field.name == 'vendorname' %}</p><br>{% endif %}
-		{% if field.name == 'action' %}</p>{% endif %}
-		{% if field.label == 'Сохранить' %}</p>{% endif %}
+		{% if field.name == 'action' and bcount.value < 2 %}
+			<a href="/modal">Поиск</a>
+		{% endif %}
 	{% endfor %}
 
 <!--
@@ -40,6 +47,8 @@
 --!>
         <!--{{ form.submit() }}--!>
     </form>
+	<p>
 	<div class="flash success">Файлы необходимо приложить позже нажав "Детальнее" на созданной заявке.</div>
+	</p>
 </div>
 {% endblock %}

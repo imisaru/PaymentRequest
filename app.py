@@ -678,8 +678,6 @@ def profile():
     rec = conn.execute(sql).fetchone()
     if request.method == "POST":
         teluser = request.form['teluser']
-        if teluser[0] == '@':
-            teluser = teluser [1:]
         sql = text(f"update users set teluser='{teluser}' where id={uid}")
         conn.execute(sql)
         conn.commit()
@@ -1300,6 +1298,7 @@ def accpost(prid):
             article.trno = request.form.get('trno')
             article.trdate = request.form.get('trdate')
             article.plandate = request.form.get('plandate')
+            article.acomment = request.form.get("acomment")
             article.accountant_ap = current_user.get_login()
             mail.sendmail(mailparams, respmail, f"PR {prid}. Бухгалтерия передала в оплату",
                           f'Здравствуйте,<br> бухгалтерия обработала и передала PR в оплату. Срок оплаты {article.plandate}.<br>Поставщик {article.vendorname}, счет {article.invoice} от {article.invdate}, сумма {article.amount}')
@@ -1374,17 +1373,20 @@ def post_attach(prid):
             os.mkdir(os.path.join('archive', str(prid)))
 
         for file in files:
-            res = attachment.query.filter(attachment.filename == file.filename, attachment.path == str(prid)).first()
+            sfilename=file.filename.replace(',', '_')
+            sfilename = sfilename.replace('#', '_')
+            res = attachment.query.filter(attachment.filename == sfilename, attachment.path == str(prid)).first()
             if res is not None:
                 db.session.delete(res)
                 db.session.commit()
 
-            att = attachment(prid=prid, filename=file.filename.replace(',', '_'), login=current_user.get_login(), path=str(prid))
+            att = attachment(prid=prid, filename=sfilename, login=current_user.get_login(), path=str(prid))
 
             db.session.add(att)
             db.session.commit()
 
-            file.save(os.path.join('archive', str(prid), file.filename.replace(',','_')))
+#            file.save(os.path.join('archive', str(prid), file.filename.replace(',','_')))
+            file.save(os.path.join('archive', str(prid), sfilename))
             files = attachment.query.filter(attachment.prid == prid)
 
     return render_template("edit-attachements.html", article=article, files=files)
@@ -1396,6 +1398,13 @@ def post_delete(prid):
     global errormsg
     article = PaymentRequest.query.get_or_404(prid)
     try:
+        sql = text(f"insert into [PaymentRequestArch] select * from [PaymentRequest] where id={prid}")
+
+        conn = db.engine.connect()
+        trans = conn.begin()
+        conn.execute(sql)
+        trans.commit()
+
         db.session.delete(article)
         db.session.commit()
         return redirect(url_for('index'))
@@ -1500,6 +1509,18 @@ def getvendorbyinn(inn):
     return Vendor.query.filter(Vendor.INN == inn).limit(1).first()
 
 
+@app.route('/modal', methods=['POST', 'GET'])
+@login_required
+def modal():
+    return render_template("modalCustomer.html")
+
+
+@app.route('/modalindex', methods=['POST', 'GET'])
+@login_required
+def modalindex():
+    return render_template("modalIndex.html")
+
+
 @app.route('/create-pr', methods=['POST', 'GET'])
 @app.route('/create_pr', methods=['POST', 'GET'])
 @login_required
@@ -1514,13 +1535,29 @@ def pr_create():
     form.dept.choices = dept_list
     if form.validate_on_submit():
         if request.form['action'] == "Найти":
-            svendor = Vendor.query.filter(Vendor.INN == form.inn.data).limit(1).first()
+            conn = db.engine.connect()
+            sql = text(f"""select count(*) as cnt from Vendors where INN like '%{form.inn.data}%' 
+            or ShortName like '%{form.inn.data}%'""")
+            nvendors = conn.execute(sql).fetchone()[0]
+            print(f"найдено {nvendors}, {sql}")
+            sql = text(f"""select top 10 * from Vendors where INN like '%{form.inn.data}%' 
+            or ShortName like '%{form.inn.data}%'""")
+            svendor =  conn.execute(sql).fetchone()
+#            svendor = Vendor.query.filter(Vendor.INN == form.inn.data).limit(1).first()
+            conn.close()
             if svendor is not None:
                 form.vendorname.data = svendor.ShortName
+                form.inn.data = svendor.INN
             else:
                 form.vendorname.data = ""
                 flash("Клиент с этим ИНН не найден. Можно сохранить, уйдет письмо ответстенному за добавление.",
                       "error")
+            return render_template("create-pr.html", form=form)
+        if form.invdate.data is None:
+            flash("Не указана Дата счета", "error")
+            return render_template("create-pr.html", form=form)
+        if form.amount.data <= 0 or form.amount.data is None:
+            flash("Не указана Сумма", "error")
             return render_template("create-pr.html", form=form)
         invdate = datetime.datetime.combine(form.invdate.data, datetime.datetime.min.time())
         vendorname = ""  # form.vendorname.data

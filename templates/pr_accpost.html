@@ -48,25 +48,21 @@
     <form class="form-inline" action="" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="trno">Номер проводки(документа)</label>
-        <input type="text" class="form-control" id="trno" name="trno" value="{{ article.trno }}"required>
+        <input type="text" class="form-control" id="trno" name="trno" value="{{ article.trno }}" required>
         <!--label for="trdate">Дата проводки(документа)</--label><br>
-        <input type="date"  id="trdate" name="trdate" value="{{ article.trdate }}" required--!><br>
+        <input type="date"  id="trdate" name="trdate" value="{{ article.trdate }}" required--!>
         <label for="plandate">Плановая дата платежа</label><br>
         <input type="date"  id="plandate" name="plandate" value="{{ article.plandate }}" placeholder="dd.mm.yyyy" required><br>
+        <label for="trno">Комментарий бухгалтера</label>
+        <input type="text" class="form-control" id="acomment" name="acomment"  value="{{ article.acomment }}">
       </div>
-
-      <div>
-             <input type="submit" class="btn btn-success" name="action" value="Сохранить и передать в оплату">
-      </div>
-            </form>
         <br>
-    <form class="form-inline" action="" method="post" enctype="multipart/form-data">
-        <div>
-        <label for="trno">Комментарий для заявителя</label>
-        <input type="text" class="form-control" id="acomment" name="acomment"  value="{{ article.acomment }}"    required>
-             <input type="submit" class="btn btn-warning" name="action" value="Отправить на доработку">
-            </div>
-            </form>
+      <div>
+          <input type="submit" class="btn btn-success" name="action" value="Сохранить и передать в оплату">
+          <input type="submit" class="btn btn-warning" name="action" value="Отправить на доработку">
+      </div>
+    </form>
+        <br>
   </div>
 </div>
 
